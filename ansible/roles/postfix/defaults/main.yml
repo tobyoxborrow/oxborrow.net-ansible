@@ -1,0 +1,30 @@
+---
+postfix_master_smtp_inet: true
+postfix_smtpd_banner: ESMTP
+postfix_mydomain: localhost
+postfix_myhostname: localhost
+postfix_mydestination: $myhostname localhost.$mydomain localhost
+postfix_myorigin: $myhostname
+postfix_inet_interfaces: 127.0.0.1
+postfix_inet_protocols: ipv4
+postfix_smtpd_recipient_restrictions:
+  - reject_unknown_sender_domain
+  - reject_unknown_recipient_domain
+  - check_recipient_access hash:/etc/postfix/denied_recipients
+  - check_client_access hash:/etc/postfix/client_whitelist
+postfix_smtpd_sender_restrictions:
+  - permit_mynetworks
+postfix_virtual_default_entry: localhost
+postfix_virtual_entries:
+  - pattern: example@localhost
+    value: toby@localhost
+postfix_generic_entries:
+  - pattern: "@localhost.localdomain"
+    value: no-reply@localhost.localdomain
+postfix_client_whitelist:
+  - google.com
+postfix_access_entries:
+  - pattern: "trogdor@homestarrunner.com"
+    value: "500 Burninated!"
+postfix_denied_recipients:
+  - strongbad@localhost

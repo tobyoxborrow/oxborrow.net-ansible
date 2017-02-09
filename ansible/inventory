@@ -1,0 +1,13 @@
+[halifax]
+halifax.oxborrow.net
+
+[wellington]
+wellington.oxborrow.net
+
+[mailservers:children]
+halifax
+wellington
+
+[all:vars]
+development=False
+vagrant=False

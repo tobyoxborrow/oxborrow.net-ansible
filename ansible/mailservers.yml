@@ -1,0 +1,21 @@
+---
+- name: oxborrow.net mailservers
+  hosts: [halifax, wellington]
+  become: true
+  become_user: root
+  roles:
+    - base_packages
+    - hostname
+    - sshd_group
+    - users
+    - sshd
+    - pip
+    - fail2ban
+    - nginx
+    - postfix
+    - motd
+    - chrony
+    - logwatch
+    - logrotate
+    - varwww
+    - hardening

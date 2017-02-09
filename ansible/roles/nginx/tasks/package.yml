@@ -1,0 +1,11 @@
+---
+- name: Ensure nginx is installed
+  package:
+    name: nginx-core
+    state: present
+
+- name: Ensure service started and enabled
+  service:
+    name: nginx
+    state: started
+    enabled: yes

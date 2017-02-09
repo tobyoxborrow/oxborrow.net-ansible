@@ -1,0 +1,7 @@
+---
+# You will easily get locked out if your user is not part of this group
+# This role should come first, then a role to configure a user to join this
+# group and then finally a role to configure sshd_config to set AllowGroups to
+# this group
+- name: Configure SSH system groups
+  include: groups.yml

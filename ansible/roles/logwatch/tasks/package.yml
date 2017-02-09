@@ -1,0 +1,5 @@
+---
+- name: Ensure logwatch is installed
+  package:
+    name: logwatch
+    state: present

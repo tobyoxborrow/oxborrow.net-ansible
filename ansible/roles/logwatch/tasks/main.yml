@@ -1,0 +1,6 @@
+---
+- name: Manage logwatch package
+  include: package.yml
+
+- name: Manage logwatch configuration
+  include: configuration.yml

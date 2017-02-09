@@ -1,0 +1,12 @@
+---
+- name: Ensure unnecessary users are absent
+  user:
+    name: "{{item}}"
+    state: absent
+  with_items:
+    - irc
+    - list
+    - uucp
+    - news
+    - lp
+    - games

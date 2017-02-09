@@ -1,0 +1,13 @@
+---
+- name: Ensure default nginx site is present
+  template:
+    src: templates/site.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure default index file is removed
+  file:
+    path: /var/www/html/index.nginx-debian.html
+    state: absent

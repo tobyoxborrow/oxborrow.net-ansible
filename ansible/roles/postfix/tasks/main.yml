@@ -1,0 +1,6 @@
+---
+- name: Manage postfix package
+  include: package.yml
+
+- name: Manage postfix configuraiton
+  include: configuration.yml

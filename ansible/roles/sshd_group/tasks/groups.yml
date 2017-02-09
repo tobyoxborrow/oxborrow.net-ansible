@@ -1,0 +1,6 @@
+---
+- name: Ensure sshlogin group exists
+  group:
+    name: sshlogin
+    state: present
+    system: yes

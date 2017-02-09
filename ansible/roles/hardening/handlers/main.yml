@@ -1,0 +1,3 @@
+---
+- name: flush routing cache
+  command: "sysctl -w net.ipv4.route.flush=1"

@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+{% if postfix_virtual_default_entry -%}
+{{ postfix_virtual_default_entry }} DEFAULT_ENTRY
+{% endif -%}
+{% for entry in postfix_virtual_entries -%}
+{{ entry.pattern }} {{ entry.value }}
+{% endfor -%}

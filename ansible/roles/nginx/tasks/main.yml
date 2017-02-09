@@ -1,0 +1,7 @@
+---
+- name: Manage nginx package
+  include: package.yml
+
+- name: Manage nginx sites
+  include: sites.yml
+

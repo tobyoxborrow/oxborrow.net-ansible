@@ -1,0 +1,9 @@
+---
+- name: Ensure chrony.conf is present
+  template:
+    dest: /etc/chrony/chrony.conf
+    src: templates/chrony.conf.j2
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart chrony

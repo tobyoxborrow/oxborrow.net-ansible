@@ -1,0 +1,8 @@
+---
+- name: Disable unused filesystems
+  copy:
+    src: files/modprobe.d-CIS.conf
+    dest: /etc/modprobe.d/CIS.conf
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,14 @@
+---
+# indirect variables to help with troubleshooting as per:
+# http://docs.ansible.com/ansible/playbooks_best_practices.html#best-practices-for-variables-and-vaults
+postfix_inet_interfaces: "{{ public_inet_address }}, 127.0.0.1"
+postfix_myhostname: "{{ hostname_fqdn }}"
+postfix_mydomain: "{{ hostname_fqdn }}"
+postfix_virtual_default_entry: "{{ vault_postfix_virtual_default_entry }}"
+postfix_virtual_entries: "{{ vault_postfix_virtual_entries }}"
+postfix_generic_entries: "{{ vault_postfix_generic_entries }}"
+postfix_smtpd_recipient_restrictions: "{{ vault_postfix_smtpd_recipient_restrictions }}"
+postfix_smtpd_sender_restrictions: "{{ vault_postfix_smtpd_sender_restrictions }}"
+postfix_client_whitelist: "{{ vault_postfix_client_whitelist }}"
+postfix_access_entries: "{{ vault_postfix_access_entries }}"
+postfix_denied_recipients: "{{ vault_postfix_denied_recipients }}"

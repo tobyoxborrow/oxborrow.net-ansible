@@ -1,0 +1,38 @@
+---
+# originally this used ansible's template and the content came from
+# multi-line yaml strings. but I found that yaml's multi-line strings do not
+# work well for large ascii art as they can contain leading whitespace which
+# generates yaml syntax errors. so now the content is stored in static files
+# and copied as needed.
+#
+# generate banners with:
+# figlet -f roman -w 128 NAME > roles/sshd/files/banner_NAME.txt
+- name: Ensure sshd_banner is present
+  copy:
+    dest: /etc/ssh/sshd_banner
+    src: files/{{ sshd_banner_filename }}
+    owner: root
+    group: root
+    mode: 0644
+  when: sshd_banner_filename != ""
+
+- name: Ensure sshd_config is present
+  template:
+    dest: /etc/ssh/sshd_config
+    src: templates/sshd_config.j2
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  register: sshd_config
+
+- name: Ensure valid syntax when configuration file changed
+  command: sshd -T
+  register: sshd_t
+  when: sshd_config|changed
+
+- name: Ensure service reloaded when configuration changes
+  service:
+    name: sshd
+    state: reloaded
+  when: not sshd_t|skipped

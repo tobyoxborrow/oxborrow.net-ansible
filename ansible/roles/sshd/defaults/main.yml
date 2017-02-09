@@ -1,0 +1,8 @@
+---
+sshd_config_port: 22
+sshd_config_addressfamily: 'inet'
+sshd_config_passwordauthentication: 'no'
+sshd_config_allowagentforwarding: 'no'
+sshd_config_allowtcpforwarding: 'no'
+sshd_config_allowgroups: 'sshlogin'
+sshd_banner_filename: ''

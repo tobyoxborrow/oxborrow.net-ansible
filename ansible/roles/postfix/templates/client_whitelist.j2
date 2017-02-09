@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for entry in postfix_client_whitelist -%}
+{{ entry }} OK
+{% endfor -%}

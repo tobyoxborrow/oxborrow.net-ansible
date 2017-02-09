@@ -1,0 +1,13 @@
+---
+# this seems unlikely not to be the case if Ansible is working at all
+# included for completeness
+- name: Ensure openssh-server is installed
+  package:
+    name: openssh-server
+    state: present
+
+- name: Ensure service started and enabled
+  service:
+    name: sshd
+    state: started
+    enabled: yes

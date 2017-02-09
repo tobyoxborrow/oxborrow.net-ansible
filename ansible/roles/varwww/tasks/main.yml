@@ -1,0 +1,36 @@
+---
+- name: Ensure git bare directory exists
+  file:
+    path: /srv/www.oxborrow.net
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+# we clone to a local git bare repo of the website content
+# it is purposfully stored outside of the docroot to ensure there are no git
+# bits in the docroot
+# we also do not pollute a git work tree with any temporary files that may be
+# made publicly accessible
+# only tracked files will be overwritten in the docroot
+- name: Clone www.oxborrow.net
+  git:
+    repo: https://github.com/tobyoxborrow/www.oxborrow.net
+    remote: origin
+    version: HEAD
+    clone: yes
+    update: no
+    dest: /srv/www.oxborrow.net
+    bare: yes
+  register: clone_varwww
+
+# extract to the webserver's default site - not dealing with multiple sites
+# public files are kept in docroot subdirectory in the repo, so only get those
+# when extracting files, strip the top-level directory name (i.e. docroot/) so
+# files are like /var/www/html/index.html and not
+# /var/www/html/docroot/index.html
+- name: Extract git bare to docroot
+  shell: git archive --format=tar HEAD docroot/ | tar --extract --file - --strip=1 --no-same-permissions --directory /var/www/html/
+  args:
+    chdir: /srv/www.oxborrow.net/
+  when: clone_varwww|changed

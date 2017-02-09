@@ -1,0 +1,103 @@
+#!/usr/bin/env python
+"""
+Recent Spam Counter
+
+Quick script to count the number of spam blocked in mail logs that is displayed
+in the motd. Doesn't work shortly after log rotation, but good enough.
+"""
+
+import re
+import os
+
+from datetime import datetime, timedelta
+
+TODAY = datetime.now()
+LAST_WEEK = TODAY - timedelta(days=8)
+
+MONTHS = {'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+          'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 0, 'Nov': 11, 'Dec': 12}
+
+
+# http://stackoverflow.com/questions/2301789/read-a-file-in-reverse-order-using-python
+def reverse_readline(filename, buf_size=8192):
+    """a generator that returns the lines of a file in reverse order"""
+    with open(filename) as handle:
+        segment = None
+        offset = 0
+        handle.seek(0, os.SEEK_END)
+        file_size = remaining_size = handle.tell()
+        while remaining_size > 0:
+            offset = min(file_size, offset + buf_size)
+            handle.seek(file_size - offset)
+            buffer = handle.read(min(remaining_size, buf_size))
+            remaining_size -= buf_size
+            lines = buffer.split('\n')
+            # the first line of the buffer is probably not a complete line so
+            # we'll save it and append it to the last line of the next buffer
+            # we read
+            if segment is not None:
+                # if the previous chunk starts right from the beginning of line
+                # do not concact the segment to the last line of new chunk
+                # instead, yield the segment first
+                if buffer[-1] is not '\n':
+                    lines[-1] += segment
+                else:
+                    yield segment
+            segment = lines[0]
+            for index in range(len(lines) - 1, 0, -1):
+                if len(lines[index]):
+                    yield lines[index]
+        # Don't yield None if the file was empty
+        if segment is not None:
+            yield segment
+
+
+def main():
+    """main"""
+
+    # example log line:
+    # 2014-08-06 21:11:58,553 fail2ban.actions: WARNING [ssh] Ban
+    # 175.119.227.143 Jul 20 13:36:33 halifax postfix/smtpd[12929]: NOQUEUE:
+    # reject: RCPT from unknown[27.76.197.201]: 554 5.7.1 Service unavailable;
+    # Client host [27.76.197.201] blocked using bl.spamcop.net; Blocked - see
+    # http://www.spamcop.net/bl.shtml?27.76.197.201; from=<>
+    # to=<stockwellshepherdsn@oxborrow.net> proto=SMTP helo=<27.76.197.201>
+
+    counter = 0
+    lines = 0
+
+    for line in reverse_readline('/var/log/mail.log'):
+        # don't spend so long reading the log
+        lines += 1
+        if lines > 100000:
+            break
+
+        if 'reject: ' in line:
+            counter += 1
+
+        # no need to check the date on every line
+        # just use the frequent statistics lines (approx every 30 mins)
+        if 'statistics: ' not in line:
+            continue
+
+        matches = re.search(r'^([A-Sa-v]{3})\s+([0-3]?[0-9])', line)
+        if not matches:
+            continue
+
+        # log lines contain no year, assume entries are for current
+        # will act odd around new year
+        year = int(TODAY.year)
+        month = int(MONTHS[matches.group(1)])
+        day = int(matches.group(2))
+
+        line_date = datetime(year, month, day)
+
+        if line_date < LAST_WEEK:
+            break
+
+    wfh = open('/var/run/recent_spam', 'w')
+    wfh.write('Spam blocked in the last 7 days: %s\n' % counter)
+
+
+if __name__ == '__main__':
+    main()

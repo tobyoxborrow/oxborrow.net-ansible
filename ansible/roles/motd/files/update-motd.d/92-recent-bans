@@ -1,0 +1,8 @@
+#!/bin/sh
+
+out=/var/run/recent_bans
+
+if [ -f "$out" ]; then
+    echo
+    cat "$out"
+fi

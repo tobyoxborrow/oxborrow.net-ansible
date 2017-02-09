@@ -1,0 +1,6 @@
+---
+- name: Manage sshd package
+  include: package.yml
+
+- name: Configure sshd package
+  include: sshd_config.yml

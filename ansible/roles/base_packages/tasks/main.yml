@@ -1,0 +1,35 @@
+---
+- name: Ensure certain base packages are absent
+  package:
+    name: "{{item}}"
+    state: absent
+  with_items:
+    - "xserver-xorg*"
+    - avahi-daemon
+    # - bind9
+    - cups
+    - cups-client
+    - cups-common
+    - ldap-utils
+    - nfs-common
+    - nfs-kernel-server
+    - nis
+    - rsh-client
+    - rsh-redone-client
+    - samba
+    - slapd
+    - snmpd
+    - talk
+    - telnet
+    - xinetd
+
+- name: Ensure certain base packages are present
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - bsd-mailx
+    - git
+    - man
+    - tcpdump
+    - tmux

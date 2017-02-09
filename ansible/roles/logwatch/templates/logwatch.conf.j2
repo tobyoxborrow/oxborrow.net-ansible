@@ -1,0 +1,36 @@
+# {{ ansible_managed }}
+
+# Yes = True  = On  = 1
+# No  = False = Off = 0
+
+LogDir = /var/log
+
+#TmpDir = /var/cache/logwatch
+
+Output = stdout
+Format = text
+Encode = none
+
+MailTo = toby@oxborrow.net
+
+MailFrom = logwatch@{{ hostname_fqdn }}
+
+Range = yesterday
+Archives = No
+
+# Low = 0
+# Med = 5
+# High = 10
+Detail = High
+
+Service = All
+Service = "-cron"
+Service = "-eximstats"
+Service = "-http"
+Service = "-postfix"
+Service = "-zz-disk_space"
+Service = "-zz-fortune"
+Service = "-zz-network"
+Service = "-zz-sys"
+
+#mailer = "/usr/sbin/sendmail -t"

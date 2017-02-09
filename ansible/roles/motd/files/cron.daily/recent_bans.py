@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+"""
+Recent Fail2Bans Counter
+"""
+
+import re
+
+from datetime import datetime, timedelta
+
+TODAY = datetime.now()
+LAST_WEEK = TODAY - timedelta(days=8)
+
+
+def main():
+    """main"""
+
+    # example contents:
+    # 2014-08-06 21:11:58,553 fail2ban.actions: WARNING [ssh] Ban 175.119.227.143
+    # 2014-08-06 21:21:59,303 fail2ban.actions: WARNING [ssh] Unban 175.119.227.143
+    rfh = open('/var/log/fail2ban.log', 'r')
+    found_start = False
+    counter = 0
+    for line in rfh:
+        if found_start:
+            if 'Ban' in line:
+                counter += 1
+            continue
+
+        # skip a lot of lines without needing to compare the date in detail
+        if 'Ban' not in line:
+            continue
+
+        matches = re.search(r'^(20[0-9]{2})-([01][0-9])-([0-3][0-9]) [0-9]{2}:', line)
+        if not matches:
+            continue
+
+        year = int(matches.group(1))
+        month = int(matches.group(2))
+        day = int(matches.group(3))
+
+        line_date = datetime(year, month, day)
+
+        if line_date > LAST_WEEK:
+            found_start = True
+            continue
+
+    wfh = open('/var/run/recent_bans', 'w')
+    wfh.write('Fail2Bans in the last 7 days: %s\n' % counter)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,8 @@
+---
+- name: Ensure logwatch.conf is present
+  template:
+    dest: /etc/logwatch/conf/logwatch.conf
+    src: templates/logwatch.conf.j2
+    owner: root
+    group: root
+    mode: 0644

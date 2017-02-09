@@ -1,0 +1,20 @@
+---
+- name: reload postfix
+  service:
+    name: postfix
+    state: reloaded
+
+- name: postmap generic
+  command: postmap /etc/postfix/generic
+
+- name: postmap virtual
+  command: postmap /etc/postfix/virtual
+
+- name: postmap access
+  command: postmap /etc/postfix/access
+
+- name: postmap client_whitelist
+  command: postmap /etc/postfix/client_whitelist
+
+- name: postmap denied_recipients
+  command: postmap /etc/postfix/denied_recipients

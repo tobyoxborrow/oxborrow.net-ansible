@@ -1,0 +1,6 @@
+---
+- name: Manage chrony package
+  include: package.yml
+
+- name: Manage chrony configuration
+  include: configuration.yml

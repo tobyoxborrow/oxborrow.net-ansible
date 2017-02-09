@@ -1,0 +1,15 @@
+# testing inventory
+
+[halifax]
+halifax.oxborrow.net ansible_connection=ssh ansible_host=127.0.0.1 ansible_port=62200 ansible_user=toby ansible_ssh_private_key_file=~/.ssh/toby@oxborrow.net ansible_become_pass=vagrant
+
+[wellington]
+wellington.oxborrow.net ansible_connection=ssh ansible_host=127.0.0.1 ansible_port=62200 ansible_user=toby ansible_ssh_private_key_file=~/.ssh/toby@oxborrow.net ansible_become_pass=vagrant
+
+[mailservers:children]
+halifax
+wellington
+
+[all:vars]
+development=True
+vagrant=True
