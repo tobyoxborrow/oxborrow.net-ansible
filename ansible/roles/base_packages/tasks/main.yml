@@ -1,7 +1,7 @@
 ---
 - name: Ensure certain base packages are absent
   package:
-    name: "{{item}}"
+    name: "{{ item }}"
     state: absent
   with_items:
     - "xserver-xorg*"
@@ -25,7 +25,7 @@
 
 - name: Ensure certain base packages are present
   package:
-    name: "{{item}}"
+    name: "{{ item }}"
     state: present
   with_items:
     - bsd-mailx

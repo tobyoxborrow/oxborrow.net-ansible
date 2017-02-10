@@ -1,5 +1,0 @@
----
-- name: Ensure ASLR is enabled
-  sysctl:
-    name: kernel.randomize_va_space
-    value: 2
