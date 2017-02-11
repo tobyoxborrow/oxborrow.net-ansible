@@ -9,13 +9,12 @@
     - sshd_group
     - users
     - sshd
-    - pip
-    - fail2ban
-    - nginx
-    - postfix
-    - motd
     - chrony
-    - logwatch
+    - motd
     - logrotate
-    - varwww
     - hardening
+    - fail2ban
+    - logwatch
+    - postfix
+    - nginx
+    - varwww

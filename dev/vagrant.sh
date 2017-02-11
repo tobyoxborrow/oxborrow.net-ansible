@@ -8,11 +8,11 @@
 #   - brings up VM and runs provision
 #   - use this to start from a clean environment
 
-# it is expected that vagrant VMs will have different keys as they are
-# frequently destroyed and recreated
-ssh-keygen -R "[127.0.0.1]:62200"
-
 if [[ $1 == "reset" ]]; then
+    # it is expected that vagrant VMs will have different keys as they are
+    # frequently destroyed and recreated
+    ssh-keygen -R "[127.0.0.1]:62200"
+
     vagrant destroy -f
 fi
 

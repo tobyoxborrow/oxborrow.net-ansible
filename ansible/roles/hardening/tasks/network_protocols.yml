@@ -1,0 +1,8 @@
+---
+- name: 3.5 Disable unused network protocols
+  copy:
+    src: files/modprobe.d-CIS-protocols.conf
+    dest: /etc/modprobe.d/CIS-protocols.conf
+    owner: root
+    group: root
+    mode: 0644

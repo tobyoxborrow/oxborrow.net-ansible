@@ -16,3 +16,9 @@
 
 - name: 3.2 Network Parameters (Host and Router)
   include: network_parameters_hostrouter.yml
+
+- name: 3.5 Uncommon Network Protocols
+  include: network_protocols.yml
+
+- name: 3.6 Firewall Configuration
+  include: iptables.yml

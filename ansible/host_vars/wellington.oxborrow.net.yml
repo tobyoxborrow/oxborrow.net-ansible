@@ -4,3 +4,7 @@ hostname_fqdn: "{{ hostname }}.oxborrow.net"
 sshd_banner_filename: "banner_{{ hostname }}.txt"
 public_inet_address: 104.244.76.123
 sshd_config_port: 63822
+firewall_tcp_ports:
+  - "{{ sshd_config_port }}"
+  - 80
+  - 25

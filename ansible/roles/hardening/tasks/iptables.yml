@@ -1,0 +1,125 @@
+---
+- name: 3.6 Stat ufw
+  command: "dpkg -s ufw"
+  register: dpkg
+  ignore_errors: true
+  changed_when: false
+  failed_when: "'Status: install ok installed' not in dpkg.stdout"
+  no_log: true
+
+- name: 3.6 Disable ufw
+  command: "ufw disable"
+  when: dpkg|succeeded
+
+- name: 3.6 Ensure ufw is absent
+  package:
+    name: ufw
+    state: absent
+  when: dpkg|succeeded
+
+- name: 3.6.1 Ensure iptables is installed
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - iptables
+    - iptables-persistent
+
+# these are enforced by netfilter-persistent save
+# but we won't use that due to some incompatability with my hosting provider
+- name: 3.6.1 Ensure iptables rules file is present
+  file:
+    path: /etc/iptables/rules.v4
+    owner: root
+    group: root
+    mode: 0640
+
+# NOTE: the benchmark rules are not in numerical order from this point on so
+# that we do not end up blocking our connectivity preventing subsequent
+# commands
+- name: 3.6.4 Ensure outbound and established connections are configured
+  iptables:
+    chain: OUTPUT
+    protocol: "{{ item }}"
+    jump: ACCEPT
+    ctstate: NEW,ESTABLISHED
+  notify: save iptables rules
+  with_items:
+    - tcp
+    - udp
+    - icmp
+
+- name: 3.6.4 Ensure outbound and established connections are configured
+  iptables:
+    chain: INPUT
+    protocol: "{{ item }}"
+    jump: ACCEPT
+    ctstate: ESTABLISHED
+  notify: save iptables rules
+  with_items:
+    - tcp
+    - udp
+    - icmp
+
+- name: 3.6.5 Ensure firewall rules exist for all open ports (tcp)
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "{{ item }}"
+    jump: ACCEPT
+    ctstate: NEW
+  notify: save iptables rules
+  with_items: "{{ firewall_tcp_ports }}"
+  when: firewall_tcp_ports is defined
+
+- name: 3.6.5 Ensure firewall rules exist for all open ports (vagrant ssh)
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 22
+    jump: ACCEPT
+    ctstate: NEW
+  notify: save iptables rules
+  when: development and vagrant
+
+- name: 3.6.5 Ensure firewall rules exist for all open ports (udp)
+  iptables:
+    chain: INPUT
+    protocol: udp
+    destination_port: "{{ item }}"
+    jump: ACCEPT
+    ctstate: NEW
+  notify: save iptables rules
+  with_items: "{{ firewall_udp_ports }}"
+  when: firewall_udp_ports is defined
+
+- name: 3.6.2 Ensure default deny firewall policy
+  iptables:
+    chain: "{{ item }}"
+    policy: DROP
+  notify: save iptables rules
+  with_items:
+    - INPUT
+    - FORWARD
+    - OUTPUT
+
+- name: 3.6.3 Ensure loopback traffic is configured
+  iptables:
+    chain: INPUT
+    in_interface: lo
+    jump: ACCEPT
+  notify: save iptables rules
+
+- name: 3.6.3 Ensure loopback traffic is configured
+  iptables:
+    chain: OUTPUT
+    out_interface: lo
+    jump: ACCEPT
+  notify: save iptables rules
+
+- name: 3.6.3 Ensure loopback traffic is configured
+  iptables:
+    chain: INPUT
+    source: 127.0.0.0/8
+    jump: DROP
+  notify: save iptables rules

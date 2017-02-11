@@ -1,0 +1,5 @@
+---
+# firewall_udp_ports:
+# - 53
+# firewall_tcp_ports:
+# - 22

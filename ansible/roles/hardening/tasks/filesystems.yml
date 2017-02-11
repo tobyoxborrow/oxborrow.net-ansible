@@ -1,8 +1,8 @@
 ---
 - name: 1.1.1 Disable unused filesystems
   copy:
-    src: files/modprobe.d-CIS.conf
-    dest: /etc/modprobe.d/CIS.conf
+    src: files/modprobe.d-CIS-filesystems.conf
+    dest: /etc/modprobe.d/CIS-filesystems.conf
     owner: root
     group: root
     mode: 0644
