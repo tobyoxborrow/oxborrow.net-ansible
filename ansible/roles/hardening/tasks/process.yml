@@ -5,7 +5,7 @@
     insertafter: EOF
     state: present
     regexp: ^\*\s+hard\s+core
-    line: "* hard core"
+    line: "* hard core 0"
     create: yes
     owner: root
     group: root
