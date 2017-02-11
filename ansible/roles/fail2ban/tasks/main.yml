@@ -4,3 +4,5 @@
     name: fail2ban
     state: present
 
+- name: Manage fail2ban configuraiton
+  include: configuration.yml

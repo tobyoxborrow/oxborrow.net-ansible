@@ -1,0 +1,33 @@
+---
+- name: Ensure configuration file jail.d/defaults-debian.conf is absent
+  file:
+    path: /etc/fail2ban/jail.d/defaults-debian.conf
+    state: absent
+  notify: reload fail2ban
+
+- name: Ensure configuration file jail.d/sshd.conf is present
+  template:
+    src: templates/sshd.conf.j2
+    dest: /etc/fail2ban/jail.d/sshd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload fail2ban
+
+- name: Ensure configuration file jail.d/nginx.conf is present
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/fail2ban/jail.d/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload fail2ban
+
+- name: Ensure configuration file jail.d/postfix.conf is present
+  template:
+    src: templates/postfix.conf.j2
+    dest: /etc/fail2ban/jail.d/postfix.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload fail2ban

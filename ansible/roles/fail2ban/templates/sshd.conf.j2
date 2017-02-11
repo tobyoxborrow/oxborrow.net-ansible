@@ -1,0 +1,8 @@
+[sshd]
+enabled = true
+{% if development and vagrant %}
+# The production port would be: {{ sshd_config_port }}
+port = 22
+{% else %}
+port = {{ sshd_config_port }}
+{% endif %}
