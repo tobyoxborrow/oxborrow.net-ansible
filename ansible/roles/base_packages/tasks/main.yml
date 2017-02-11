@@ -30,6 +30,6 @@
   with_items:
     - bsd-mailx
     - git
-    - man
+    - man-db
     - tcpdump
     - tmux
