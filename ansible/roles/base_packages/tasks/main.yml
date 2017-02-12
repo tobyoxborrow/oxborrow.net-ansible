@@ -4,24 +4,64 @@
     name: "{{ item }}"
     state: absent
   with_items:
-    - "xserver-xorg*"
     - avahi-daemon
     # - bind9
+    - command-not-found
+    - command-not-found-data
     - cups
     - cups-client
     - cups-common
+    - eatmydata
+    - friendly-recovery
+    - fuse
+    - geoip-database
     - ldap-utils
+    - liblxc1
+    - lxc-common
+    - lxcfs
+    - lxd-client
+    - nano
     - nfs-common
     - nfs-kernel-server
     - nis
+    - ntfs-3g
+    - pastebinit
+    - pollinate
+    - rename
     - rsh-client
     - rsh-redone-client
+    - run-one
     - samba
+    - sgml-base
     - slapd
+    - snap-confine
+    - snapd
     - snmpd
+    - squashfs-tools
+    - ssh-import-id
     - talk
+    - tcpd
     - telnet
+    - ubuntu-core-launcher
+    - xauth
+    - xdg-user-dirs
     - xinetd
+    - xml-core
+    - xserver-xorg*
+
+- name: Ensure certain base services are disabled
+  service:
+    name: "{{ item }}"
+    enabled: no
+    state: stopped
+  with_items:
+    - cloud-config
+    - cloud-final
+    - cloud-init-local
+    - cloud-init
+    - friendly-recovery
+    - iscsid
+    - open-iscsi
 
 - name: Ensure certain base packages are present
   package:
