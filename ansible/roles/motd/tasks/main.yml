@@ -23,14 +23,22 @@
     group: root
     mode: 0755
 
-- name: Ensure help-text is not executable
+- name: Verify 10-help-text exists
+  stat:
+    path: /etc/update-motd.d/10-help-text
+  register: helptext
+  changed_when: false
+  check_mode: yes
+
+- name: Ensure 10-help-text is not executable
   file:
     path: /etc/update-motd.d/10-help-text
     mode: 0644
+  when: helptext.stat.exists
 
 - name: Verify 51-cloudguest exists
   stat:
-    path: "/etc/update-motd.d/51-cloudguest"
+    path: /etc/update-motd.d/51-cloudguest
   register: cloudguest
   changed_when: false
   check_mode: yes
