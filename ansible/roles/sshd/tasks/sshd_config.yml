@@ -33,6 +33,6 @@
 
 - name: Ensure service reloaded when configuration changes
   service:
-    name: sshd
+    name: "{{ openssh_server_service }}"
     state: reloaded
   when: not sshd_t|skipped

@@ -6,3 +6,5 @@ sshd_config_allowagentforwarding: 'no'
 sshd_config_allowtcpforwarding: 'no'
 sshd_config_allowgroups: 'sshlogin'
 sshd_banner_filename: ''
+sshd_package_name: 'openssh-server'
+sshd_service_name: 'sshd' # suitable for Ubuntu. On Debian use "ssh"
