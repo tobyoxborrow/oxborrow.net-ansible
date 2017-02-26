@@ -1,4 +1,7 @@
 ---
+- name: Manage alternative ntp packages
+  include: ntp.yml
+
 - name: Manage chrony package
   include: package.yml
 

@@ -1,0 +1,27 @@
+---
+# ignore errors as service module will error if the service does not exist,
+# which is perfectly fine in this case
+- name: Ensure alternative ntp services are stopped and disabled
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  with_items: "{{ chrony_ntp_packages_to_remove }}"
+  ignore_errors: yes
+
+- name: Ensure alternative ntp packages are absent
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ chrony_ntp_packages_to_remove }}"
+
+# /etc/init.d/ntp - at least on raspbian - did not get removed when the ntp
+# package was removed, possibly because ansible did not purge the related
+# files. This extra step helps clean them up, avoiding errors on boot and the
+# service module above always returning "changed" for the ntp service even
+# though nothing actually changed.
+- name: Ensure altnernative ntp service init.d scripts are absent
+  file:
+    path: "/etc/init.d/{{ item }}"
+    state: absent
+  with_items: "{{ chrony_ntp_packages_to_remove }}"
