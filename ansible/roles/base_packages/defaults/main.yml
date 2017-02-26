@@ -1,0 +1,73 @@
+---
+base_services_to_disable:
+  - cloud-config
+  - cloud-final
+  - cloud-init-local
+  - friendly-recovery
+  - iscsid
+  - open-iscsi
+
+# instead of redefining the above, you can just populate the following list
+additional_base_services_to_disable:
+
+base_packages_to_remove:
+  - avahi-daemon
+  # - bind9
+  - cloud-init
+  - command-not-found
+  - command-not-found-data
+  - cups
+  - cups-client
+  - cups-common
+  - eatmydata
+  - friendly-recovery
+  - fuse
+  - geoip-database
+  - ldap-utils
+  - liblxc1
+  - lxc-common
+  - lxcfs
+  - lxd-client
+  - nano
+  - nfs-common
+  - nfs-kernel-server
+  - nis
+  - ntfs-3g
+  - pastebinit
+  - pollinate
+  - rename
+  - rsh-client
+  - rsh-redone-client
+  - run-one
+  - samba
+  - sgml-base
+  - slapd
+  - snap-confine
+  - snapd
+  - snmpd
+  - squashfs-tools
+  - ssh-import-id
+  - talk
+  - tcpd
+  - telnet
+  - ubuntu-core-launcher
+  - xauth
+  - xdg-user-dirs
+  - xinetd
+  - xml-core
+  - xserver-xorg*
+
+# instead of redefining the above, you can just populate the following list
+additional_base_packages_to_remove:
+
+base_packages_to_install:
+  - bsd-mailx
+  - git
+  - man-db
+  - netcat
+  - nmap
+  - tcpdump
+  - tmux
+
+# instead of redefining the above, you can just populate the following list
+additional_base_packages_to_install:

@@ -1,0 +1,4 @@
+---
+- name: apt-get autoremove
+  command: apt-get --yes autoremove
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
