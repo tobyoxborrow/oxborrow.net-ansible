@@ -13,6 +13,7 @@
     group: root
     mode: 0644
   notify: reload fail2ban
+  when: fail2ban_enable_sshd
 
 - name: Ensure configuration file jail.d/nginx.conf is present
   template:
@@ -22,6 +23,7 @@
     group: root
     mode: 0644
   notify: reload fail2ban
+  when: fail2ban_enable_nginx
 
 - name: Ensure configuration file jail.d/postfix.conf is present
   template:
@@ -31,3 +33,4 @@
     group: root
     mode: 0644
   notify: reload fail2ban
+  when: fail2ban_enable_postfix

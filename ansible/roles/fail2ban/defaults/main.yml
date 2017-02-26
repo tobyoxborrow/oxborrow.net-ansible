@@ -1,0 +1,4 @@
+---
+fail2ban_enable_sshd: yes
+fail2ban_enable_postfix: no
+fail2ban_enable_nginx: no

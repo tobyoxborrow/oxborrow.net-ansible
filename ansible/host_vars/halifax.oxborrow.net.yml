@@ -8,3 +8,5 @@ firewall_tcp_ports:
   - "{{ sshd_config_port }}"
   - 80
   - 25
+fail2ban_enable_nginx: yes
+fail2ban_enable_postfix: yes
