@@ -1,0 +1,13 @@
+---
+users_to_remove:
+  - avahi
+  - games
+  - irc
+  - list
+  - lp
+  - news
+  - statd
+  - uucp
+
+# instead of redefining the above, you can just populate the following list
+additional_users_to_remove:

@@ -3,10 +3,4 @@
   user:
     name: "{{item}}"
     state: absent
-  with_items:
-    - irc
-    - list
-    - uucp
-    - news
-    - lp
-    - games
+  with_items: "{{ users_to_remove + additional_users_to_remove | default([], true) }}"
