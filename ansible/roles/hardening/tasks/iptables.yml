@@ -37,6 +37,20 @@
 # NOTE: the benchmark rules are not in numerical order from this point on so
 # that we do not end up blocking our connectivity preventing subsequent
 # commands
+- name: 3.6.3 Ensure loopback traffic is configured
+  iptables:
+    chain: OUTPUT
+    out_interface: lo
+    jump: ACCEPT
+  notify: save iptables rules
+
+- name: 3.6.3 Ensure loopback traffic is configured
+  iptables:
+    chain: INPUT
+    source: 127.0.0.0/8
+    jump: DROP
+  notify: save iptables rules
+
 - name: 3.6.4 Ensure outbound and established connections are configured
   iptables:
     chain: OUTPUT
@@ -108,18 +122,4 @@
     chain: INPUT
     in_interface: lo
     jump: ACCEPT
-  notify: save iptables rules
-
-- name: 3.6.3 Ensure loopback traffic is configured
-  iptables:
-    chain: OUTPUT
-    out_interface: lo
-    jump: ACCEPT
-  notify: save iptables rules
-
-- name: 3.6.3 Ensure loopback traffic is configured
-  iptables:
-    chain: INPUT
-    source: 127.0.0.0/8
-    jump: DROP
   notify: save iptables rules
