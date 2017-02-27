@@ -1,0 +1,5 @@
+---
+# indirect variables to help with troubleshooting as per:
+# http://docs.ansible.com/ansible/playbooks_best_practices.html#best-practices-for-variables-and-vaults
+logwatch_mail_to: "{{ vault_logwatch_mail_to }}"
+sshd_config_port: "{{ vault_sshd_config_port }}"

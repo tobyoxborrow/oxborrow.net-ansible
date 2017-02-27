@@ -1,0 +1,14 @@
+---
+logwatch_mail_to: root
+logwatch_mail_from: "logwatch@{{ hostname_fqdn }}"
+logwatch_services:
+  - All
+  - -cron
+  - -eximstats
+  - -http
+  - -postfix
+  - -sendmail
+  - -zz-disk_space
+  - -zz-fortune
+  - -zz-network
+  - -zz-sys

@@ -11,9 +11,9 @@ Output = stdout
 Format = text
 Encode = none
 
-MailTo = toby@oxborrow.net
+MailTo = {{ logwatch_mail_to }}
 
-MailFrom = logwatch@{{ hostname_fqdn }}
+MailFrom = {{ logwatch_mail_from }}
 
 Range = yesterday
 Archives = No
@@ -23,14 +23,8 @@ Archives = No
 # High = 10
 Detail = High
 
-Service = All
-Service = "-cron"
-Service = "-eximstats"
-Service = "-http"
-Service = "-postfix"
-Service = "-zz-disk_space"
-Service = "-zz-fortune"
-Service = "-zz-network"
-Service = "-zz-sys"
+{% for logwatch_service in logwatch_services %}
+Service = "{{logwatch_service}}"
+{% endfor %}
 
 #mailer = "/usr/sbin/sendmail -t"
