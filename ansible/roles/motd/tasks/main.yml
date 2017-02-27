@@ -22,6 +22,7 @@
     owner: root
     group: root
     mode: 0755
+  when: motd_install_recent_scripts
 
 - name: Verify 10-help-text exists
   stat:
