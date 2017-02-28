@@ -24,6 +24,13 @@
     mode: 0755
   when: motd_install_recent_scripts
 
+- name: Verify recent scripts are installed
+  command: run-parts --test /etc/cron.daily
+  register: runparts
+  failed_when: runparts.stdout.find('/etc/cron.daily/recent_') == -1
+  changed_when: no
+  when: motd_install_recent_scripts
+
 - name: Verify 10-help-text exists
   stat:
     path: /etc/update-motd.d/10-help-text
