@@ -1,0 +1,11 @@
+---
+- name: Manage letsencrypt package
+  include: package.yml
+
+- name: Manage letsencrypt cronjobs
+  include: cronjobs.yml
+  when: not development and not vagrant
+
+- name: Manage letsencrypt certs
+  include: certs.yml
+  when: not development and not vagrant

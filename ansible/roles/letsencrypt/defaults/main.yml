@@ -1,0 +1,17 @@
+---
+# letsencrypt was renamed to certbot in mid-2016 but some distros still use the
+# letsencrypt name for the package and command
+letsencrypt_package_name: letsencrypt
+letsencrypt_renew_command: /usr/bin/letsencrypt renew
+# this directory is created by the package, adjust path if your package does
+# not use this name
+letsencrypt_renew_log: /var/log/letsencrypt/renew.log
+
+# Example actions to perform if there was a renewal
+#letsencrypt_post_renew_commands:
+#  - service nginx reload
+
+# Example certs
+#letsencrypt_certs:
+#  - domain: www.example.com
+#    command: letsencrypt certonly --webroot -w /var/www/html -m foo@example.com -d www.example.com --agree-tos
