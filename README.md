@@ -100,7 +100,7 @@ See: https://github.com/tobyoxborrow/dotfiles
 ## Usage
 
 There are multiple playbooks, one per oxborrow.net host. To make running
-ansible against vagrant easier, scripts can be found in the `run/` directory.
+ansible against the hosts easier, scripts can be found in the `run/` directory.
 They wrap ansible-playbook and help providing credentials to ansible vault.
 
 Ensure you have some out-of-band connection to the host, e.g. KVM, just in case
