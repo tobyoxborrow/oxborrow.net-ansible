@@ -1,0 +1,81 @@
+---
+- name: Stat dovecot.socket
+  command: systemctl status dovecot.socket
+  register: dovecotsocket
+  changed_when: no
+  failed_when: no
+
+# avoid: dovecot: master: Error: systemd listens on port 993, but it’s not
+# configured in Dovecot
+# see: https://sowhatisthesolution.wordpress.com/2015/04/27/upgrading-dovecot-debian-wheezy-to-jessie/
+- name: Ensure dovecot.socket is masked
+  command: systemctl mask dovecot.socket
+  when: dovecotsocket is defined and dovecotsocket.stdout.find('masked') == -1
+
+- name: Ensure virtual mailbox user exists
+  user:
+    name: vmail
+    comment: Virtual Mailboxes
+    group: vmail
+    createhome: yes
+    state: present
+    system: yes
+
+- name: Ensure virtual mailbox directory exists
+  file:
+    path: /var/mail/virtual
+    state: directory
+    owner: vmail
+    group: vmail
+    mode: 02755
+
+- name: Ensure auth-master includes are disabled
+  lineinfile:
+    dest: /etc/dovecot/conf.d/10-auth.conf
+    regexp: 'include auth-master\.conf\.ext'
+    line: "#!include auth-master.conf.ext"
+    state: present
+  notify: restart dovecot
+
+- name: Ensure auth-system includes are disabled
+  lineinfile:
+    dest: /etc/dovecot/conf.d/10-auth.conf
+    regexp: 'include auth-system\.conf\.ext'
+    line: "#!include auth-system.conf.ext"
+    state: present
+  notify: restart dovecot
+
+- name: Ensure auth-deny includes are present
+  lineinfile:
+    dest: /etc/dovecot/conf.d/10-auth.conf
+    regexp: 'include auth-deny\.conf\.ext'
+    line: "!include auth-deny.conf.ext"
+    state: present
+  notify: restart dovecot
+
+- name: Ensure deny-users configuration file is present
+  template:
+    dest: /etc/dovecot/deny-users
+    src: templates/deny-users.j2
+    owner: root
+    group: dovecot
+    mode: 0640
+  notify: restart dovecot
+
+- name: Ensure users configuration file is present
+  template:
+    dest: /etc/dovecot/users
+    src: templates/users.j2
+    owner: root
+    group: dovecot
+    mode: 0640
+  notify: restart dovecot
+
+- name: Ensure local.conf is present
+  template:
+    dest: /etc/dovecot/local.conf
+    src: templates/local.conf.j2
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart dovecot

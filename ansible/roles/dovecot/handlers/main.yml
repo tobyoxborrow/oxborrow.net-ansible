@@ -1,0 +1,15 @@
+---
+# Dovecot does not respond to configuration changes well with just a reload or
+# restart so instead a full stop and start cycle is necessary to ensure all
+# changes are picked up.
+# ansible provides sleep for this purpose but systemd does not support it
+- name: restart dovecot
+  service:
+    name: dovecot
+    state: stopped
+  notify: start dovecot
+
+- name: start dovecot
+  service:
+    name: dovecot
+    state: started

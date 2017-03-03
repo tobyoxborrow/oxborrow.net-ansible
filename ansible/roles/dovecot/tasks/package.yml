@@ -1,0 +1,6 @@
+---
+- name: Ensure dovecot is installed
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ dovecot_packages }}"

@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for user in dovecot_users %}
+{{ user.username }}:{{ user.password }}:{{ user.uid }}:{{ user.gid }}::{{ user.home }}
+{% endfor %}

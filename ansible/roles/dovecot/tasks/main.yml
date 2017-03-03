@@ -1,0 +1,9 @@
+---
+- name: Manage dovecot package
+  include: package.yml
+
+- name: Manage dovecot configuraiton
+  include: configuration.yml
+
+- name: Manage dovecot service
+  include: service.yml
