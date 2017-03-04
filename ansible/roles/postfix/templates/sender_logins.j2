@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+
+{% if postfix_sender_login_entries is defined -%}
+{% for entry in postfix_sender_login_entries -%}
+{{ entry.username }} {{ entry.address }}
+{% endfor -%}
+{% endif -%}

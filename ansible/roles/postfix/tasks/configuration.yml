@@ -28,6 +28,17 @@
    - postmap generic
    - reload postfix
 
+- name: Ensure configuration file vmailbox is present
+  template:
+    src: templates/vmailbox.j2
+    dest: /etc/postfix/vmailbox
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+   - postmap vmailbox
+   - reload postfix
+
 - name: Ensure configuration file virtual is present
   template:
     src: templates/virtual.j2
@@ -70,6 +81,17 @@
     mode: 0644
   notify:
    - postmap denied_recipients
+   - reload postfix
+
+- name: Ensure configuration file sender_logins is present
+  template:
+    src: templates/sender_logins.j2
+    dest: /etc/postfix/sender_logins
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+   - postmap sender_logins
    - reload postfix
 
 - name: Synchronize remaining postfix configuration files

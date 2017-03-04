@@ -1,11 +1,9 @@
 ---
-- name: reload postfix
-  service:
-    name: postfix
-    state: reloaded
-
 - name: postmap generic
   command: postmap /etc/postfix/generic
+
+- name: postmap vmailbox
+  command: postmap /etc/postfix/vmailbox
 
 - name: postmap virtual
   command: postmap /etc/postfix/virtual
@@ -19,5 +17,13 @@
 - name: postmap denied_recipients
   command: postmap /etc/postfix/denied_recipients
 
+- name: postmap sender_logins
+  command: postmap /etc/postfix/sender_logins
+
 - name: postmap static files
   command: postmap /etc/postfix/header_checks /etc/postfix/helo_access /etc/postfix/localdomains /etc/postfix/relay_domains /etc/postfix/transport
+
+- name: reload postfix
+  service:
+    name: postfix
+    state: reloaded

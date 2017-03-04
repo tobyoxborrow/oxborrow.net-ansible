@@ -1,5 +1,6 @@
 ---
-postfix_master_smtp_inet: true
+postfix_master_smtp_inet: yes
+postfix_master_submission_inet: no
 postfix_smtpd_banner: ESMTP
 postfix_mydomain: localhost
 postfix_myhostname: localhost
@@ -14,17 +15,43 @@ postfix_smtpd_recipient_restrictions:
   - check_client_access hash:/etc/postfix/client_whitelist
 postfix_smtpd_sender_restrictions:
   - permit_mynetworks
-postfix_virtual_default_entry: localhost
+postfix_smtpd_relay_restrictions:
+  - permit_mynetworks
+  - permit_sasl_authenticated
+  - reject_unauth_destination
+# postfix_virtual_mailbox_domains: example.com
+postfix_virtual_mailbox_base: /var/mail/virtual
+# postfix_virtual_default_entry: example.com
+postfix_virtual_minimum_uid: 900
+# postfix_virtual_uid_maps: static:999
+# postfix_virtual_gid_maps: static:998
 postfix_virtual_entries:
-  - pattern: example@localhost
-    value: toby@localhost
+  - pattern: foo@example.com
+    value: bar@example.com
+postfix_virtual_mailbox_entries:
+  - address: foo@example.com
+    mailbox: example.com/foo/
+postfix_virtual_transport: "lmtp:unix:private/dovecot-lmtp"
 postfix_generic_entries:
   - pattern: "@localhost.localdomain"
     value: no-reply@localhost.localdomain
 postfix_client_whitelist:
-  - google.com
+  - example.com
 postfix_access_entries:
-  - pattern: "trogdor@homestarrunner.com"
+  - pattern: "trogdor@example.com"
     value: "500 Burninated!"
 postfix_denied_recipients:
   - strongbad@localhost
+postfix_sender_login_entries:
+  - username: foo@example.com
+    address: foo@example.com
+postfix_smtpd_sasl_auth_enable: "no"
+postfix_smtpd_sasl_path: private/auth
+postfix_smtpd_sasl_type: dovecot
+postfix_smtpd_use_tls: "no"
+postfix_smtpd_tls_ask_ccert: "no"
+postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
+postfix_smtpd_tls_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
+postfix_smtpd_tls_loglevel: 1
+postfix_smtpd_tls_received_header: "yes"
+postfix_smtpd_tls_security_level: may

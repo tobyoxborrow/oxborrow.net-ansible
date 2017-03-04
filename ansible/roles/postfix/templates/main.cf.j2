@@ -93,6 +93,41 @@ unknown_local_recipient_reject_code = 550
 # recipient restrictions.
 relay_domains = $mydestination, hash:/etc/postfix/relay_domains
 
+# Postfix is final destination for the specified list of domains; mail is
+# delivered via the $virtual_transport mail delivery transport. By default this
+# is the Postfix virtual(8) delivery agent. The SMTP server validates recipient
+# addresses with $virtual_mailbox_maps and rejects mail for non-existent
+# recipients.
+virtual_mailbox_domains = {{ postfix_virtual_mailbox_domains }}
+
+# A prefix that the virtual(8) delivery agent prepends to all pathname results
+# from $virtual_mailbox_maps table lookups. This is a safety measure to ensure
+# that an out of control map doesn't litter the file system with mailboxes.
+# While virtual_mailbox_base could be set to "/", this setting isn't
+# recommended.
+virtual_mailbox_base = {{ postfix_virtual_mailbox_base }}
+
+# Optional lookup tables with all valid addresses in the domains that match
+# $virtual_mailbox_domains.
+virtual_mailbox_maps = hash:/etc/postfix/vmailbox
+
+# The minimum user ID value that the virtual(8) delivery agent accepts as a
+# result from $virtual_uid_maps table lookup. Returned values less than this
+# will be rejected, and the message will be deferred.
+virtual_minimum_uid = {{ postfix_virtual_minimum_uid }}
+
+# Lookup tables with the per-recipient user ID that the virtual(8) delivery
+# agent uses while writing to the recipient's mailbox.
+virtual_uid_maps = {{ postfix_virtual_uid_maps }}
+
+# Lookup tables with the per-recipient group ID for virtual(8) mailbox
+# delivery.
+virtual_gid_maps = {{ postfix_virtual_gid_maps }}
+
+# The default mail delivery transport and next-hop destination for final
+# delivery to domains listed with $virtual_mailbox_domains.
+virtual_transport = {{ postfix_virtual_transport }}
+
 # Optional lookup tables that alias specific mail addresses or domains to other
 # local or remote address. The table format and lookups are documented in
 # virtual(5). For an overview of Postfix address manipulations see the
@@ -132,6 +167,56 @@ local_transport = local
 # Optional lookup tables with mappings from recipient address to (message
 # delivery transport, next-hop destination).
 transport_maps = hash:/etc/postfix/transport
+
+# File with the Postfix SMTP server RSA certificate in PEM format.
+smtpd_tls_cert_file = {{ postfix_smtpd_tls_cert_file }}
+
+# File with the Postfix SMTP server RSA private key in PEM format.
+smtpd_tls_key_file = {{ postfix_smtpd_tls_key_file }}
+
+# Opportunistic TLS: announce STARTTLS support to remote SMTP clients, but do
+# not require that clients use TLS encryption.
+smtpd_use_tls = {{ postfix_smtpd_use_tls }}
+
+# Enable additional Postfix SMTP server logging of TLS activity. Each logging
+# level also includes the information that is logged at a lower logging level.
+smtpd_tls_loglevel = {{ postfix_smtpd_tls_loglevel }}
+
+# Request that the Postfix SMTP server produces Received: message headers that
+# include information about the protocol and cipher used, as well as the remote
+# SMTP client CommonName and client certificate issuer CommonName.
+smtpd_tls_received_header = {{ postfix_smtpd_tls_received_header }}
+
+# The SMTP TLS security level for the Postfix SMTP server; when a non-empty
+# value is specified, this overrides the obsolete parameters smtpd_use_tls and
+# smtpd_enforce_tls. This parameter is ignored with "smtpd_tls_wrappermode =
+# yes".
+smtpd_tls_security_level = {{ postfix_smtpd_tls_security_level }}
+
+# Ask a remote SMTP client for a client certificate.
+smtpd_tls_ask_ccert = {{ postfix_smtpd_tls_ask_ccert }}
+
+# Enable SASL authentication in the Postfix SMTP server. By default, the
+# Postfix SMTP server does not use authentication.
+smtpd_sasl_auth_enable = {{ postfix_smtpd_sasl_auth_enable }}
+
+# The SASL plug-in type that the Postfix SMTP server should use for
+# authentication. The available types are listed with the "postconf -a"
+# command.
+smtpd_sasl_type = {{ postfix_smtpd_sasl_type }}
+
+# Implementation-specific information that the Postfix SMTP server passes
+# through to the SASL plug-in implementation that is selected with
+# smtpd_sasl_type. Typically this specifies the name of a configuration file or
+# rendezvous point.
+smtpd_sasl_path = {{ postfix_smtpd_sasl_path }}
+
+# Access restrictions for mail relay control that the Postfix SMTP server
+# applies in the context of the RCPT TO command, before
+# smtpd_recipient_restrictions.
+{% if postfix_smtpd_relay_restrictions is defined -%}
+smtpd_relay_restrictions = {{ postfix_smtpd_relay_restrictions|join(',') }}
+{% endif %}
 
 
 # ### Anti-spam ###############################################################

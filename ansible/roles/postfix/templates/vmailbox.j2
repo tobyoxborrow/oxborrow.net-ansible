@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+
+{% if postfix_virtual_mailbox_entries is defined -%}
+{% for entry in postfix_virtual_mailbox_entries -%}
+{{ entry.address }} {{ entry.mailbox }}
+{% endfor -%}
+{% endif -%}
