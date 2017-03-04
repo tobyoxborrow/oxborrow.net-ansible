@@ -4,7 +4,10 @@
 postfix_inet_interfaces: "{{ public_inet_address }}, 127.0.0.1"
 postfix_myhostname: "{{ hostname_fqdn }}"
 postfix_mydomain: "{{ hostname_fqdn }}"
-postfix_virtual_default_entry: "{{ vault_postfix_virtual_default_entry }}"
+postfix_virtual_mailbox_domains: "{{ vault_postfix_virtual_mailbox_domains }}"
+postfix_virtual_uid_maps: static:999
+postfix_virtual_gid_maps: static:998
+postfix_virtual_mailbox_entries: "{{ vault_postfix_virtual_mailbox_entries }}"
 postfix_virtual_entries: "{{ vault_postfix_virtual_entries }}"
 postfix_generic_entries: "{{ vault_postfix_generic_entries }}"
 postfix_smtpd_recipient_restrictions: "{{ vault_postfix_smtpd_recipient_restrictions }}"
@@ -12,3 +15,16 @@ postfix_smtpd_sender_restrictions: "{{ vault_postfix_smtpd_sender_restrictions }
 postfix_client_whitelist: "{{ vault_postfix_client_whitelist }}"
 postfix_access_entries: "{{ vault_postfix_access_entries }}"
 postfix_denied_recipients: "{{ vault_postfix_denied_recipients }}"
+postfix_sender_login_entries: "{{ vault_postfix_sender_login_entries }}"
+postfix_smtpd_use_tls: "yes"
+postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/www.oxborrow.net/fullchain.pem
+postfix_smtpd_tls_key_file: /etc/letsencrypt/live/www.oxborrow.net/privkey.pem
+postfix_master_submission_inet: "yes"
+
+dovecot_users: "{{ vault_dovecot_users }}"
+
+letsencrypt_certs:
+  - domain: www.oxborrow.net
+    command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d www.oxborrow.net --agree-tos
+letsencrypt_post_renew_commands:
+  - systemctl dovecot restart
