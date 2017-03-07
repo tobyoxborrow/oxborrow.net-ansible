@@ -25,14 +25,4 @@
     mode: 0644
     backup: yes
   register: sshd_config
-
-- name: Ensure valid syntax when configuration file changed
-  command: sshd -T
-  register: sshd_t
-  when: sshd_config|changed
-
-- name: Ensure service reloaded when configuration changes
-  service:
-    name: "{{ openssh_server_service }}"
-    state: reloaded
-  when: not sshd_t|skipped
+  notify: reload sshd - check syntax

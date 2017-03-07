@@ -1,0 +1,6 @@
+---
+- name: Ensure service started and enabled
+  service:
+    name: "{{ sshd_service_name }}"
+    state: started
+    enabled: yes

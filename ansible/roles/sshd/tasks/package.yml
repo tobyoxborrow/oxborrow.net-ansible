@@ -5,9 +5,3 @@
   package:
     name: "{{ sshd_package_name }}"
     state: present
-
-- name: Ensure service started and enabled
-  service:
-    name: "{{ sshd_service_name }}"
-    state: started
-    enabled: yes

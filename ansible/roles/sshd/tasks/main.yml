@@ -4,3 +4,6 @@
 
 - name: Configure sshd package
   include: sshd_config.yml
+
+- name: Manage sshd service
+  include: service.yml
