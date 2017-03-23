@@ -11,5 +11,6 @@ firewall_tcp_ports:
   - 587
 fail2ban_enable_nginx: yes
 fail2ban_enable_postfix: yes
+fail2ban_enable_dovecot: yes
 dovecot_ssl_cert: "</etc/letsencrypt/live/www.oxborrow.net/fullchain.pem"
 dovecot_ssl_key: "</etc/letsencrypt/live/www.oxborrow.net/privkey.pem"

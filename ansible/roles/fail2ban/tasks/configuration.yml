@@ -31,3 +31,12 @@
     group: root
     mode: 0644
   notify: reload fail2ban
+
+- name: Ensure configuration file jail.d/dovecot.conf is present
+  template:
+    src: templates/dovecot.conf.j2
+    dest: /etc/fail2ban/jail.d/dovecot.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload fail2ban
