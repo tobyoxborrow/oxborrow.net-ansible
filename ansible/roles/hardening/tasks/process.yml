@@ -24,10 +24,10 @@
 - name: 1.5.4 Stat prelink
   command: "dpkg -s prelink"
   register: dpkg
-  ignore_errors: true
-  changed_when: false
+  ignore_errors: yes
+  changed_when: no
   failed_when: "'Status: install ok installed' not in dpkg.stdout"
-  no_log: true
+  no_log: yes
 
 - name: 1.5.4 Restore prelink binaries to normal
   command: "prelink -ua"

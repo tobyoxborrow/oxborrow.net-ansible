@@ -35,7 +35,7 @@
   stat:
     path: /etc/update-motd.d/10-help-text
   register: helptext
-  changed_when: false
+  changed_when: no
   check_mode: yes
 
 - name: Ensure 10-help-text is not executable
@@ -48,7 +48,7 @@
   stat:
     path: /etc/update-motd.d/51-cloudguest
   register: cloudguest
-  changed_when: false
+  changed_when: no
   check_mode: yes
 
 - name: Ensure 51-cloudguest is not executable

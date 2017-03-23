@@ -1,7 +1,7 @@
 ---
 - name: oxborrow.net mailservers
   hosts: [halifax, wellington]
-  become: true
+  become: yes
   become_user: root
   roles:
     - base_packages

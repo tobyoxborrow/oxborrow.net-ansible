@@ -2,10 +2,10 @@
 - name: 3.6 Stat ufw
   command: "dpkg -s ufw"
   register: dpkg
-  ignore_errors: true
-  changed_when: false
+  ignore_errors: yes
+  changed_when: no
   failed_when: "'Status: install ok installed' not in dpkg.stdout"
-  no_log: true
+  no_log: yes
 
 - name: 3.6 Disable ufw
   command: "ufw disable"
