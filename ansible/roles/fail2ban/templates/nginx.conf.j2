@@ -1,5 +1,13 @@
 [nginx-botsearch]
+{% if fail2ban_enable_nginx %}
 enabled = true
+{% else %}
+enabled = false
+{% endif %}
 
 [nginx-http-auth]
+{% if fail2ban_enable_nginx %}
 enabled = true
+{% else %}
+enabled = false
+{% endif %}

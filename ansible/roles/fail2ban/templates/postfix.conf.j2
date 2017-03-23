@@ -1,11 +1,32 @@
 [postfix]
+{% if fail2ban_enable_postfix %}
 enabled = true
+{% else %}
+enabled = false
+{% endif %}
 logpath = /var/log/mail.log
-
-[postfix-rbl]
-enabled = true
-logpath = /var/log/mail.log
+bantime = 3600
+findtime = 1800
+maxretry = 3
+usedns = no
 
 [postfix-sasl]
+{% if fail2ban_enable_postfix %}
 enabled = true
+{% else %}
+enabled = false
+{% endif %}
 logpath = /var/log/mail.log
+bantime = 3600
+findtime = 1800
+maxretry = 3
+
+[postfix-rbl]
+{% if fail2ban_enable_postfix %}
+enabled = true
+{% else %}
+enabled = false
+{% endif %}
+logpath = /var/log/mail.log
+bantime = 3600
+maxretry = 1
