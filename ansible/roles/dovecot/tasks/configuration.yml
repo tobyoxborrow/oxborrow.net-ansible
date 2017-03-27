@@ -12,6 +12,12 @@
   command: systemctl mask dovecot.socket
   when: dovecotsocket is defined and dovecotsocket.stdout.find('masked') == -1
 
+- name: Ensure virtual mailbox group exists
+  group:
+    name: vmail
+    state: present
+    system: yes
+
 - name: Ensure virtual mailbox user exists
   user:
     name: vmail
