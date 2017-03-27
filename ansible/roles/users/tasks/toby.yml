@@ -40,6 +40,7 @@
     clone: yes
     update: no
     dest: /home/toby/.dotfiles
+  become: yes
   become_user: toby
   register: clone_dotfiles
 
