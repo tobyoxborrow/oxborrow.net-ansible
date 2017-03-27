@@ -7,8 +7,12 @@ set -o nounset
 
 {{ letsencrypt_renew_command }} >> {{ letsencrypt_renew_log }}
 
+{% if letsencrypt_post_renew_commands is defined -%}
+# If any PEM files were modified in the last ten minutes, assume there were
+# some certificates renewed and now execute any update commands
 if find /etc/letsencrypt/ -mmin -10 -name "*.pem" -ls | grep --quiet pem; then
 {% for post_renewal_command in letsencrypt_post_renew_commands %}
     {{ post_renewal_command }}
 {% endfor %}
 fi
+{% endif -%}
