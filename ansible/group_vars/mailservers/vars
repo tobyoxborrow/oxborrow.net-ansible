@@ -22,4 +22,4 @@ postfix_master_submission_inet: "yes"
 dovecot_users: "{{ vault_dovecot_users }}"
 
 letsencrypt_post_renew_commands:
-  - systemctl dovecot restart
+  - systemctl restart dovecot
