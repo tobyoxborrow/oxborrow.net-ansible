@@ -15,8 +15,11 @@
     - hardening
     - fail2ban
     - logwatch
-    - letsencrypt
-    - postfix
-    - dovecot
+    - role: letsencrypt
+      tags: mail
+    - role: postfix
+      tags: mail
+    - role: dovecot
+      tags: mail
     - nginx
     - varwww
