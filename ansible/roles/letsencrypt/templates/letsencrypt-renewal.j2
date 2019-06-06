@@ -5,7 +5,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-{{ letsencrypt_renew_command }} >> {{ letsencrypt_renew_log }}
+{{ letsencrypt_renew_command }} >> {{ letsencrypt_renew_log }} 2>&1
 
 {% if letsencrypt_post_renew_commands is defined -%}
 # If any PEM files were modified in the last ten minutes, assume there were
