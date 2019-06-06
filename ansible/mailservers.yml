@@ -8,6 +8,7 @@
     - hostname
     - sshd_group
     - users
+    - pam
     - sshd
     - chrony
     - motd

@@ -1,0 +1,12 @@
+---
+- name: Make cron logins quiet
+  pamd:
+    name: common-session-noninteractive
+    type: session
+    control: required
+    module_path: pam_unix.so
+    state: before
+    new_type: session
+    new_control: '[success=1 default=ignore]'
+    new_module_path: pam_succeed_if.so
+    module_arguments: 'service in cron quiet use_uid'
