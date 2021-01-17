@@ -2,3 +2,7 @@
 - name: CIS Ubuntu Linux 16.04 LTS Benchmark
   include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
+
+- name: CIS Debian 8 Benchmark
+  include: debian.yml
+  when: ansible_distribution == "Debian"

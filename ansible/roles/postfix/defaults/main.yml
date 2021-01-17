@@ -9,10 +9,10 @@ postfix_myorigin: $myhostname
 postfix_inet_interfaces: 127.0.0.1
 postfix_inet_protocols: ipv4
 postfix_smtpd_recipient_restrictions:
+  - check_client_access hash:/etc/postfix/client_whitelist
+  - check_recipient_access hash:/etc/postfix/denied_recipients
   - reject_unknown_sender_domain
   - reject_unknown_recipient_domain
-  - check_recipient_access hash:/etc/postfix/denied_recipients
-  - check_client_access hash:/etc/postfix/client_whitelist
 postfix_smtpd_sender_restrictions:
   - permit_mynetworks
 postfix_smtpd_relay_restrictions:

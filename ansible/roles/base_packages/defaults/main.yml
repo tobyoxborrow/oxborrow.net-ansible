@@ -1,15 +1,4 @@
 ---
-base_services_to_disable:
-  - cloud-config
-  - cloud-final
-  - cloud-init-local
-  - friendly-recovery
-  - iscsid
-  - open-iscsi
-
-# instead of redefining the above, you can just populate the following list
-additional_base_services_to_disable:
-
 base_packages_to_remove:
   - avahi-daemon
   # - bind9

@@ -1,11 +1,4 @@
 ---
-- name: Ensure certain base services are disabled
-  service:
-    name: "{{ item }}"
-    enabled: no
-    state: stopped
-  with_items: "{{ base_services_to_disable + additional_base_services_to_disable | default([], true) }}"
-
 - name: Ensure certain base packages are absent
   package:
     name: "{{ item }}"
