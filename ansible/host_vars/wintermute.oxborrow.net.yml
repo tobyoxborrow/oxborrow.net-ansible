@@ -1,0 +1,28 @@
+---
+hostname: halifax
+hostname_fqdn: "{{ hostname }}.oxborrow.net"
+
+sshd_banner_filename: "banner_{{ hostname }}.txt"
+
+public_inet_address: 209.141.56.246
+
+firewall_tcp_ports:
+  - "{{ sshd_config_port }}"
+  - 80
+  - 25
+  - 993
+  - 587
+
+fail2ban_enable_nginx: yes
+fail2ban_enable_postfix: yes
+fail2ban_enable_dovecot: yes
+
+letsencrypt_certs:
+  - domain: www.oxborrow.net
+    command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d www.oxborrow.net --agree-tos
+
+postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/www.oxborrow.net/fullchain.pem
+postfix_smtpd_tls_key_file: /etc/letsencrypt/live/www.oxborrow.net/privkey.pem
+
+dovecot_ssl_cert: "</etc/letsencrypt/live/www.oxborrow.net/fullchain.pem"
+dovecot_ssl_key: "</etc/letsencrypt/live/www.oxborrow.net/privkey.pem"

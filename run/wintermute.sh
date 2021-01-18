@@ -6,8 +6,10 @@ if [[ $1 == "check" ]]; then
     echo "CHECK MODE"
 fi
 
+# --vault-password-file=<(/usr/bin/env pass oxborrow.net/ansible/vault) \
+
 ansible-playbook --diff --inventory ./ansible/inventory \
     ${CHECK_ARGS} \
     --ask-become-pass \
-    --vault-password-file=<(/usr/local/bin/pass oxborrow.net/ansible/vault) \
-    ./ansible/mailservers.yml --limit "halifax"
+    --vault-id=run/vault-pass-client.py \
+    ./ansible/oxborrow.net.yml --limit "wintermute"

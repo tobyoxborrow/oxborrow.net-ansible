@@ -57,7 +57,7 @@ def main():
 
     # example log line:
     # 2014-08-06 21:11:58,553 fail2ban.actions: WARNING [ssh] Ban
-    # 175.119.227.143 Jul 20 13:36:33 halifax postfix/smtpd[12929]: NOQUEUE:
+    # 175.119.227.143 Jul 20 13:36:33 hostname postfix/smtpd[12929]: NOQUEUE:
     # reject: RCPT from unknown[27.76.197.201]: 554 5.7.1 Service unavailable;
     # Client host [27.76.197.201] blocked using bl.spamcop.net; Blocked - see
     # http://www.spamcop.net/bl.shtml?27.76.197.201; from=<>

@@ -1,8 +1,9 @@
 ---
-# @halifax~ id
+# ~ id
 # uid=20003(toby) gid=100(users) groups=100(users),4(adm),27(sudo),999(sshlogin)
-# @halifax~ getent passwd toby
+# ~ getent passwd toby
 # toby:x:20003:100:Toby Oxborrow <toby@oxborrow.net>:/home/toby:/bin/bash
+
 - name: Ensure user toby exists
   user:
     name: toby

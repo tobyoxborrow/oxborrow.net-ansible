@@ -84,7 +84,7 @@ ansible vault.
 Example:
 ```
 ./dev/vagrant.sh
-./dev/halifax.vagrant.sh
+./dev/hostname.vagrant.sh
 ```
 
 See these scripts for more details.
@@ -109,5 +109,5 @@ the openssh configuration gets messed up.
 Usage example:
 
 ```
-./run/halifax.sh
+./run/hostname.sh
 ```
