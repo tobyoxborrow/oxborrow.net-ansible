@@ -1,12 +1,16 @@
-[halifax]
-halifax.oxborrow.net
+# [wellington]
+# wellington.oxborrow.net
 
-[wellington]
-wellington.oxborrow.net
+[wintermute]
+wintermute.oxborrow.net
+
+[freeside]
+freeside.oxborrow.net
 
 [mailservers:children]
-halifax
-wellington
+# wellington
+wintermute
+freeside
 
 [all:vars]
 development=False

@@ -1,26 +1,34 @@
 ---
-- name: oxborrow.net mailservers
-  hosts: [halifax, wellington]
+- name: freeside.oxborrow.net
+  hosts: freeside
   become: yes
   become_user: root
   roles:
     - base_packages
-    - hostname
-    - sshd_group
-    - users
-    - pam
-    - sshd
-    - chrony
-    - motd
-    - logrotate
-    - hardening
-    - fail2ban
-    - logwatch
-    - role: letsencrypt
-      tags: mail
-    - role: postfix
-      tags: mail
-    - role: dovecot
-      tags: mail
-    - nginx
-    - varwww
+
+- name: wintermute.oxborrow.net
+  hosts: wintermute
+  become: yes
+  become_user: root
+  roles:
+    - base_packages
+
+# - hostname
+# - sshd_group
+# - users
+# - pam
+# - sshd
+# - chrony
+# - motd
+# - logrotate
+# - hardening
+# - fail2ban
+# - logwatch
+# - role: letsencrypt
+#   tags: mail
+# - role: postfix
+# tags: mail
+# - role: dovecot
+# tags: mail
+# - nginx
+# - varwww
