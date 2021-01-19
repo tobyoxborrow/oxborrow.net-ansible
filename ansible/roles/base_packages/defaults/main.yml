@@ -14,6 +14,7 @@ base_packages_to_install:
   - ncat
   - nmap
   - tmux
+  - vim-nox
 
 # instead of redefining the above, you can just populate the following list
 additional_base_packages_to_install:
