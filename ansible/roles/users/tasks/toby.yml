@@ -23,7 +23,7 @@
 - name: Ensure authorized_keys file is present
   authorized_key:
     user: toby
-    key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCjYf9u9mItGujvxv+TTBIPd0gmdUXwcU+J7xvXbVdDDdQ29uo6BtZfWKyTXViTCozxlqdyqhEOJKwXEgZ9Bv24eHnpL9rrbBIqDwXHAoR8WorEQjIJ4PPvAMIizh6dw/B+huvNQG4sdDzdeAllc6w4QjJ2PpcQ66fTVHPb59G9MXvgKcWkptpdkDnSLXa1AXppNI8h1bEBUi5PV0sCM3w0qclUHEXAR2cRbJ1tYE2DLVMLgiprfeudR958ig14EQmBqA0p8whOREn5CqUWe5nbDwd/zqcyDAIsff0YZkM6xq+Zzay8WK+S7FdSNbXGovuOORjXShE2/AkzuU0aSAjF6FCWftBLCG02IbW5EGS6LfD+coo3CVu4mTjQy3efKYSnJJR6K9J4vOn8OwDUnprE+zmvvRRkmqca+N+sk1Sghm+pFnkRnSUHEpP39JylSFSLefGWZ+aE7Go86TBm2q0IsxTz942o1/eRSwR+lRgWEBm8aWxoHnXGXya+8BJ0QKLBXkCeNe0ogB/S99UE/pLKAGfhttBL5azDAoU31Uyq9zFVcKaF0YEFXKwTGz9IcTyS5D9uZB/cf2PLdfCthQ+3BKa8QT1/MyQhSSia3hN+oOYY0pYZ3ES+YEM9HvhFpocEuSB9ebhzEQo2Fc+rQcOvl/kuxHcMqdGfP2O6mGKSUQ== toby@oxborrow.net'
+    key: https://github.com/tobyoxborrow.keys
     exclusive: yes
     state: present
     manage_dir: yes
@@ -51,4 +51,4 @@
   become_user: toby
   register: dotfiles_sh
   changed_when: dotfiles_sh.stdout != ""
-  when: clone_dotfiles|changed
+  when: clone_dotfiles is changed
