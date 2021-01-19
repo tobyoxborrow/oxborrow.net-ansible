@@ -6,7 +6,7 @@
 - name: Ensure hostname with local address is in /etc/hosts
   lineinfile:
     line: "127.0.0.1 {{ hostname_fqdn }} {{ hostname }} localhost.localdomain localhost"
-    regexp: "^127.0.0.1 "
+    regexp: '^127.0.0.1\s'
     dest: /etc/hosts
     state: present
   when: public_inet_address is not defined
@@ -14,7 +14,7 @@
 - name: Ensure localhost with local address is in /etc/hosts
   lineinfile:
     line: "127.0.0.1 localhost.localdomain localhost"
-    regexp: "^127.0.0.1 "
+    regexp: '^127.0.0.1\s'
     dest: /etc/hosts
     state: present
   when: public_inet_address is defined
