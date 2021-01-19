@@ -12,6 +12,32 @@ done manually, perhaps via KVM or local console:
 * network connectivity
 * working repository system (i.e. apt-get update succeeds)
 
+## SSH Config
+
+Example SSH config in ~/.ssh/config:
+```
+Host example.oxborrow.net
+  HostName 192.0.2.1
+  User toby
+  IdentityFile ~/.ssh/filename
+```
+
+## SSH Agent
+
+An optional step: Using an SSH agent will avoid having to re-enter the SSH key passphrase.
+
+On macOS an SSH agent is built-in to KeyChain Access and is typically already running.
+
+On other systems you may need to manually start the agent:
+```Shell
+eval 'ssh-agent -s'
+```
+
+Then to add keys to the agent:
+```Shell
+ssh-add ~/.ssh/filename
+```
+
 ## Vault
 
 Certain secret sauce is kept in ansible vault encrypted files so that they can
@@ -20,46 +46,46 @@ automation the password for decrypting them is stored on your workstation in
 pass oxborrow.net/ansible/vault.
 
 Pass and pwgen can be installed with homebrew:
-```
+```Shell
 brew install pass pwgen
 pass init
 ```
 
 Generate a password for the vault. Since I'll never type it and it will be
 stored in public, go nuts with the length:
-```
+```Shell
 pwgen 128 1
 ```
 
 To store the vault password in pass:
-```
+```Shell
 pass insert oxborrow.net/ansible/vault
 ```
 
 Encrypt (or rekey) the files that should be kept secret:
-```
+```Shell
 ansible-vault encrypt ansible/group_vars/*/vault
 ```
 
-Alternatively, OSX Keychain Access could be used and the pass commands could be
-swapped with their `security` equivilents.
+Alternatively, macOS Keychain Access could be used and the pass commands could
+be swapped with their `security` equivilents.
 
 See the files in the run/ directory for examples of how that is used.
 
 ## Bootstrap
 
-Scripts are included in the `bootstrap/` directory that install the minimum
+Scripts are included in the 'bootstrap/' directory that install the minimum
 dependancies required for ansible. These scripts are dead simple so should have
 no problem running, but would be higher maintenance if they grow too large,
 which is why they are only used briefly.
 
-The scripts are intended to be run on the host to bootstrap, this reduces some
-complexity (i.e. you don't need to prepare the ssh service, a user who can
+The scripts are intended to be run once on the host to bootstrap, this reduces
+some complexity (i.e. you don't need to prepare the ssh service, a user who can
 login and ssh keys beforehand, and so on).
 
 Usage example:
 
-```
+```Shell
 scp ./bootstrap/bootstrap_debian.sh example.oxborrow.net:
 ssh example.oxborrow.net sudo ./bootstrap_debian.sh
 ```
@@ -108,6 +134,6 @@ the openssh configuration gets messed up.
 
 Usage example:
 
-```
+```Shell
 ./run/hostname.sh
 ```
