@@ -9,7 +9,6 @@ base_packages_to_remove:
 additional_base_packages_to_remove:
 
 base_packages_to_install:
-  - bsd-mailx
   - git-core
   - man-db
   - ncat
