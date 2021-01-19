@@ -44,6 +44,9 @@ chown -R toby:users ~toby/.ssh/
 echo "Updating repositories..."
 apt update
 
+if ! type sudo >/dev/null 2>&1; then
+    apt install --yes sudo
+fi
 # # python-apt must be installed to use check mode
 # if ! dpkg -s python-apt > /dev/null 2>&1; then
 #     apt install --yes python-apt
