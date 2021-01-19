@@ -27,26 +27,46 @@ set -o nounset
 # echo "Please set a password for the user root"
 # passwd
 
-echo "Creating the user toby"
-useradd --gid users --groups adm,sudo --shell /bin/bash --create-home toby
+if ! getent passwd toby; then
+    echo "Creating the user toby"
+    useradd --gid users --groups adm,sudo --shell /bin/bash --create-home toby
 
-echo "Please set a password for the user toby"
-passwd toby
+    echo "Please set a password for the user toby"
+    passwd toby
+fi
 
-echo "Adding SSH key for the user toby"
+echo "Preparing SSH key permissions for the user toby"
 mkdir -p ~toby/.ssh/
 chmod 0700 ~toby/.ssh/
-echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXx0w7HECZqZilUYqMxT6K4Ym014gkmURfovdL005nN toby@oxborrow.net" >> ~toby/.ssh/authorized_keys
-echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEoFbrKme/ZvYLIRVACAXOdVwUYd0ZyYgSA1F0ajpw4K toby@hurricane.home.oxborrow.net" >> ~toby/.ssh/authorized_keys
+touch ~toby/.ssh/authorized_keys
 chmod 0600 ~toby/.ssh/authorized_keys
 chown -R toby:users ~toby/.ssh/
 
-echo "Updating repositories..."
-apt update
-
-if ! type sudo >/dev/null 2>&1; then
-    apt install --yes sudo
+if ! grep -q L005nN ~toby/.ssh/authorized_keys; then
+    echo "Adding SSH key 1 for the user toby"
+    echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXx0w7HECZqZilUYqMxT6K4Ym014gkmURfovdL005nN toby@oxborrow.net" >> ~toby/.ssh/authorized_keys
 fi
+if ! grep -q ajpw4K ~toby/.ssh/authorized_keys; then
+    echo "Adding SSH key 2 for the user toby"
+    echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEoFbrKme/ZvYLIRVACAXOdVwUYd0ZyYgSA1F0ajpw4K toby@hurricane.home.oxborrow.net" >> ~toby/.ssh/authorized_keys
+fi
+
+echo "Updating repositories..."
+/usr/bin/apt update
+
+# Ansible requires sudo for "become", and it is not necessarily installed by default
+if ! type sudo >/dev/null 2>&1; then
+    /usr/bin/apt install --yes sudo
+fi
+
+# Ansible should detect python, but may fail. explicitly set python to point to python3
+if ! type python3 >/dev/null 2>&1; then
+    /usr/bin/apt install --yes python3
+fi
+if ! type python >/dev/null 2>&1; then
+    /usr/bin/update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+fi
+
 # # python-apt must be installed to use check mode
 # if ! dpkg -s python-apt > /dev/null 2>&1; then
 #     apt install --yes python-apt
