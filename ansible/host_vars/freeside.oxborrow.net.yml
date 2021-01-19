@@ -1,10 +1,10 @@
 ---
-hostname: halifax
+hostname: freeside
 hostname_fqdn: "{{ hostname }}.oxborrow.net"
 
 sshd_banner_filename: "banner_{{ hostname }}.txt"
 
-public_inet_address: 209.141.56.246
+public_inet_address: 188.34.205.7
 
 firewall_tcp_ports:
   - "{{ sshd_config_port }}"

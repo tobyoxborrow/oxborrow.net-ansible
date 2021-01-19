@@ -2,10 +2,10 @@
 # wellington.oxborrow.net
 
 [wintermute]
-wintermute.oxborrow.net
+wintermute.oxborrow.net ansible_become_pass='{{ vault_wintermute_become_pass }}'
 
 [freeside]
-freeside.oxborrow.net
+freeside.oxborrow.net ansible_become_pass='{{ vault_freeside_become_pass }}'
 
 [mailservers:children]
 # wellington

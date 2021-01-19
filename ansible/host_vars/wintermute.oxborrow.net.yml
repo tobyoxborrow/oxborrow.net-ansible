@@ -1,10 +1,10 @@
 ---
-hostname: halifax
+hostname: wintermute
 hostname_fqdn: "{{ hostname }}.oxborrow.net"
 
 sshd_banner_filename: "banner_{{ hostname }}.txt"
 
-public_inet_address: 209.141.56.246
+public_inet_address: 209.141.50.158
 
 firewall_tcp_ports:
   - "{{ sshd_config_port }}"

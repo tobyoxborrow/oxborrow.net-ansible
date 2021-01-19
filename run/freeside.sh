@@ -11,4 +11,4 @@ ansible-playbook \
     --inventory ./ansible/inventory \
     ${CHECK_ARGS} \
     --vault-id=run/vault-pass-client.py \
-    ./ansible/oxborrow.net.yml --limit "wintermute"
+    ./ansible/oxborrow.net.yml --limit "freeside"
