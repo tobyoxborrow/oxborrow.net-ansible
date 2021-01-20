@@ -1,20 +1,33 @@
 ---
 base_packages_to_remove:
   - eatmydata
+  - emacsen-common
+  - iamerican
+  - laptop-detect
   - nano
-  - xauth
   - wamerican
-
-# instead of redefining the above, you can just populate the following list
-additional_base_packages_to_remove:
+  - xauth
 
 base_packages_to_install:
+  - acl
+  - apt-transport-https
+  - bash
+  - bash-completion
+  - bind9-host
+  - curl
   - git-core
+  - less
   - man-db
+  - mtr-tiny
   - ncat
   - nmap
   - tmux
   - vim-nox
 
-# instead of redefining the above, you can just populate the following list
+# The following variables are left blank here on purpose and provided
+# explicitly to be overridden by hostvars/groupvars.
+# Assign your custom changes to the following variables. If you use the above
+# you would have to redefine the whole list, which will lead to drift. Since
+# these are left empty there is no risk of drift.
+additional_base_packages_to_remove:
 additional_base_packages_to_install:
