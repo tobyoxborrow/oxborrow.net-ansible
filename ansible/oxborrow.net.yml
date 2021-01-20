@@ -38,6 +38,11 @@
     - users
     - sshd
     - pam
+    - logrotate
+    - logwatch
+    - hardening
+    - fail2ban
+    - postfix
 
 - name: freeside.oxborrow.net
   hosts: freeside
@@ -52,3 +57,8 @@
     - users
     - sshd
     - pam
+    - logrotate
+    - logwatch
+    - hardening
+    - fail2ban
+    - postfix
