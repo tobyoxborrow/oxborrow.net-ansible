@@ -19,9 +19,9 @@
     - role: letsencrypt
       tags: mail
     - role: postfix
-    tags: mail
+      tags: mail
     - role: dovecot
-    tags: mail
+      tags: mail
     - nginx
     - varwww
 
