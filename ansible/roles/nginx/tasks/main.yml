@@ -4,4 +4,3 @@
 
 - name: Manage nginx sites
   include: sites.yml
-

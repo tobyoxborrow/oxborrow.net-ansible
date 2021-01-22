@@ -8,7 +8,7 @@
     mode: 0755
 
 # we clone to a local git bare repo of the website content
-# it is purposfully stored outside of the docroot to ensure there are no git
+# it is purposefully stored outside of the docroot to ensure there are no git
 # bits in the docroot
 # we also do not pollute a git work tree with any temporary files that may be
 # made publicly accessible
