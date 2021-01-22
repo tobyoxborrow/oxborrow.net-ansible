@@ -1,14 +1,14 @@
-# [wellington]
-# wellington.oxborrow.net
+[wellington]
+wellington.oxborrow.net
 
 [wintermute]
-wintermute.oxborrow.net ansible_become_pass='{{ vault_wintermute_become_pass }}'
+wintermute.oxborrow.net ansible_become_pass='{{ wintermute_become_pass }}'
 
 [freeside]
-freeside.oxborrow.net ansible_become_pass='{{ vault_freeside_become_pass }}'
+freeside.oxborrow.net ansible_become_pass='{{ freeside_become_pass }}'
 
 [mailservers:children]
-# wellington
+wellington
 wintermute
 freeside
 

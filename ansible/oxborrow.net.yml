@@ -1,6 +1,9 @@
 ---
-- name: wellington.oxborrow.net
-  hosts: wellington
+- name: oxborrow.net
+  hosts:
+    - freeside
+    - wellington
+    - wintermute
   become: yes
   become_user: root
   roles:
@@ -16,49 +19,8 @@
     - hardening
     - fail2ban
     - logwatch
-    - role: letsencrypt
-      tags: mail
-    - role: postfix
-      tags: mail
-    - role: dovecot
-      tags: mail
+    - letsencrypt
+    - postfix
+    # - dovecot
     - nginx
     - varwww
-
-- name: wintermute.oxborrow.net
-  hosts: wintermute
-  become: yes
-  become_user: root
-  roles:
-    - base_packages
-    - hostname
-    - motd
-    - chrony
-    - sshd_group
-    - users
-    - sshd
-    - pam
-    - logrotate
-    - logwatch
-    - hardening
-    - fail2ban
-    - postfix
-
-- name: freeside.oxborrow.net
-  hosts: freeside
-  become: yes
-  become_user: root
-  roles:
-    - base_packages
-    - hostname
-    - motd
-    - chrony
-    - sshd_group
-    - users
-    - sshd
-    - pam
-    - logrotate
-    - logwatch
-    - hardening
-    - fail2ban
-    - postfix
