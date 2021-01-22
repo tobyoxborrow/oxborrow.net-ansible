@@ -9,3 +9,6 @@
 # fail2ban will take care of adding them back
 - name: save iptables rules
   shell: iptables-save | grep -v f2b > /etc/iptables/rules.v4
+
+- name: update grub
+  command: "update-grub"

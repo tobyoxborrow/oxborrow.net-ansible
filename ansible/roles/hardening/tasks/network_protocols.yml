@@ -1,5 +1,5 @@
 ---
-- name: 3.5 Disable unused network protocols
+- name: 3.4 Disable unused network protocols
   copy:
     src: files/modprobe.d-CIS-protocols.conf
     dest: /etc/modprobe.d/CIS-protocols.conf

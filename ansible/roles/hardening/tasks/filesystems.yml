@@ -1,8 +1,32 @@
 ---
 - name: 1.1.1 Disable unused filesystems
-  copy:
-    src: files/modprobe.d-CIS-filesystems.conf
+  template:
+    src: templates/modprobe.d-CIS-filesystems.conf.j2
     dest: /etc/modprobe.d/CIS-filesystems.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: 1.1.2 Ensure /tmp is configured
+  mount:
+    src: tmpfs
+    path: /tmp
+    state: mounted
+    fstype: tmpfs
+    boot: yes
+    dump: 0
+    opts: defaults,rw,nosuid,nodev,noexec,relatime
+    backup: yes
+
+- name: 1.1.22 Disable Automounting
+  package:
+    name: autofs
+    state: absent
+
+- name: 1.1.23 Disable USB Storage
+  copy:
+    src: files/modprobe.d-CIS-usb_storage.conf
+    dest: /etc/modprobe.d/CIS-usb_storage.conf
     owner: root
     group: root
     mode: 0644

@@ -3,3 +3,6 @@
 # http://docs.ansible.com/ansible/playbooks_best_practices.html#best-practices-for-variables-and-vaults
 logwatch_mail_to: "{{ vault_logwatch_mail_to }}"
 sshd_config_port: "{{ vault_sshd_config_port }}"
+wintermute_become_pass: "{{ vault_wintermute_become_pass }}"
+freeside_become_pass: "{{ vault_freeside_become_pass }}"
+hardening_unattended_mail_to: "{{ vault_logwatch_mail_to }}"

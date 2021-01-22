@@ -3,3 +3,14 @@
 # - 53
 # firewall_tcp_ports:
 # - 22
+
+# CIS 1.1.1 Disable unused filesystems
+hardening_disable_filesystems:
+- cramfs
+- freevxfs
+- jffs2  # CIS 1.1.1.2
+- hfs  # CIS 1.1.1.3
+- hfsplus  # CIS 1.1.1.4
+- squashfs  # CIS 1.1.1.5
+- udf  # CIS 1.1.1.6
+- vfat  # CIS 1.1.1.7 (may be needed for UEFI/EFI boot partition)

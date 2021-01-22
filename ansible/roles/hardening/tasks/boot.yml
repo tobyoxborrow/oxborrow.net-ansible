@@ -1,0 +1,7 @@
+---
+- name: 1.5.1 Ensure permissions on bootloader config are configured
+  file:
+    path: /boot/grub/grub.cfg
+    owner: root
+    group: root
+    mode: 0600

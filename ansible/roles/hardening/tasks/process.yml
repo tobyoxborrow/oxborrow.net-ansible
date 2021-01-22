@@ -1,5 +1,28 @@
 ---
-- name: 1.5.1 Ensure core dumps are restricted (limits)
+- name: 1.6.2 Ensure address space layout randomization is enabled
+  sysctl:
+    name: kernel.randomize_va_space
+    value: 2
+
+- name: 1.6.3 Stat prelink
+  command: "dpkg -s prelink"
+  register: dpkg
+  ignore_errors: yes
+  changed_when: no
+  failed_when: "'Status: install ok installed' not in dpkg.stdout"
+  no_log: yes
+
+- name: 1.6.3 Restore prelink binaries to normal
+  command: "prelink -ua"
+  when: dpkg is succeeded
+
+- name: 1.6.3 Ensure prelink is absent
+  package:
+    name: prelink
+    state: absent
+  when: dpkg is succeeded
+
+- name: 1.6.4 Ensure core dumps are restricted (limits)
   lineinfile:
     dest: /etc/security/limits.d/core.conf
     insertafter: EOF
@@ -11,30 +34,7 @@
     group: root
     mode: 0644
 
-- name: 1.5.1 Ensure core dumps are restricted (sysctl)
+- name: 1.6.4 Ensure core dumps are restricted (sysctl)
   sysctl:
     name: fs.suid_dumpable
     value: 0
-
-- name: 1.5.3 Ensure address space layout randomization is enabled
-  sysctl:
-    name: kernel.randomize_va_space
-    value: 2
-
-- name: 1.5.4 Stat prelink
-  command: "dpkg -s prelink"
-  register: dpkg
-  ignore_errors: yes
-  changed_when: no
-  failed_when: "'Status: install ok installed' not in dpkg.stdout"
-  no_log: yes
-
-- name: 1.5.4 Restore prelink binaries to normal
-  command: "prelink -ua"
-  when: dpkg|succeeded
-
-- name: 1.5.4 Ensure prelink is absent
-  package:
-    name: prelink
-    state: absent
-  when: dpkg|succeeded

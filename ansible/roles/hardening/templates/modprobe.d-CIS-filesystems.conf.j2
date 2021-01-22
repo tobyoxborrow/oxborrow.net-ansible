@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+# CIS 1.1.1 Disable unused filesystems
+{% for entry in hardening_disable_filesystems -%}
+install {{ entry }} /bin/true
+{% endfor -%}
