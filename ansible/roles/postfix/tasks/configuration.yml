@@ -1,17 +1,17 @@
 ---
-- name: Ensure configuration file main.cf is present
-  template:
-    src: templates/main.cf.j2
-    dest: /etc/postfix/main.cf
-    owner: root
-    group: root
-    mode: 0644
-  notify: reload postfix
-
 - name: Ensure configuration file master.cf is present
   template:
     src: templates/master.cf.j2
     dest: /etc/postfix/master.cf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart postfix
+
+- name: Ensure configuration file main.cf is present
+  template:
+    src: templates/main.cf.j2
+    dest: /etc/postfix/main.cf
     owner: root
     group: root
     mode: 0644
