@@ -33,3 +33,19 @@ include /etc/logrotate.d
     create 0660 root utmp
     rotate 1
 }
+
+# CIS sudo logfile
+/var/log/sudo.log {
+    missingok
+    monthly
+    create 0660 root adm
+    rotate 9
+}
+
+# CIS audit logfile
+/var/log/audit/audit.log {
+    missingok
+    monthly
+    create 0660 root adm
+    rotate 9
+}

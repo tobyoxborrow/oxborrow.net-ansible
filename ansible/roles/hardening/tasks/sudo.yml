@@ -13,6 +13,6 @@
     src: sudoers.d-10-CIS-defaults-logfile
     dest: /etc/sudoers.d/10-CIS-defaults-logfile
     owner: root
-    group: root
-    mode: 0600
+    group: adm
+    mode: 0640
     validate: /usr/sbin/visudo -cf %s
