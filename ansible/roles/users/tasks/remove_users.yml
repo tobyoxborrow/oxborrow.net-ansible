@@ -1,6 +1,6 @@
 ---
 - name: Ensure unnecessary users are absent
   user:
-    name: "{{item}}"
+    name: "{{ item }}"
     state: absent
   with_items: "{{ users_to_remove + additional_users_to_remove | default([], true) }}"

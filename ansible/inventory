@@ -7,7 +7,7 @@ wintermute.oxborrow.net ansible_become_pass='{{ wintermute_become_pass }}'
 [freeside]
 freeside.oxborrow.net ansible_become_pass='{{ freeside_become_pass }}'
 
-[mailservers:children]
+[www.oxborrow.net:children]
 wellington
 wintermute
 freeside

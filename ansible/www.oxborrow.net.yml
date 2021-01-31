@@ -1,5 +1,5 @@
 ---
-- name: oxborrow.net
+- name: www.oxborrow.net
   hosts:
     - freeside
     - wellington

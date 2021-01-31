@@ -1,16 +1,10 @@
 ---
-- name: Stat dovecot.socket
-  command: systemctl status dovecot.socket
-  register: dovecotsocket
-  changed_when: no
-  failed_when: no
-
 # avoid: dovecot: master: Error: systemd listens on port 993, but it’s not
 # configured in Dovecot
 # see: https://sowhatisthesolution.wordpress.com/2015/04/27/upgrading-dovecot-debian-wheezy-to-jessie/
 - name: Ensure dovecot.socket is masked
-  command: systemctl mask dovecot.socket
-  when: dovecotsocket is defined and dovecotsocket.stdout.find('masked') == -1
+  ansible.builtin.systemd:
+    masked: yes
 
 - name: Ensure virtual mailbox group exists
   group:

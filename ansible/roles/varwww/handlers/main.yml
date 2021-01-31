@@ -1,0 +1,10 @@
+---
+# Extract to the webserver's default site - not dealing with multiple sites
+# public files are kept in docroot subdirectory in the repo, so only get those
+# When extracting files, strip the top-level directory name (i.e. docroot/) so
+# files are like /var/www/html/index.html and not
+# /var/www/html/docroot/index.html
+- name: Extract git bare to docroot
+  shell: set -o pipefail && git archive --format=tar HEAD docroot/ | tar --extract --file - --strip=1 --no-same-permissions --directory /var/www/html/
+  args:
+    chdir: /srv/www.oxborrow.net/
