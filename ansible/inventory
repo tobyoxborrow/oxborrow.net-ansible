@@ -7,10 +7,20 @@ wintermute.oxborrow.net ansible_become_pass='{{ wintermute_become_pass }}'
 [freeside]
 freeside.oxborrow.net ansible_become_pass='{{ freeside_become_pass }}'
 
-[www.oxborrow.net:children]
+[pihole]
+pihole.home.oxborrow.net ansible_become_pass='{{ pihole_become_pass }}'
+
+[dvd]
+dvd.home.oxborrow.net ansible_become_pass='{{ dvd_become_pass }}'
+
+[www_oxborrow_net:children]
 wellington
 wintermute
 freeside
+
+[home_oxborrow_net:children]
+pihole
+dvd
 
 [all:vars]
 development=False
