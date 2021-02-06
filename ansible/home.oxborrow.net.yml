@@ -1,0 +1,21 @@
+---
+- name: home.oxborrow.net
+  hosts:
+    - pihole
+    - dvd
+  become: yes
+  become_user: root
+  roles:
+    - base_packages
+    - hostname
+    - motd
+    - chrony
+    - sshd_group
+    - users
+    - sshd
+#    - pam
+#    - logrotate
+#    - hardening
+#    - fail2ban
+#    - logwatch
+#    - letsencrypt

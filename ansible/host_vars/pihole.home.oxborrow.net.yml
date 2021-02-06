@@ -1,0 +1,33 @@
+---
+hostname: pihole
+hostname_fqdn: "{{ hostname }}.home.oxborrow.net"
+
+sshd_banner_filename: "banner_{{ hostname }}.txt"
+
+# public_inet_address: n/a
+
+firewall_tcp_ports:
+  - "{{ sshd_config_port }}"
+  - 80
+  - 53
+  - 443
+  - 8080
+  - 8443
+
+fail2ban_enable_nginx: no
+fail2ban_enable_postfix: no
+fail2ban_enable_dovecot: no
+
+# letsencrypt_certs:
+#   - domain: "{{ hostname_fqdn }}"
+#     command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d www.oxborrow.net --agree-tos
+
+hardening_disable_filesystems:
+- cramfs
+- freevxfs
+- jffs2
+- hfs
+- hfsplus
+- squashfs
+- udf
+# - vfat  # raspberry pi uses vfat for boot partition
