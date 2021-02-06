@@ -2,3 +2,9 @@
 chrony_ntp_packages_to_remove:
   - ntp
   - openntpd
+
+chrony_server_entries:
+  - 0.europe.pool.ntp.org
+  - 1.europe.pool.ntp.org
+  - 0.jp.pool.ntp.org
+  - 1.jp.pool.ntp.org

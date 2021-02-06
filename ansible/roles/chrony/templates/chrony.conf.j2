@@ -1,8 +1,9 @@
 # {{ ansible_managed }}
 
-server time.hk iburst
-server clock.cuhk.edu.hk iburst
-server stdtime.gov.hk iburst
+{% for entry in chrony_server_entries -%}
+server {{ entry }} iburst
+{% endfor -%}
+
 keyfile /etc/chrony/chrony.keys
 commandkey 1
 driftfile /var/lib/chrony/chrony.drift
