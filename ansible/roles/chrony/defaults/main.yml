@@ -1,4 +1,6 @@
 ---
+chrony_enable_role: yes
+
 chrony_ntp_packages_to_remove:
   - ntp
   - openntpd

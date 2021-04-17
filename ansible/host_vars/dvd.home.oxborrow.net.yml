@@ -51,3 +51,16 @@ base_packages_to_remove:
   - xauth
   - xinetd  # CIS Ensure xinetd is not installed
   - xserver-xorg*  # CIS Ensure X Window System is not installed
+
+# OSMC depends on ntp package and already configures it
+chrony_enable_role: no
+
+users_to_remove:
+  # - avahi  # dependancy of OSMC
+  - games
+  - irc
+  - list
+  - lp
+  - news
+  - statd
+  - uucp
