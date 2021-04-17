@@ -1,9 +1,9 @@
 # {{ ansible_managed }}
 
-{% if postfix_virtual_default_entry is defined -%}
+{% if postfix_virtual_default_entry is defined and postfix_virtual_default_entry is not none -%}
 {{ postfix_virtual_default_entry }} DEFAULT_ENTRY
 {% endif -%}
-{% if postfix_virtual_entries is defined -%}
+{% if postfix_virtual_entries is defined and postfix_virtual_entries is not none -%}
 {% for entry in postfix_virtual_entries -%}
 {{ entry.pattern }} {{ entry.value }}
 {% endfor -%}

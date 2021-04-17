@@ -21,8 +21,8 @@ letsencrypt_certs:
   - domain: www.oxborrow.net
     command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d www.oxborrow.net --agree-tos
 
-postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/www.oxborrow.net/fullchain.pem
-postfix_smtpd_tls_key_file: /etc/letsencrypt/live/www.oxborrow.net/privkey.pem
+# postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/www.oxborrow.net/fullchain.pem
+# postfix_smtpd_tls_key_file: /etc/letsencrypt/live/www.oxborrow.net/privkey.pem
 
 dovecot_ssl_cert: "</etc/letsencrypt/live/www.oxborrow.net/fullchain.pem"
 dovecot_ssl_key: "</etc/letsencrypt/live/www.oxborrow.net/privkey.pem"

@@ -1,0 +1,9 @@
+---
+- name: mail-config
+  hosts:
+    - freeside
+    - wintermute
+  become: yes
+  become_user: root
+  roles:
+    - postfix
