@@ -13,9 +13,9 @@
     - sshd_group
     - users
     - sshd
-#    - pam
-#    - logrotate
+    - pam
+    - logrotate
 #    - hardening
-#    - fail2ban
+    - fail2ban
 #    - logwatch
 #    - letsencrypt
