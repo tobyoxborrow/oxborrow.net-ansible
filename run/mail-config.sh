@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Only perform mail config updates
+# Saving time if nothing else is known to have change
 
 CHECK_ARGS=""
 if [[ $1 == "check" ]]; then
