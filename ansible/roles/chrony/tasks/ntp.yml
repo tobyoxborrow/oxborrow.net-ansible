@@ -7,7 +7,7 @@
     state: stopped
     enabled: no
   with_items: "{{ chrony_ntp_packages_to_remove }}"
-  ignore_errors: yes
+  ignore_errors: yes  # noqa ignore-errors
 
 - name: Ensure alternative ntp packages are absent
   package:

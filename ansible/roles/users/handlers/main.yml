@@ -1,0 +1,7 @@
+---
+- name: Run dotfiles script
+  command: /home/toby/.dotfiles/dotfiles.sh
+  become: yes
+  become_user: toby
+  register: dotfiles_sh
+  changed_when: dotfiles_sh.stdout != ""

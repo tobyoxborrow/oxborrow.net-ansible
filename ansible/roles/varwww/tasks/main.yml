@@ -17,7 +17,7 @@
   git:
     repo: https://github.com/tobyoxborrow/www.oxborrow.net
     remote: origin
-    version: HEAD
+    version: HEAD  # noqa git-latest
     clone: yes
     update: no
     dest: /srv/www.oxborrow.net

@@ -37,18 +37,11 @@
   git:
     repo: https://github.com/tobyoxborrow/dotfiles
     remote: origin
-    version: HEAD
+    version: HEAD  # noqa git-latest
     clone: yes
     update: no
     dest: /home/toby/.dotfiles
   become: yes
   become_user: toby
   register: clone_dotfiles
-
-- name: Run dotfiles script
-  command: /home/toby/.dotfiles/dotfiles.sh
-  become: yes
-  become_user: toby
-  register: dotfiles_sh
-  changed_when: dotfiles_sh.stdout != ""
-  when: clone_dotfiles is changed
+  notify: Run dotfiles script
