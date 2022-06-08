@@ -1,6 +1,6 @@
 ---
 - name: Ensure logwatch.conf is present
-  template:
+  ansible.builtin.template:
     dest: /etc/logwatch/conf/logwatch.conf
     src: templates/logwatch.conf.j2
     owner: root

@@ -1,11 +1,11 @@
 ---
 - name: 1.9 Ensure unattended-upgrades is installed
-  package:
+  ansible.builtin.package:
     name: unattended-upgrades
     state: present
 
 - name: 1.9 Ensure unattended-upgrades is configured (50unattended-upgrades)
-  template:
+  ansible.builtin.template:
     src: templates/50unattended-upgrades.j2
     dest: /etc/apt/apt.conf.d/50unattended-upgrades
     owner: root
@@ -13,7 +13,7 @@
     mode: 0644
 
 - name: 1.9 Ensure unattended-upgrades is configured (20auto-upgrades)
-  template:
+  ansible.builtin.template:
     src: templates/20auto-upgrades.j2
     dest: /etc/apt/apt.conf.d/20auto-upgrades
     owner: root
@@ -21,6 +21,6 @@
     mode: 0644
 
 - name: 1.9 Ensure unattended-upgrades service is enabled
-  service:
+  ansible.builtin.service:
     name: unattended-upgrades
-    enabled: yes
+    enabled: true

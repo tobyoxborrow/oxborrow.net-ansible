@@ -1,5 +1,5 @@
 ---
-fail2ban_enable_sshd: yes
-fail2ban_enable_postfix: no
-fail2ban_enable_nginx: no
-fail2ban_enable_dovecot: no
+fail2ban_enable_sshd: true
+fail2ban_enable_postfix: false
+fail2ban_enable_nginx: false
+fail2ban_enable_dovecot: false

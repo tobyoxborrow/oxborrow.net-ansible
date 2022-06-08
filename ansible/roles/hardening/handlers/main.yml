@@ -1,6 +1,6 @@
 ---
 - name: flush routing cache
-  command: "sysctl -w net.ipv4.route.flush=1"
+  ansible.builtin.command: "sysctl -w net.ipv4.route.flush=1"
 
 # there is some issue running netfilter-persistent save (or rather modprobe
 # iptables_filter) on my hosting provider so directly call iptables-save. but
@@ -8,7 +8,9 @@
 # fail2ban entries will be found in iptables, filter them out
 # fail2ban will take care of adding them back
 - name: save iptables rules
-  shell: iptables-save | grep -v f2b > /etc/iptables/rules.v4
+  ansible.builtin.shell: >
+    iptables-save |
+    grep -v f2b > /etc/iptables/rules.v4
 
 - name: update grub
-  command: "update-grub"
+  ansible.builtin.command: "update-grub"

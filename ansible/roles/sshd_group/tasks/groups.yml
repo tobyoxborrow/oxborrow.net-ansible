@@ -1,6 +1,6 @@
 ---
 - name: Ensure sshlogin group exists
-  group:
+  ansible.builtin.group:
     name: sshlogin
     state: present
-    system: yes
+    system: true

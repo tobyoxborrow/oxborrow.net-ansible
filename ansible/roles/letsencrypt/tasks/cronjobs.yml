@@ -1,6 +1,6 @@
 ---
 - name: Ensure letsencrypt cronjob script is present
-  template:
+  ansible.builtin.template:
     src: templates/letsencrypt-renewal.j2
     dest: /usr/local/bin/letsencrypt-renewal
     owner: root
@@ -8,7 +8,7 @@
     mode: 0755
 
 - name: Ensure letsencrypt cronjob is present
-  cron:
+  ansible.builtin.cron:
     name: "letsencrypt renewal"
     job: "/usr/local/bin/letsencrypt-renewal"
     state: present

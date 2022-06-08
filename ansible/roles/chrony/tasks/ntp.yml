@@ -2,15 +2,15 @@
 # ignore errors as service module will error if the service does not exist,
 # which is perfectly fine in this case
 - name: Ensure alternative ntp services are stopped and disabled
-  service:
+  ansible.builtin.service:
     name: "{{ item }}"
     state: stopped
-    enabled: no
+    enabled: false
   with_items: "{{ chrony_ntp_packages_to_remove }}"
-  ignore_errors: yes  # noqa ignore-errors
+  ignore_errors: true  # noqa ignore-errors
 
 - name: Ensure alternative ntp packages are absent
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: absent
   with_items: "{{ chrony_ntp_packages_to_remove }}"
@@ -21,7 +21,7 @@
 # service module above always returning "changed" for the ntp service even
 # though nothing actually changed.
 - name: Ensure altnernative ntp service init.d scripts are absent
-  file:
+  ansible.builtin.file:
     path: "/etc/init.d/{{ item }}"
     state: absent
   with_items: "{{ chrony_ntp_packages_to_remove }}"

@@ -1,5 +1,5 @@
 ---
 - name: Ensure logwatch is installed
-  package:
+  ansible.builtin.package:
     name: logwatch
     state: present

@@ -1,6 +1,6 @@
 ---
 - name: Ensure default nginx site is present
-  template:
+  ansible.builtin.template:
     src: templates/site.j2
     dest: /etc/nginx/sites-available/default
     owner: root
@@ -8,6 +8,6 @@
     mode: 0644
 
 - name: Ensure default index file is removed
-  file:
+  ansible.builtin.file:
     path: /var/www/html/index.nginx-debian.html
     state: absent

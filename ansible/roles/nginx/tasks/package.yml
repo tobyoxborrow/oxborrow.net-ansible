@@ -1,11 +1,11 @@
 ---
 - name: Ensure nginx is installed
-  package:
+  ansible.builtin.package:
     name: nginx-light
     state: present
 
 - name: Ensure service started and enabled
-  service:
+  ansible.builtin.service:
     name: nginx
     state: started
-    enabled: yes
+    enabled: true

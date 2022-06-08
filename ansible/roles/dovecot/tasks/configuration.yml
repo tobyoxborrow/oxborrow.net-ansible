@@ -4,25 +4,25 @@
 # see: https://sowhatisthesolution.wordpress.com/2015/04/27/upgrading-dovecot-debian-wheezy-to-jessie/
 - name: Ensure dovecot.socket is masked
   ansible.builtin.systemd:
-    masked: yes
+    masked: true
 
 - name: Ensure virtual mailbox group exists
-  group:
+  ansible.builtin.group:
     name: vmail
     state: present
-    system: yes
+    system: true
 
 - name: Ensure virtual mailbox user exists
-  user:
+  ansible.builtin.user:
     name: vmail
     comment: Virtual Mailboxes
     group: vmail
-    createhome: yes
+    createhome: true
     state: present
-    system: yes
+    system: true
 
 - name: Ensure virtual mailbox directory exists
-  file:
+  ansible.builtin.file:
     path: /var/mail/virtual
     state: directory
     owner: vmail
@@ -30,7 +30,7 @@
     mode: 02755
 
 - name: Ensure auth-master includes are disabled
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/dovecot/conf.d/10-auth.conf
     regexp: 'include auth-master\.conf\.ext'
     line: "#!include auth-master.conf.ext"
@@ -38,7 +38,7 @@
   notify: restart dovecot
 
 - name: Ensure auth-system includes are disabled
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/dovecot/conf.d/10-auth.conf
     regexp: 'include auth-system\.conf\.ext'
     line: "#!include auth-system.conf.ext"
@@ -46,7 +46,7 @@
   notify: restart dovecot
 
 - name: Ensure auth-deny includes are present
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/dovecot/conf.d/10-auth.conf
     regexp: 'include auth-deny\.conf\.ext'
     line: "!include auth-deny.conf.ext"
@@ -54,7 +54,7 @@
   notify: restart dovecot
 
 - name: Ensure deny-users configuration file is present
-  template:
+  ansible.builtin.template:
     dest: /etc/dovecot/deny-users
     src: templates/deny-users.j2
     owner: root
@@ -63,7 +63,7 @@
   notify: restart dovecot
 
 - name: Ensure users configuration file is present
-  template:
+  ansible.builtin.template:
     dest: /etc/dovecot/users
     src: templates/users.j2
     owner: root
@@ -72,7 +72,7 @@
   notify: restart dovecot
 
 - name: Ensure local.conf is present
-  template:
+  ansible.builtin.template:
     dest: /etc/dovecot/local.conf
     src: templates/local.conf.j2
     owner: root

@@ -5,43 +5,43 @@
 # toby:x:20003:100:Toby Oxborrow <toby@oxborrow.net>:/home/toby:/bin/bash
 
 - name: Ensure user toby exists
-  user:
+  ansible.builtin.user:
     name: toby
     comment: Toby Oxborrow <toby@oxborrow.net>
     group: users
     groups: adm,sudo,sshlogin
     shell: /bin/bash
-    createhome: yes
+    createhome: true
     state: present
-    system: no
+    system: false
 
 - name: Ensure home directory directory permissions
-  file:
+  ansible.builtin.file:
     path: /home/toby
     mode: 0700
 
 - name: Ensure authorized_keys file is present
-  authorized_key:
+  ansible.builtin.authorized_key:
     user: toby
     key: https://github.com/tobyoxborrow.keys
-    exclusive: yes
+    exclusive: true
     state: present
-    manage_dir: yes
+    manage_dir: true
 
 - name: Ensure git is installed
-  package:
+  ansible.builtin.package:
     name: git
     state: present
 
 - name: Clone dotfiles
-  git:
+  ansible.builtin.git:
     repo: https://github.com/tobyoxborrow/dotfiles
     remote: origin
     version: HEAD  # noqa git-latest
-    clone: yes
-    update: no
+    clone: true
+    update: false
     dest: /home/toby/.dotfiles
-  become: yes
+  become: true
   become_user: toby
   register: clone_dotfiles
   notify: Run dotfiles script

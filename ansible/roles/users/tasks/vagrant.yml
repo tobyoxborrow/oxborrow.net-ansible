@@ -1,12 +1,12 @@
 ---
 - name: Ensure user ubuntu is a member of sshlogin group on vagrant
-  user:
+  ansible.builtin.user:
     name: "ubuntu"
     groups: adm,sudo,sshlogin
   when: vagrant
 
 - name: Ensure user ubuntu is absent when not on vagrant
-  user:
+  ansible.builtin.user:
     name: "ubuntu"
     state: absent
   when: not vagrant

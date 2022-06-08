@@ -1,6 +1,6 @@
 ---
 - name: Ensure chrony.conf is present
-  template:
+  ansible.builtin.template:
     dest: /etc/chrony/chrony.conf
     src: templates/chrony.conf.j2
     owner: root

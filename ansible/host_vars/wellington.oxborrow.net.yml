@@ -13,9 +13,9 @@ firewall_tcp_ports:
   - 993
   - 587
 
-fail2ban_enable_nginx: yes
-fail2ban_enable_postfix: yes
-fail2ban_enable_dovecot: yes
+fail2ban_enable_nginx: true
+fail2ban_enable_postfix: true
+fail2ban_enable_dovecot: true
 
 letsencrypt_certs:
   - domain: wellington.oxborrow.net

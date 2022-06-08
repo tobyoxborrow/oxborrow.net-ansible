@@ -1,6 +1,6 @@
 ---
-postfix_master_smtp_inet: yes
-postfix_master_submission_inet: no
+postfix_master_smtp_inet: true
+postfix_master_submission_inet: false
 postfix_smtpd_banner: ESMTP
 postfix_mydomain: localhost
 postfix_myhostname: localhost

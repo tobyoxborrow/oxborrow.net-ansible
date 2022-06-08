@@ -1,6 +1,6 @@
 ---
 - name: 1.1.1 Disable unused filesystems
-  template:
+  ansible.builtin.template:
     src: templates/modprobe.d-CIS-filesystems.conf.j2
     dest: /etc/modprobe.d/CIS-filesystems.conf
     owner: root
@@ -8,23 +8,23 @@
     mode: 0644
 
 - name: 1.1.2 Ensure /tmp is configured
-  mount:
+  ansible.builtin.mount:
     src: tmpfs
     path: /tmp
     state: mounted
     fstype: tmpfs
-    boot: yes
+    boot: true
     dump: 0
     opts: defaults,rw,nosuid,nodev,noexec,relatime
-    backup: yes
+    backup: true
 
 - name: 1.1.22 Disable Automounting
-  package:
+  ansible.builtin.package:
     name: autofs
     state: absent
 
 - name: 1.1.23 Disable USB Storage
-  copy:
+  ansible.builtin.copy:
     src: files/modprobe.d-CIS-usb_storage.conf
     dest: /etc/modprobe.d/CIS-usb_storage.conf
     owner: root

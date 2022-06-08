@@ -1,13 +1,13 @@
 ---
 - name: Ensure certain base packages are absent
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: absent
   with_items: "{{ base_packages_to_remove + additional_base_packages_to_remove | default([], true) }}"
   notify: apt-get autoremove
 
 - name: Ensure certain base packages are present
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   with_items: "{{ base_packages_to_install + additional_base_packages_to_install | default([], true) }}"

@@ -1,12 +1,12 @@
 ---
 - name: Ensure configuration file jail.d/defaults-debian.conf is absent
-  file:
+  ansible.builtin.file:
     path: /etc/fail2ban/jail.d/defaults-debian.conf
     state: absent
   notify: reload fail2ban
 
 - name: Ensure configuration file jail.d/sshd.conf is present
-  template:
+  ansible.builtin.template:
     src: templates/sshd.conf.j2
     dest: /etc/fail2ban/jail.d/sshd.conf
     owner: root
@@ -15,7 +15,7 @@
   notify: reload fail2ban
 
 - name: Ensure configuration file jail.d/nginx.conf is present
-  template:
+  ansible.builtin.template:
     src: templates/nginx.conf.j2
     dest: /etc/fail2ban/jail.d/nginx.conf
     owner: root
@@ -24,7 +24,7 @@
   notify: reload fail2ban
 
 - name: Ensure configuration file jail.d/postfix.conf is present
-  template:
+  ansible.builtin.template:
     src: templates/postfix.conf.j2
     dest: /etc/fail2ban/jail.d/postfix.conf
     owner: root
@@ -33,7 +33,7 @@
   notify: reload fail2ban
 
 - name: Ensure configuration file jail.d/dovecot.conf is present
-  template:
+  ansible.builtin.template:
     src: templates/dovecot.conf.j2
     dest: /etc/fail2ban/jail.d/dovecot.conf
     owner: root

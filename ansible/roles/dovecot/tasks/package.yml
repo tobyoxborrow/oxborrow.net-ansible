@@ -1,6 +1,6 @@
 ---
 - name: Ensure dovecot is installed
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   with_items: "{{ dovecot_packages }}"

@@ -1,11 +1,11 @@
 ---
 - name: Ensure postfix is installed
-  package:
+  ansible.builtin.package:
     name: postfix
     state: present
 
 - name: Ensure service started and enabled
-  service:
+  ansible.builtin.service:
     name: postfix
     state: started
-    enabled: yes
+    enabled: true

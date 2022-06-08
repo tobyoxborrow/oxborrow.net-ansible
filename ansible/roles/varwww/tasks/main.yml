@@ -1,6 +1,6 @@
 ---
 - name: Ensure git bare directory exists
-  file:
+  ansible.builtin.file:
     path: /srv/www.oxborrow.net
     state: directory
     owner: root
@@ -14,12 +14,12 @@
 # made publicly accessible
 # only tracked files will be overwritten in the docroot
 - name: Clone www.oxborrow.net
-  git:
+  ansible.builtin.git:
     repo: https://github.com/tobyoxborrow/www.oxborrow.net
     remote: origin
     version: HEAD  # noqa git-latest
-    clone: yes
-    update: no
+    clone: true
+    update: false
     dest: /srv/www.oxborrow.net
-    bare: yes
+    bare: true
   notify: Extract git bare to docroot

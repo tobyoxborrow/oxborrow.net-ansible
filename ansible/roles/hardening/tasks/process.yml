@@ -1,40 +1,40 @@
 ---
 - name: 1.6.2 Ensure address space layout randomization is enabled
-  sysctl:
+  ansible.builtin.sysctl:
     name: kernel.randomize_va_space
     value: 2
 
 - name: 1.6.3 Stat prelink
-  command: "dpkg -s prelink"
+  ansible.builtin.command: "dpkg -s prelink"
   register: dpkg
-  ignore_errors: yes
-  changed_when: no
+  ignore_errors: true
+  changed_when: false
   failed_when: "'Status: install ok installed' not in dpkg.stdout"
-  no_log: yes
+  no_log: true
 
 - name: 1.6.3 Restore prelink binaries to normal
-  command: "prelink -ua"
+  ansible.builtin.command: "prelink -ua"
   when: dpkg is succeeded
 
 - name: 1.6.3 Ensure prelink is absent
-  package:
+  ansible.builtin.package:
     name: prelink
     state: absent
   when: dpkg is succeeded
 
 - name: 1.6.4 Ensure core dumps are restricted (limits)
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/security/limits.d/core.conf
     insertafter: EOF
     state: present
     regexp: ^\*\s+hard\s+core
     line: "* hard core 0"
-    create: yes
+    create: true
     owner: root
     group: root
     mode: 0644
 
 - name: 1.6.4 Ensure core dumps are restricted (sysctl)
-  sysctl:
+  ansible.builtin.sysctl:
     name: fs.suid_dumpable
     value: 0

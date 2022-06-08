@@ -10,23 +10,23 @@ firewall_tcp_ports:
   - "{{ sshd_config_port }}"
   - 8080
 
-fail2ban_enable_nginx: no
-fail2ban_enable_postfix: no
-fail2ban_enable_dovecot: no
+fail2ban_enable_nginx: false
+fail2ban_enable_postfix: false
+fail2ban_enable_dovecot: false
 
 # letsencrypt_certs:
 #   - domain: "{{ hostname_fqdn }}"
 #     command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d www.oxborrow.net --agree-tos
 
 hardening_disable_filesystems:
-- cramfs
-- freevxfs
-- jffs2
-- hfs
-- hfsplus
-- squashfs
-- udf
-# - vfat  # raspberry pi uses vfat for boot partition
+  - cramfs
+  - freevxfs
+  - jffs2
+  - hfs
+  - hfsplus
+  - squashfs
+  - udf
+  # - vfat  # raspberry pi uses vfat for boot partition
 
 base_packages_to_remove:
   # - avahi-daemon  # dependancy of OSMC
@@ -53,7 +53,7 @@ base_packages_to_remove:
   - xserver-xorg*  # CIS Ensure X Window System is not installed
 
 # OSMC depends on ntp package and already configures it
-chrony_enable_role: no
+chrony_enable_role: false
 
 users_to_remove:
   # - avahi  # dependancy of OSMC

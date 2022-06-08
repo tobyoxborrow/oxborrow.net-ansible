@@ -108,7 +108,7 @@ dovecot_deny_users:
   - www-data
 
 # Example users format to populate /etc/dovecot/users file
-#dovecot_users:
+# dovecot_users:
 #  - username: foobar@example.com
 #    password: "{SHA512-CRYPT}$6$0G4lQx4ZbodhFLlH$AmuAx23Puy14iv2.S5qOAAXg/xG9GtTQs42ctnRnQWOke5dP2QXwEw9WplALZn3Za985HlRUR18fo"
 #    uid: 999

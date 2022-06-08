@@ -8,10 +8,10 @@ letsencrypt_renew_command: /usr/bin/letsencrypt renew
 letsencrypt_renew_log: /var/log/letsencrypt/renew.log
 
 # Example actions to perform if there was a renewal
-#letsencrypt_post_renew_commands:
+# letsencrypt_post_renew_commands:
 #  - service nginx reload
 
 # Example certs
-#letsencrypt_certs:
+# letsencrypt_certs:
 #  - domain: www.example.com
 #    command: letsencrypt certonly --webroot -w /var/www/html -m foo@example.com -d www.example.com --agree-tos

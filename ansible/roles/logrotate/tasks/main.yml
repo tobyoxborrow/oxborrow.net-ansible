@@ -1,11 +1,11 @@
 ---
 - name: Ensure logrotate is installed
-  package:
+  ansible.builtin.package:
     name: logrotate
     state: present
 
 - name: Ensure configuration file logrotate.conf is present
-  template:
+  ansible.builtin.template:
     src: templates/logrotate.conf.j2
     dest: /etc/logrotate.conf
     owner: root

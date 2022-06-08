@@ -1,6 +1,6 @@
 ---
 - name: Ensure configuration file master.cf is present
-  template:
+  ansible.builtin.template:
     src: templates/master.cf.j2
     dest: /etc/postfix/master.cf
     owner: root
@@ -9,7 +9,7 @@
   notify: restart postfix
 
 - name: Ensure configuration file main.cf is present
-  template:
+  ansible.builtin.template:
     src: templates/main.cf.j2
     dest: /etc/postfix/main.cf
     owner: root
@@ -18,84 +18,84 @@
   notify: reload postfix
 
 - name: Ensure configuration file generic is present
-  template:
+  ansible.builtin.template:
     src: templates/generic.j2
     dest: /etc/postfix/generic
     owner: root
     group: root
     mode: 0644
   notify:
-   - postmap generic
-   - reload postfix
+    - postmap generic
+    - reload postfix
 
 - name: Ensure configuration file vmailbox is present
-  template:
+  ansible.builtin.template:
     src: templates/vmailbox.j2
     dest: /etc/postfix/vmailbox
     owner: root
     group: root
     mode: 0644
   notify:
-   - postmap vmailbox
-   - reload postfix
+    - postmap vmailbox
+    - reload postfix
 
 - name: Ensure configuration file virtual is present
-  template:
+  ansible.builtin.template:
     src: templates/virtual.j2
     dest: /etc/postfix/virtual
     owner: root
     group: root
     mode: 0644
   notify:
-   - postmap virtual
-   - reload postfix
+    - postmap virtual
+    - reload postfix
 
 - name: Ensure configuration file access is present
-  template:
+  ansible.builtin.template:
     src: templates/access.j2
     dest: /etc/postfix/access
     owner: root
     group: root
     mode: 0644
   notify:
-   - postmap access
-   - reload postfix
+    - postmap access
+    - reload postfix
 
 - name: Ensure configuration file client_whitelist is present
-  template:
+  ansible.builtin.template:
     src: templates/client_whitelist.j2
     dest: /etc/postfix/client_whitelist
     owner: root
     group: root
     mode: 0644
   notify:
-   - postmap client_whitelist
-   - reload postfix
+    - postmap client_whitelist
+    - reload postfix
 
 - name: Ensure configuration file denied_recipients is present
-  template:
+  ansible.builtin.template:
     src: templates/denied_recipients.j2
     dest: /etc/postfix/denied_recipients
     owner: root
     group: root
     mode: 0644
   notify:
-   - postmap denied_recipients
-   - reload postfix
+    - postmap denied_recipients
+    - reload postfix
 
 - name: Ensure configuration file sender_logins is present
-  template:
+  ansible.builtin.template:
     src: templates/sender_logins.j2
     dest: /etc/postfix/sender_logins
     owner: root
     group: root
     mode: 0644
   notify:
-   - postmap sender_logins
-   - reload postfix
+    - postmap sender_logins
+    - reload postfix
 
 - name: Synchronize remaining postfix configuration files
-  copy:
+  ansible.builtin.copy:
     src: files/
     dest: /etc/postfix/
     owner: root

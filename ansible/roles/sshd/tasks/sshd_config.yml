@@ -8,7 +8,7 @@
 # generate banners with:
 # figlet -f roman -w 128 NAME > roles/sshd/files/banner_NAME.txt
 - name: Ensure sshd_banner is present
-  copy:
+  ansible.builtin.copy:
     dest: /etc/ssh/sshd_banner
     src: files/{{ sshd_banner_filename }}
     owner: root
@@ -17,12 +17,12 @@
   when: sshd_banner_filename != ""  # noqa empty-string-compare
 
 - name: Ensure sshd_config is present
-  template:
+  ansible.builtin.template:
     dest: /etc/ssh/sshd_config
     src: templates/sshd_config.j2
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true
   register: sshd_config
   notify: reload sshd - check syntax

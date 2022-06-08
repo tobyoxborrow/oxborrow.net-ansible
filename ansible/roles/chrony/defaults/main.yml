@@ -1,5 +1,5 @@
 ---
-chrony_enable_role: yes
+chrony_enable_role: true
 
 chrony_ntp_packages_to_remove:
   - ntp

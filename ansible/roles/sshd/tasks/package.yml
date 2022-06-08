@@ -2,6 +2,6 @@
 # this seems unlikely not to be the case if Ansible is working at all
 # included for completeness
 - name: Ensure openssh-server is installed
-  package:
+  ansible.builtin.package:
     name: "{{ sshd_package_name }}"
     state: present

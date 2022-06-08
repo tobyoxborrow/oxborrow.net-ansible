@@ -13,9 +13,9 @@ firewall_tcp_ports:
   - 993
   - 587
 
-fail2ban_enable_nginx: yes
-fail2ban_enable_postfix: yes
-fail2ban_enable_dovecot: yes
+fail2ban_enable_nginx: true
+fail2ban_enable_postfix: true
+fail2ban_enable_dovecot: true
 
 letsencrypt_certs:
   - domain: www.oxborrow.net
@@ -28,11 +28,11 @@ dovecot_ssl_cert: "</etc/letsencrypt/live/www.oxborrow.net/fullchain.pem"
 dovecot_ssl_key: "</etc/letsencrypt/live/www.oxborrow.net/privkey.pem"
 
 hardening_disable_filesystems:
-- cramfs
-- freevxfs
-- jffs2
-- hfs
-- hfsplus
-- squashfs
-- udf
-# - vfat  # freeside's hosting provider uses vfat for EFI boot partition
+  - cramfs
+  - freevxfs
+  - jffs2
+  - hfs
+  - hfsplus
+  - squashfs
+  - udf
+  # - vfat  # freeside's hosting provider uses vfat for EFI boot partition

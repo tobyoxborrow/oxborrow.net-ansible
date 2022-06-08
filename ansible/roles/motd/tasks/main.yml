@@ -1,6 +1,6 @@
 ---
 - name: Ensure motd is present
-  template:
+  ansible.builtin.template:
     src: templates/motd.j2
     dest: /etc/motd
     owner: root
@@ -8,7 +8,7 @@
     mode: 0644
 
 - name: Ensure motd.tail is present
-  template:
+  ansible.builtin.template:
     src: templates/motd.tail.j2
     dest: /etc/motd.tail
     owner: root
@@ -16,7 +16,7 @@
     mode: 0644
 
 - name: Synchronize update-motd.d files
-  copy:
+  ansible.builtin.copy:
     src: files/update-motd.d/
     dest: /etc/update-motd.d/
     owner: root
@@ -24,7 +24,7 @@
     mode: 0755
 
 - name: Synchronize recent script files
-  copy:
+  ansible.builtin.copy:
     src: files/cron.daily/
     dest: /etc/cron.daily/
     owner: root
@@ -33,40 +33,40 @@
   when: motd_install_recent_scripts
 
 - name: Verify recent scripts are installed
-  command: run-parts --test /etc/cron.daily
+  ansible.builtin.command: run-parts --test /etc/cron.daily
   register: runparts
   failed_when: runparts.stdout.find('/etc/cron.daily/recent_') == -1
-  changed_when: no
+  changed_when: false
   when: motd_install_recent_scripts
 
 - name: Verify 10-help-text exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/update-motd.d/10-help-text
   register: helptext
-  changed_when: no
-  check_mode: yes
+  changed_when: false
+  check_mode: true
 
 - name: Ensure 10-help-text is not executable
-  file:
+  ansible.builtin.file:
     path: /etc/update-motd.d/10-help-text
     mode: 0644
   when: helptext.stat.exists
 
 - name: Verify 51-cloudguest exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/update-motd.d/51-cloudguest
   register: cloudguest
-  changed_when: no
-  check_mode: yes
+  changed_when: false
+  check_mode: true
 
 - name: Ensure 51-cloudguest is not executable
-  file:
+  ansible.builtin.file:
     path: /etc/update-motd.d/51-cloudguest
     mode: 0644
   when: cloudguest.stat.exists
 
 - name: Ensure /etc/issue is present
-  template:
+  ansible.builtin.template:
     src: templates/etc-issue.j2
     dest: /etc/issue
     owner: root
@@ -74,7 +74,7 @@
     mode: 0644
 
 - name: Ensure /etc/issue.net is present
-  template:
+  ansible.builtin.template:
     src: templates/etc-issue-net.j2
     dest: /etc/issue.net
     owner: root

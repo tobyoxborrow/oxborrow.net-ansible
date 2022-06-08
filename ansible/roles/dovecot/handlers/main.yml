@@ -4,12 +4,12 @@
 # changes are picked up.
 # ansible provides sleep for this purpose but systemd does not support it
 - name: restart dovecot
-  service:
+  ansible.builtin.service:
     name: dovecot
     state: stopped
   notify: start dovecot
 
 - name: start dovecot
-  service:
+  ansible.builtin.service:
     name: dovecot
     state: started

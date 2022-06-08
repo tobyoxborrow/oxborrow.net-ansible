@@ -4,9 +4,9 @@
     path: "/etc/letsencrypt/live/{{ item.domain }}/fullchain.pem"
   with_items: "{{ letsencrypt_certs }}"
   register: stat_certs
-  changed_when: no
+  changed_when: false
 
 - name: Initialise missing certs
-  command: "{{ item.item.command }}"
+  ansible.builtin.command: "{{ item.item.command }}"
   with_items: "{{ stat_certs.results }}"
   when: not item.stat.exists
