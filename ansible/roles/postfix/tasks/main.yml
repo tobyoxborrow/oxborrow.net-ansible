@@ -1,6 +1,6 @@
 ---
 - name: Manage postfix package
-  include: package.yml
+  import_tasks: package.yml
 
 - name: Manage postfix configuraiton
-  include: configuration.yml
+  import_tasks: configuration.yml

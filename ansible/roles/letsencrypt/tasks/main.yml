@@ -1,11 +1,11 @@
 ---
 - name: Manage letsencrypt package
-  include: package.yml
+  import_tasks: package.yml
 
 - name: Manage letsencrypt cronjobs
-  include: cronjobs.yml
+  import_tasks: cronjobs.yml
   when: not development and not vagrant
 
 - name: Manage letsencrypt certs
-  include: certs.yml
+  import_tasks: certs.yml
   when: not development and not vagrant

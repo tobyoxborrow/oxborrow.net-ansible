@@ -1,4 +1,4 @@
 ---
 - name: CIS Debian 10 Benchmark
-  include: debian.yml
+  import_tasks: debian.yml
   when: ansible_distribution == "Debian"

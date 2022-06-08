@@ -1,9 +1,9 @@
 ---
 - name: Manage sshd package
-  include: package.yml
+  import_tasks: package.yml
 
 - name: Configure sshd package
-  include: sshd_config.yml
+  import_tasks: sshd_config.yml
 
 - name: Manage sshd service
-  include: service.yml
+  import_tasks: service.yml

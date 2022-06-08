@@ -1,12 +1,12 @@
 ---
 - name: Manage alternative ntp packages
-  include: ntp.yml
+  import_tasks: ntp.yml
   when: chrony_enable_role
 
 - name: Manage chrony package
-  include: package.yml
+  import_tasks: package.yml
   when: chrony_enable_role
 
 - name: Manage chrony configuration
-  include: configuration.yml
+  import_tasks: configuration.yml
   when: chrony_enable_role

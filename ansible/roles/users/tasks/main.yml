@@ -1,9 +1,9 @@
 ---
 - name: Manage user toby
-  include: toby.yml
+  import_tasks: toby.yml
 
 - name: Remove unnecessary users
-  include: remove_users.yml
+  import_tasks: remove_users.yml
 
 - name: Handle vagrant users
-  include: vagrant.yml
+  import_tasks: vagrant.yml
