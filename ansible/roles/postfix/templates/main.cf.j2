@@ -134,6 +134,11 @@ virtual_transport = {{ postfix_virtual_transport }}
 # ADDRESS_REWRITING_README document.
 virtual_alias_maps = hash:/etc/postfix/virtual
 
+# Optional BCC (blind carbon-copy) address lookup tables, indexed by recipient
+# address. The BCC address (multiple results are not supported) is added when
+# mail enters from outside of Postfix.
+recipient_bcc_maps = hash:/etc/postfix/recipient_bcc_maps
+
 # The alias databases that are used for local(8) delivery. See aliases(5) for
 # syntax details. Specify zero or more "type:name" lookup tables, separated by
 # whitespace or comma. Tables will be searched in the specified order until a

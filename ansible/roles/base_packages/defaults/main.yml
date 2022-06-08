@@ -25,6 +25,7 @@ base_packages_to_remove:
 
 base_packages_to_install:
   - acl
+  - alpine
   - apt-transport-https
   - bash
   - bash-completion

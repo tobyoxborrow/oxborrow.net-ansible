@@ -94,6 +94,17 @@
     - postmap sender_logins
     - reload postfix
 
+- name: Ensure configuration file recipient_bcc_maps is present
+  ansible.builtin.template:
+    src: templates/recipient_bcc_maps.j2
+    dest: /etc/postfix/recipient_bcc_maps
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - postmap recipient_bcc_maps
+    - reload postfix
+
 - name: Synchronize remaining postfix configuration files
   ansible.builtin.copy:
     src: files/

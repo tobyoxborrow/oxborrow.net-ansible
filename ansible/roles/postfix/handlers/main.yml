@@ -8,6 +8,9 @@
 - name: postmap virtual
   ansible.builtin.command: postmap /etc/postfix/virtual
 
+- name: postmap recipient_bcc_maps
+  ansible.builtin.command: postmap /etc/postfix/recipient_bcc_maps
+
 - name: postmap access
   ansible.builtin.command: postmap /etc/postfix/access
 
