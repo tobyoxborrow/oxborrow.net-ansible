@@ -21,6 +21,5 @@
     - logwatch
     - letsencrypt
     - postfix
-    # - dovecot
     - nginx
     - varwww

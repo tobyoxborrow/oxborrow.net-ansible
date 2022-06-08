@@ -15,7 +15,6 @@ firewall_tcp_ports:
 
 fail2ban_enable_nginx: true
 fail2ban_enable_postfix: true
-fail2ban_enable_dovecot: true
 
 letsencrypt_certs:
   - domain: wellington.oxborrow.net
@@ -23,6 +22,3 @@ letsencrypt_certs:
 
 postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/wellington.oxborrow.net/fullchain.pem
 postfix_smtpd_tls_key_file: /etc/letsencrypt/live/wellington.oxborrow.net/privkey.pem
-
-dovecot_ssl_cert: "</etc/letsencrypt/live/wellington.oxborrow.net/fullchain.pem"
-dovecot_ssl_key: "</etc/letsencrypt/live/wellington.oxborrow.net/privkey.pem"

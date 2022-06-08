@@ -93,6 +93,13 @@ unknown_local_recipient_reject_code = 550
 # recipient restrictions.
 relay_domains = $mydestination, hash:/etc/postfix/relay_domains
 
+{% if postfix_virtual_transport is defined -%}
+# The default mail delivery transport and next-hop destination for final
+# delivery to domains listed with $virtual_mailbox_domains.
+virtual_transport = {{ postfix_virtual_transport }}
+
+{% endif %}
+{% if postfix_virtual_mailbox_domains is defined -%}
 # Postfix is final destination for the specified list of domains; mail is
 # delivered via the $virtual_transport mail delivery transport. By default this
 # is the Postfix virtual(8) delivery agent. The SMTP server validates recipient
@@ -100,6 +107,8 @@ relay_domains = $mydestination, hash:/etc/postfix/relay_domains
 # recipients.
 virtual_mailbox_domains = {{ postfix_virtual_mailbox_domains }}
 
+{% endif %}
+{% if postfix_virtual_mailbox_base is defined -%}
 # A prefix that the virtual(8) delivery agent prepends to all pathname results
 # from $virtual_mailbox_maps table lookups. This is a safety measure to ensure
 # that an out of control map doesn't litter the file system with mailboxes.
@@ -107,6 +116,8 @@ virtual_mailbox_domains = {{ postfix_virtual_mailbox_domains }}
 # recommended.
 virtual_mailbox_base = {{ postfix_virtual_mailbox_base }}
 
+{% endif %}
+{% if postfix_virtual_transport is defined -%}
 # Optional lookup tables with all valid addresses in the domains that match
 # $virtual_mailbox_domains.
 virtual_mailbox_maps = hash:/etc/postfix/vmailbox
@@ -124,10 +135,7 @@ virtual_uid_maps = {{ postfix_virtual_uid_maps }}
 # delivery.
 virtual_gid_maps = {{ postfix_virtual_gid_maps }}
 
-# The default mail delivery transport and next-hop destination for final
-# delivery to domains listed with $virtual_mailbox_domains.
-virtual_transport = {{ postfix_virtual_transport }}
-
+{% endif %}
 # Optional lookup tables that alias specific mail addresses or domains to other
 # local or remote address. The table format and lookups are documented in
 # virtual(5). For an overview of Postfix address manipulations see the

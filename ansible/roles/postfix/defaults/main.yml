@@ -31,7 +31,6 @@ postfix_virtual_entries:
 postfix_virtual_mailbox_entries:
   - address: foo@example.com
     mailbox: example.com/foo/
-postfix_virtual_transport: "lmtp:unix:private/dovecot-lmtp"
 postfix_generic_entries:
   - pattern: "@localhost.localdomain"
     value: no-reply@localhost.localdomain
@@ -45,9 +44,6 @@ postfix_denied_recipients:
 postfix_sender_login_entries:
   - username: foo@example.com
     address: foo@example.com
-postfix_smtpd_sasl_auth_enable: "no"
-postfix_smtpd_sasl_path: private/auth
-postfix_smtpd_sasl_type: dovecot
 postfix_smtpd_use_tls: "no"
 postfix_smtpd_tls_ask_ccert: "no"
 postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem

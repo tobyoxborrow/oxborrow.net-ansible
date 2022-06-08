@@ -19,8 +19,3 @@ postfix_sender_login_entries: "{{ vault_postfix_sender_login_entries }}"
 postfix_recipient_bcc_maps: "{{ vault_postfix_recipient_bcc_maps }}"
 postfix_smtpd_use_tls: "yes"
 postfix_master_submission_inet: "yes"
-
-dovecot_users: "{{ vault_dovecot_users }}"
-
-letsencrypt_post_renew_commands:
-  - systemctl restart dovecot

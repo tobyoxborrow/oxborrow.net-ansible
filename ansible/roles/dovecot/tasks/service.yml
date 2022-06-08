@@ -1,6 +1,0 @@
----
-- name: Ensure service started and enabled
-  ansible.builtin.service:
-    name: "{{ dovecot_service_name }}"
-    state: started
-    enabled: true

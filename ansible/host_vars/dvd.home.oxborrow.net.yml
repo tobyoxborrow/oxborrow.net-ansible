@@ -12,7 +12,6 @@ firewall_tcp_ports:
 
 fail2ban_enable_nginx: false
 fail2ban_enable_postfix: false
-fail2ban_enable_dovecot: false
 
 # letsencrypt_certs:
 #   - domain: "{{ hostname_fqdn }}"
