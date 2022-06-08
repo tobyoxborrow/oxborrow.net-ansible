@@ -9,6 +9,6 @@ logwatch_services:
   - -postfix
   - -sendmail
   - -zz-disk_space
-  - -zz-fortune
   - -zz-network
   - -zz-sys
+  # - -zz-fortune
