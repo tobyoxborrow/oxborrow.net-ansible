@@ -209,6 +209,7 @@ smtpd_tls_security_level = {{ postfix_smtpd_tls_security_level }}
 # Ask a remote SMTP client for a client certificate.
 smtpd_tls_ask_ccert = {{ postfix_smtpd_tls_ask_ccert }}
 
+{% if postfix_smtpd_sasl_auth_enable is defined -%}
 # Enable SASL authentication in the Postfix SMTP server. By default, the
 # Postfix SMTP server does not use authentication.
 smtpd_sasl_auth_enable = {{ postfix_smtpd_sasl_auth_enable }}
@@ -224,6 +225,7 @@ smtpd_sasl_type = {{ postfix_smtpd_sasl_type }}
 # rendezvous point.
 smtpd_sasl_path = {{ postfix_smtpd_sasl_path }}
 
+{% endif %}
 # Access restrictions for mail relay control that the Postfix SMTP server
 # applies in the context of the RCPT TO command, before
 # smtpd_recipient_restrictions.

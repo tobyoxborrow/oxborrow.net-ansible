@@ -5,9 +5,9 @@ postfix_inet_interfaces: "{{ public_inet_address }}, 127.0.0.1"
 postfix_myhostname: "{{ hostname_fqdn }}"
 postfix_mydomain: "{{ hostname_fqdn }}"
 postfix_virtual_mailbox_domains: "{{ vault_postfix_virtual_mailbox_domains }}"
+postfix_virtual_mailbox_entries: "{{ vault_postfix_virtual_mailbox_entries }}"
 postfix_virtual_uid_maps: static:999
 postfix_virtual_gid_maps: static:998
-postfix_virtual_mailbox_entries: "{{ vault_postfix_virtual_mailbox_entries }}"
 postfix_virtual_entries: "{{ vault_postfix_virtual_entries }}"
 postfix_generic_entries: "{{ vault_postfix_generic_entries }}"
 postfix_smtpd_recipient_restrictions: "{{ vault_postfix_smtpd_recipient_restrictions }}"
