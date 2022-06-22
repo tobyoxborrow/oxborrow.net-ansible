@@ -7,9 +7,17 @@
     group: root
     mode: 0644
 
+- name: Ensure services/rsyslogd.conf is present
+  ansible.builtin.copy:
+    src: files/etc-logwatch-conf-services.rsyslogd.conf
+    dest: /etc/logwatch/conf/services/rsyslogd.conf
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Ensure daily cronjob is present
   ansible.builtin.copy:
-    src: files/cron.00logwatch
+    src: files/etc-cron.00logwatch
     dest: /etc/cron.daily/00logwatch
     owner: root
     group: root
@@ -24,7 +32,7 @@
 
 - name: Ensure weekly cronjob is present
   ansible.builtin.copy:
-    src: files/cron.00logwatch
+    src: files/etc-cron.00logwatch
     dest: /etc/cron.weekly/00logwatch
     owner: root
     group: root
