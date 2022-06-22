@@ -3,3 +3,8 @@
   ansible.builtin.package:
     name: logwatch
     state: present
+
+- name: Ensure libdate-manip-perl is installed
+  ansible.builtin.package:
+    name: libdate-manip-perl
+    state: present
