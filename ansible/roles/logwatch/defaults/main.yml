@@ -1,6 +1,7 @@
 ---
 logwatch_mail_to: root
 logwatch_mail_from: "logwatch@{{ hostname_fqdn }}"
+
 logwatch_services:
   - All
   - -cron
@@ -11,4 +12,7 @@ logwatch_services:
   - -zz-disk_space
   - -zz-network
   - -zz-sys
-  # - -zz-fortune
+
+# Set cronjob and range
+# cadence of "daily" or "weekly"
+logwatch_cadence: "weekly"

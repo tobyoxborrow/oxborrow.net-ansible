@@ -6,3 +6,33 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Ensure daily cronjob is present
+  ansible.builtin.copy:
+    src: files/cron.00logwatch
+    dest: /etc/cron.daily/00logwatch
+    owner: root
+    group: root
+    mode: 0755
+  when: logwatch_cadence == "daily"
+
+- name: Ensure daily cronjob is absent
+  ansible.builtin.file:
+    path: /etc/cron.daily/00logwatch
+    state: absent
+  when: logwatch_cadence != "daily"
+
+- name: Ensure weekly cronjob is present
+  ansible.builtin.copy:
+    src: files/cron.00logwatch
+    dest: /etc/cron.weekly/00logwatch
+    owner: root
+    group: root
+    mode: 0755
+  when: logwatch_cadence == "weekly"
+
+- name: Ensure weekly cronjob is absent
+  ansible.builtin.file:
+    path: /etc/cron.weekly/00logwatch
+    state: absent
+  when: logwatch_cadence != "weekly"

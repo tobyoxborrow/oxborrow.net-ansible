@@ -15,7 +15,11 @@ MailTo = {{ logwatch_mail_to }}
 
 MailFrom = {{ logwatch_mail_from }}
 
+{% if logwatch_cadence == "daily" -%}
 Range = yesterday
+{% elif logwatch_cadence == "weekly" -%}
+Range = between -7 days and -1 days
+{% endif -%}
 Archives = No
 
 # Low = 0
