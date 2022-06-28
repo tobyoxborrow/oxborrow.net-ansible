@@ -7,11 +7,40 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
   - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v6.2.2
+    rev: v6.3.0
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
         additional_dependencies: [ansible]
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+      - id: isort
+        args:
+          - --line-width
+          - "79"
+          - --force-single-line-imports
+          - --order-by-type
+          - --atomic
+          - --lines-after-imports
+          - "2"
+          - --lines-between-types
+          - "1"
+          - --force-grid-wrap
+          - "0"
+          - --trailing-comma
+          - --multi-line
+          - "3"
+          - --use-parentheses
+  - repo: https://github.com/psf/black
+    rev: 22.6.0
+    hooks:
+      - id: black
+        language_version: python3.9
   - repo: https://github.com/jorisroovers/gitlint
     rev: v0.17.0
     hooks:

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 Recent Spam Counter
 
@@ -6,32 +6,46 @@ Quick script to count the number of spam blocked in mail logs that is displayed
 in the motd. Doesn't work shortly after log rotation, but good enough.
 """
 
-import re
 import os
+import re
 
-from datetime import datetime, timedelta
+from datetime import datetime
+from datetime import timedelta
+
 
 TODAY = datetime.now()
 LAST_WEEK = TODAY - timedelta(days=8)
 
-MONTHS = {'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
-          'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 0, 'Nov': 11, 'Dec': 12}
+MONTHS = {
+    "Jan": 1,
+    "Feb": 2,
+    "Mar": 3,
+    "Apr": 4,
+    "May": 5,
+    "Jun": 6,
+    "Jul": 7,
+    "Aug": 8,
+    "Sep": 9,
+    "Oct": 0,
+    "Nov": 11,
+    "Dec": 12,
+}
 
 
 # http://stackoverflow.com/questions/2301789/read-a-file-in-reverse-order-using-python
 def reverse_readline(filename, buf_size=8192):
-    """a generator that returns the lines of a file in reverse order"""
-    with open(filename) as handle:
+    """Generator that returns the lines of a file in reverse order."""
+    with open(filename, encoding="ascii") as hdl:
         segment = None
         offset = 0
-        handle.seek(0, os.SEEK_END)
-        file_size = remaining_size = handle.tell()
+        hdl.seek(0, os.SEEK_END)
+        file_size = remaining_size = hdl.tell()
         while remaining_size > 0:
             offset = min(file_size, offset + buf_size)
-            handle.seek(file_size - offset)
-            buffer = handle.read(min(remaining_size, buf_size))
+            hdl.seek(file_size - offset)
+            buffer = hdl.read(min(remaining_size, buf_size))
             remaining_size -= buf_size
-            lines = buffer.split('\n')
+            lines = buffer.split("\n")
             # the first line of the buffer is probably not a complete line so
             # we'll save it and append it to the last line of the next buffer
             # we read
@@ -39,7 +53,7 @@ def reverse_readline(filename, buf_size=8192):
                 # if the previous chunk starts right from the beginning of line
                 # do not concact the segment to the last line of new chunk
                 # instead, yield the segment first
-                if buffer[-1] is not '\n':
+                if buffer[-1] != "\n":
                     lines[-1] += segment
                 else:
                     yield segment
@@ -53,8 +67,7 @@ def reverse_readline(filename, buf_size=8192):
 
 
 def main():
-    """main"""
-
+    """Main."""
     # example log line:
     # 2014-08-06 21:11:58,553 fail2ban.actions: WARNING [ssh] Ban
     # 175.119.227.143 Jul 20 13:36:33 hostname postfix/smtpd[12929]: NOQUEUE:
@@ -66,21 +79,21 @@ def main():
     counter = 0
     lines = 0
 
-    for line in reverse_readline('/var/log/mail.log'):
+    for line in reverse_readline("/var/log/mail.log"):
         # don't spend so long reading the log
         lines += 1
         if lines > 100000:
             break
 
-        if 'reject: ' in line:
+        if "reject: " in line:
             counter += 1
 
         # no need to check the date on every line
         # just use the frequent statistics lines (approx every 30 mins)
-        if 'statistics: ' not in line:
+        if "statistics: " not in line:
             continue
 
-        matches = re.search(r'^([A-Sa-v]{3})\s+([0-3]?[0-9])', line)
+        matches = re.search(r"^([A-Sa-v]{3})\s+([0-3]?[0-9])", line)
         if not matches:
             continue
 
@@ -95,9 +108,9 @@ def main():
         if line_date < LAST_WEEK:
             break
 
-    wfh = open('/var/run/recent_spam', 'w')
-    wfh.write('Spam blocked in the last 7 days: %s\n' % counter)
+    with open("/var/run/recent_spam", "w", encoding="utf-8") as hdl:
+        hdl.write(f"Spam blocked in the last 7 days: {counter}\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
