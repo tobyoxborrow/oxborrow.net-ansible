@@ -2,7 +2,6 @@
 - name: www.oxborrow.net
   hosts:
     - freeside
-    - wellington
     - wintermute
   become: true
   become_user: root
