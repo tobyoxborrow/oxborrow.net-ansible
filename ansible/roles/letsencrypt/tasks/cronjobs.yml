@@ -7,10 +7,11 @@
     group: root
     mode: 0755
 
-- name: Ensure letsencrypt cronjob is present
+- name: Ensure letsencrypt cronjob job is present
   ansible.builtin.cron:
     name: "letsencrypt renewal"
     job: "/usr/local/bin/letsencrypt-renewal"
+    special_time: daily
+    cron_file: letsencrypt-renewal
+    user: root
     state: present
-    hour: "0"
-    minute: "0"

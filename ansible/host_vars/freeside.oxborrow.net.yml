@@ -17,11 +17,14 @@ fail2ban_enable_nginx: true
 fail2ban_enable_postfix: true
 
 letsencrypt_certs:
-  - domain: www.oxborrow.net
-    command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d www.oxborrow.net --agree-tos
+  - domain: freeside.oxborrow.net
+    command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d freeside.oxborrow.net --agree-tos
 
-# postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/www.oxborrow.net/fullchain.pem
-# postfix_smtpd_tls_key_file: /etc/letsencrypt/live/www.oxborrow.net/privkey.pem
+letsencrypt_post_renew_commands:
+  - service postfix reload
+
+postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/freeside.oxborrow.net/fullchain.pem
+postfix_smtpd_tls_key_file: /etc/letsencrypt/live/freeside.oxborrow.net/privkey.pem
 
 hardening_disable_filesystems:
   - cramfs

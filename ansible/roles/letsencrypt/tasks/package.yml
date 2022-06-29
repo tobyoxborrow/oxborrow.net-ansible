@@ -1,5 +1,5 @@
 ---
-- name: Ensure letsencrypt is installed
+- name: Ensure letsencrypt package is installed
   ansible.builtin.package:
     name: "{{ letsencrypt_package_name }}"
     state: present

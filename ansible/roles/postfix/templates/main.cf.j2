@@ -181,15 +181,17 @@ local_transport = local
 # delivery transport, next-hop destination).
 transport_maps = hash:/etc/postfix/transport
 
-# File with the Postfix SMTP server RSA certificate in PEM format.
-smtpd_tls_cert_file = {{ postfix_smtpd_tls_cert_file }}
+# The SMTP TLS security level for the Postfix SMTP server; when a non-empty
+# value is specified, this overrides the obsolete parameters smtpd_use_tls and
+# smtpd_enforce_tls. This parameter is ignored with "smtpd_tls_wrappermode =
+# yes".
+smtpd_tls_security_level = {{ postfix_smtpd_tls_security_level }}
 
-# File with the Postfix SMTP server RSA private key in PEM format.
-smtpd_tls_key_file = {{ postfix_smtpd_tls_key_file }}
-
-# Opportunistic TLS: announce STARTTLS support to remote SMTP clients, but do
-# not require that clients use TLS encryption.
-smtpd_use_tls = {{ postfix_smtpd_use_tls }}
+# List of one or more PEM files, each holding one or more private keys directly
+# followed by a corresponding certificate chain.
+smtpd_tls_chain_files =
+    {{ postfix_smtpd_tls_key_file }},
+    {{ postfix_smtpd_tls_cert_file }}
 
 # Enable additional Postfix SMTP server logging of TLS activity. Each logging
 # level also includes the information that is logged at a lower logging level.
@@ -200,12 +202,6 @@ smtpd_tls_loglevel = {{ postfix_smtpd_tls_loglevel }}
 # SMTP client CommonName and client certificate issuer CommonName.
 smtpd_tls_received_header = {{ postfix_smtpd_tls_received_header }}
 
-# The SMTP TLS security level for the Postfix SMTP server; when a non-empty
-# value is specified, this overrides the obsolete parameters smtpd_use_tls and
-# smtpd_enforce_tls. This parameter is ignored with "smtpd_tls_wrappermode =
-# yes".
-smtpd_tls_security_level = {{ postfix_smtpd_tls_security_level }}
-
 # Ask a remote SMTP client for a client certificate.
 smtpd_tls_ask_ccert = {{ postfix_smtpd_tls_ask_ccert }}
 
@@ -214,11 +210,15 @@ smtpd_tls_ask_ccert = {{ postfix_smtpd_tls_ask_ccert }}
 # Postfix SMTP server does not use authentication.
 smtpd_sasl_auth_enable = {{ postfix_smtpd_sasl_auth_enable }}
 
+{% endif %}
+{% if postfix_smtpd_sasl_type is defined -%}
 # The SASL plug-in type that the Postfix SMTP server should use for
 # authentication. The available types are listed with the "postconf -a"
 # command.
 smtpd_sasl_type = {{ postfix_smtpd_sasl_type }}
 
+{% endif %}
+{% if postfix_smtpd_sasl_path is defined -%}
 # Implementation-specific information that the Postfix SMTP server passes
 # through to the SASL plug-in implementation that is selected with
 # smtpd_sasl_type. Typically this specifies the name of a configuration file or
