@@ -1,0 +1,16 @@
+---
+- name: Ensure SRS_FORWARD_PORT in postsrsd configuration
+  ansible.builtin.lineinfile:
+    line: "SRS_FORWARD_PORT={{ postsrsd_forward_port }}"
+    regexp: '^SRS_FORWARD_PORT='
+    dest: /etc/default/postsrsd
+    state: present
+  when: postsrsd_forward_port is defined
+
+- name: Ensure SRS_REVERSE_PORT in postsrsd configuration
+  ansible.builtin.lineinfile:
+    line: "SRS_REVERSE_PORT={{ postsrsd_reverse_port }}"
+    regexp: '^SRS_REVERSE_PORT='
+    dest: /etc/default/postsrsd
+    state: present
+  when: postsrsd_reverse_port is defined

@@ -1,0 +1,11 @@
+---
+- name: Ensure postsrsd is installed
+  ansible.builtin.package:
+    name: postsrsd
+    state: present
+
+- name: Ensure service started and enabled
+  ansible.builtin.service:
+    name: postsrsd
+    state: started
+    enabled: true

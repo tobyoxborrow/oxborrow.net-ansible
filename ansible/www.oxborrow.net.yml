@@ -19,6 +19,7 @@
     - fail2ban
     - logwatch
     - letsencrypt
+    - postsrsd
     - postfix
     - nginx
     - varwww

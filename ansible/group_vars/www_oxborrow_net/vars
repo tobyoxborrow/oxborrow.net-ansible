@@ -18,3 +18,9 @@ postfix_denied_recipients: "{{ vault_postfix_denied_recipients }}"
 postfix_sender_login_entries: "{{ vault_postfix_sender_login_entries }}"
 postfix_recipient_bcc_maps: "{{ vault_postfix_recipient_bcc_maps }}"
 postfix_master_submission_inet: "yes"
+
+# postfix configuration for postsrsd
+postfix_sender_canonical_classes: "envelope_sender"
+postfix_sender_canonical_maps: "tcp:localhost:{{ postsrsd_forward_port }}"
+postfix_recipient_canonical_classes: "envelope_recipient,header_recipient"
+postfix_recipient_canonical_maps: "tcp:localhost:{{ postsrsd_reverse_port }}"

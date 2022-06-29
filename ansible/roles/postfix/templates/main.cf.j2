@@ -162,7 +162,7 @@ header_checks = regexp:/etc/postfix/header_checks
 # The default SMTP TLS security level for the Postfix SMTP client; when a
 # non-empty value is specified, this overrides the obsolete parameters
 # smtp_use_tls, smtp_enforce_tls, and smtp_tls_enforce_peername.
-smtp_tls_security_level = may
+smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
 
 # The maximal size of any local(8) individual mailbox or maildir file, or zero
 # (no limit).
@@ -226,11 +226,38 @@ smtpd_sasl_type = {{ postfix_smtpd_sasl_type }}
 smtpd_sasl_path = {{ postfix_smtpd_sasl_path }}
 
 {% endif %}
+{% if postfix_smtpd_relay_restrictions is defined -%}
 # Access restrictions for mail relay control that the Postfix SMTP server
 # applies in the context of the RCPT TO command, before
 # smtpd_recipient_restrictions.
-{% if postfix_smtpd_relay_restrictions is defined -%}
 smtpd_relay_restrictions = {{ postfix_smtpd_relay_restrictions|join(',') }}
+
+{% endif %}
+{% if postfix_sender_canonical_classes is defined -%}
+# What addresses are subject to sender_canonical_maps address mapping. By
+# default, sender_canonical_maps address mapping is applied to envelope sender
+# addresses, and to header sender addresses.
+sender_canonical_classes = {{ postfix_sender_canonical_classes }}
+
+{% endif %}
+{% if postfix_sender_canonical_maps is defined -%}
+# Optional address mapping lookup tables for envelope and header sender
+# addresses. The table format and lookups are documented in canonical(5).
+sender_canonical_maps = {{ postfix_sender_canonical_maps }}
+
+{% endif %}
+{% if postfix_recipient_canonical_classes is defined -%}
+# What addresses are subject to recipient_canonical_maps address mapping. By
+# default, recipient_canonical_maps address mapping is applied to envelope
+# recipient addresses, and to header recipient addresses.
+recipient_canonical_classes = {{ postfix_recipient_canonical_classes }}
+
+{% endif %}
+{% if postfix_recipient_canonical_maps is defined -%}
+# Optional address mapping lookup tables for envelope and header recipient
+# addresses. The table format and lookups are documented in canonical(5).
+recipient_canonical_maps = {{ postfix_recipient_canonical_maps }}
+
 {% endif %}
 
 
@@ -296,9 +323,9 @@ smtpd_client_restrictions = hash:/etc/postfix/access, permit_mynetworks
 smtpd_helo_required = yes
 smtpd_delay_reject = yes
 
+{% if postfix_smtpd_sender_restrictions is defined -%}
 # Optional restrictions that the Postfix SMTP server applies in the context of
 # a client MAIL FROM command.
-{% if postfix_smtpd_sender_restrictions is defined -%}
 smtpd_sender_restrictions = {{ postfix_smtpd_sender_restrictions|join(',') }}
 {% endif %}
 
