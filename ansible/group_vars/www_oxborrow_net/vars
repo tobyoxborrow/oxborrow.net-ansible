@@ -1,6 +1,31 @@
 ---
 # indirect variables to help with troubleshooting as per:
 # http://docs.ansible.com/ansible/playbooks_best_practices.html#best-practices-for-variables-and-vaults
+hostname_fqdn: "{{ hostname }}.oxborrow.net"
+
+sshd_banner_filename: "banner_{{ hostname }}.txt"
+
+firewall_tcp_ports:
+  - "{{ sshd_config_port }}"
+  - 80
+  - 25
+  - 993
+  - 587
+
+fail2ban_enable_nginx: true
+fail2ban_enable_postfix: true
+fail2ban_enable_sshd: true
+
+letsencrypt_certs:
+  - domain: "{{ hostname }}.oxborrow.net"
+    command: "letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d {{ hostname }}.oxborrow.net --agree-tos"
+
+postfix_smtpd_tls_cert_file: "/etc/letsencrypt/live/{{ hostname }}.oxborrow.net/fullchain.pem"
+postfix_smtpd_tls_key_file: "/etc/letsencrypt/live/{{ hostname }}.oxborrow.net/privkey.pem"
+
+letsencrypt_post_renew_commands:
+  - service postfix reload
+
 postfix_inet_interfaces: "{{ public_inet_address }}, 127.0.0.1"
 postfix_myhostname: "{{ hostname_fqdn }}"
 postfix_mydomain: "{{ hostname_fqdn }}"

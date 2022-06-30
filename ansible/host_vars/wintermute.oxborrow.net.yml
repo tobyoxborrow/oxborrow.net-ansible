@@ -1,27 +1,4 @@
 ---
 hostname: wintermute
-hostname_fqdn: "{{ hostname }}.oxborrow.net"
-
-sshd_banner_filename: "banner_{{ hostname }}.txt"
 
 public_inet_address: 209.141.50.158
-
-firewall_tcp_ports:
-  - "{{ sshd_config_port }}"
-  - 80
-  - 25
-  - 993
-  - 587
-
-fail2ban_enable_nginx: true
-fail2ban_enable_postfix: true
-
-letsencrypt_certs:
-  - domain: wintermute.oxborrow.net
-    command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d wintermute.oxborrow.net --agree-tos
-
-letsencrypt_post_renew_commands:
-  - service postfix reload
-
-postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/wintermute.oxborrow.net/fullchain.pem
-postfix_smtpd_tls_key_file: /etc/letsencrypt/live/wintermute.oxborrow.net/privkey.pem

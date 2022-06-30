@@ -7,7 +7,7 @@
 
 - name: Ensure configuration file jail.d/sshd.conf is present
   ansible.builtin.template:
-    src: templates/sshd.conf.j2
+    src: templates/jails.d-sshd.conf.j2
     dest: /etc/fail2ban/jail.d/sshd.conf
     owner: root
     group: root
@@ -16,7 +16,7 @@
 
 - name: Ensure configuration file jail.d/nginx.conf is present
   ansible.builtin.template:
-    src: templates/nginx.conf.j2
+    src: templates/jails.d-nginx.conf.j2
     dest: /etc/fail2ban/jail.d/nginx.conf
     owner: root
     group: root
@@ -25,7 +25,7 @@
 
 - name: Ensure configuration file jail.d/postfix.conf is present
   ansible.builtin.template:
-    src: templates/postfix.conf.j2
+    src: templates/jails.d-postfix.conf.j2
     dest: /etc/fail2ban/jail.d/postfix.conf
     owner: root
     group: root
