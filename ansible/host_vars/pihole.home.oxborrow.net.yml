@@ -1,10 +1,5 @@
 ---
 hostname: pihole
-hostname_fqdn: "{{ hostname }}.home.oxborrow.net"
-
-sshd_banner_filename: "banner_{{ hostname }}.txt"
-
-# public_inet_address: n/a
 
 firewall_tcp_ports:
   - "{{ sshd_config_port }}"
@@ -13,13 +8,6 @@ firewall_tcp_ports:
   - 443
   - 8080
   - 8443
-
-fail2ban_enable_nginx: false
-fail2ban_enable_postfix: false
-
-# letsencrypt_certs:
-#   - domain: "{{ hostname_fqdn }}"
-#     command: letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d www.oxborrow.net --agree-tos
 
 hardening_disable_filesystems:
   - cramfs

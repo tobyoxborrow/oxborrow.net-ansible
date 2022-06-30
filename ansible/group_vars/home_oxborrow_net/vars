@@ -1,6 +1,16 @@
 ---
+hostname_fqdn: "{{ hostname }}.home.oxborrow.net"
+
+sshd_banner_filename: "banner_{{ hostname }}.txt"
+
+# public_inet_address: n/a
+
 chrony_server_entries:
   - 0.asia.pool.ntp.org
   - 1.asia.pool.ntp.org
   - 2.asia.pool.ntp.org
   - 3.asia.pool.ntp.org
+
+fail2ban_enable_nginx: false
+fail2ban_enable_postfix: false
+fail2ban_enable_rcptscan: false
