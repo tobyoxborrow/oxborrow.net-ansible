@@ -2,7 +2,7 @@
 # Although this would normally be a case of "changed_when: no" we need it to
 # trigger the other handler. So this will always appear changed when called.
 - name: reload sshd - check syntax
-  ansible.builtin.command: sshd -T
+  ansible.builtin.command: /usr/sbin/sshd -T
   notify: reload sshd
 
 - name: reload sshd
