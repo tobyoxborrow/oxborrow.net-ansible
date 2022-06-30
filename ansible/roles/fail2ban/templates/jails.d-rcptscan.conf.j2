@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+#
+# Fail2Ban jail configuration: rcpt-scan
+#
+# Ban hosts that scan names in my mail domain.
+# They will try many common first names to find a valid address to spam.
+#
+
+[rcpt-scan]
+{% if fail2ban_enable_rcptscan %}
+enabled    = true
+{% else %}
+enabled    = false
+{% endif %}
+filter     = rcpt-scan
+logpath    = /var/log/mail.log
+banaction  = iptables
+bantime    = 21600
+findtime   = 3600
+maxretry   = 0
+usedns     = no

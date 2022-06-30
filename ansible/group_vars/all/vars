@@ -2,12 +2,15 @@
 # indirect variables to help with troubleshooting as per:
 # http://docs.ansible.com/ansible/playbooks_best_practices.html#best-practices-for-variables-and-vaults
 
+admin_email_address: "{{ vault_admin_email_address }}"
+
 wintermute_become_pass: "{{ vault_wintermute_become_pass }}"
 freeside_become_pass: "{{ vault_freeside_become_pass }}"
 pihole_become_pass: "{{ vault_pihole_become_pass }}"
 dvd_become_pass: "{{ vault_dvd_become_pass }}"
 
-logwatch_mail_to: "{{ vault_logwatch_mail_to }}"
+logwatch_mail_to: "{{ admin_email_address }}"
+
 sshd_config_port: "{{ vault_sshd_config_port }}"
 
-hardening_unattended_mail_to: "{{ vault_logwatch_mail_to }}"
+hardening_unattended_mail_to: "{{ admin_email_address }}"

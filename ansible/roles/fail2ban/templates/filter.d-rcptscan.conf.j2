@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+#
+# Fail2Ban filter configuration: rcpt-scan
+#
+# Ban hosts that scan names in my mail domain.
+# They will try many common first names to find a valid address to spam.
+#
+
+[Definition]
+
+# Option:  failregex
+# Notes.:  Ban based on the recipient address.
+# Values:  TEXT
+#
+failregex = from [^[]+\[<HOST>\].*to=<spameri@tiscali.it>
+{% for entry in fail2ban_rcptscan_addresses %}
+            from [^[]+\[<HOST>\].*to=<{{ entry }}>
+{% endfor -%}

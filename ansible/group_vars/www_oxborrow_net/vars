@@ -16,15 +16,17 @@ fail2ban_enable_nginx: true
 fail2ban_enable_postfix: true
 fail2ban_enable_sshd: true
 
+fail2ban_rcptscan_addresses: "{{ vault_fail2ban_rcptscan_addresses }}"
+
 letsencrypt_certs:
   - domain: "{{ hostname }}.oxborrow.net"
-    command: "letsencrypt certonly --webroot -w /var/www/html -m toby@oxborrow.net -d {{ hostname }}.oxborrow.net --agree-tos"
-
-postfix_smtpd_tls_cert_file: "/etc/letsencrypt/live/{{ hostname }}.oxborrow.net/fullchain.pem"
-postfix_smtpd_tls_key_file: "/etc/letsencrypt/live/{{ hostname }}.oxborrow.net/privkey.pem"
+    command: "certbot certonly --webroot -w /var/www/html -m {{ admin_email_address }} -d {{ hostname }}.oxborrow.net --agree-tos"
 
 letsencrypt_post_renew_commands:
   - service postfix reload
+
+postfix_smtpd_tls_cert_file: "/etc/letsencrypt/live/{{ hostname }}.oxborrow.net/fullchain.pem"
+postfix_smtpd_tls_key_file: "/etc/letsencrypt/live/{{ hostname }}.oxborrow.net/privkey.pem"
 
 postfix_inet_interfaces: "{{ public_inet_address }}, 127.0.0.1"
 postfix_myhostname: "{{ hostname_fqdn }}"
