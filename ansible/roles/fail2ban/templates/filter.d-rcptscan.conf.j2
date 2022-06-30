@@ -13,6 +13,8 @@
 # Values:  TEXT
 #
 failregex = from [^[]+\[<HOST>\].*to=<spameri@tiscali.it>
+{% if fail2ban_rcptscan_addresses is defined -%}
 {% for entry in fail2ban_rcptscan_addresses %}
             from [^[]+\[<HOST>\].*to=<{{ entry }}>
-{% endfor -%}
+{% endfor %}
+{%- endif -%}
