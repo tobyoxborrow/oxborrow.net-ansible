@@ -1,0 +1,6 @@
+---
+- name: Ensure service started and enabled
+  ansible.builtin.service:
+    name: unifi
+    state: started
+    enabled: true

@@ -19,3 +19,11 @@
     - fail2ban
 #    - logwatch
 #    - letsencrypt
+
+- name: pihole.home.oxborrow.net
+  hosts:
+    - pihole
+  become: true
+  become_user: root
+  roles:
+    - unifi
