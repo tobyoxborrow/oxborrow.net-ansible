@@ -32,6 +32,24 @@
     mode: 0644
   notify: reload fail2ban
 
+- name: Ensure configuration file filter.d/http-scan.conf is present
+  ansible.builtin.template:
+    src: templates/filter.d-httpscan.conf.j2
+    dest: /etc/fail2ban/filter.d/http-scan.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload fail2ban
+
+- name: Ensure configuration file jail.d/http-scan.conf is present
+  ansible.builtin.template:
+    src: templates/jails.d-httpscan.conf.j2
+    dest: /etc/fail2ban/jail.d/http-scan.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload fail2ban
+
 - name: Ensure configuration file filter.d/rcpt-scan.conf is present
   ansible.builtin.template:
     src: templates/filter.d-rcptscan.conf.j2

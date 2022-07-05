@@ -1,8 +1,13 @@
 ---
+fail2ban_enable_httpscan: false
 fail2ban_enable_nginx: false
 fail2ban_enable_postfix: false
 fail2ban_enable_rcptscan: false
 fail2ban_enable_sshd: true
+
+# fail2ban_httpscan_logpath: /var/log/nginx/access.log
+# fail2ban_httpscan_entries:
+# - /admin/?
 
 # fail2ban_rcptscan_addresses:
 # - spameri@tiscali.it

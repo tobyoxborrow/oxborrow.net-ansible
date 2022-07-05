@@ -14,8 +14,81 @@ firewall_tcp_ports:
 
 fail2ban_enable_nginx: true
 fail2ban_enable_postfix: true
+fail2ban_enable_httpscan: true
 fail2ban_enable_rcptscan: true
 fail2ban_enable_sshd: true
+
+fail2ban_httpscan_entries:
+- (GET|POST) /.aws/
+- (GET|POST) /.git/
+# Executable file extensions not found on this web server
+- (GET|POST) /[^.]+.asp
+- (GET|POST) /[^.]+.cfm
+- (GET|POST) /[^.]+.cgi
+- (GET|POST) /[^.]+.dll
+- (GET|POST) /[^.]+.exe
+- (GET|POST) /[^.]+.jhtml
+- (GET|POST) /[^.]+.jsp
+- (GET|POST) /[^.]+.pl
+- (GET|POST) /[^.]+.shtml
+# Directories. Commonly software with known vulnerabilities.
+- (GET|POST) /GponForm/
+- (GET|POST) /PMA/
+- (GET|POST) /Webmail/
+- (GET|POST) /_vti_bin/
+- (GET|POST) /admin/
+- (GET|POST) /api/
+- (GET|POST) /bin/
+- (GET|POST) /boaform/
+- (GET|POST) /bt/
+- (GET|POST) /bug/
+- (GET|POST) /bugtrack/
+- (GET|POST) /cgi-bin/
+- (GET|POST) /components/
+- (GET|POST) /config/
+- (GET|POST) /db/
+- (GET|POST) /dbadmin/
+- (GET|POST) /domain_default_page/
+- (GET|POST) /email/
+- (GET|POST) /issue/
+- (GET|POST) /issuetrack/
+- (GET|POST) /login/
+- (GET|POST) /m/
+- (GET|POST) /mail/
+- (GET|POST) /mail2/
+- (GET|POST) /manager/
+- (GET|POST) /mantis/
+- (GET|POST) /mantisbt/
+- (GET|POST) /mgmt/
+- (GET|POST) /myadmin/
+- (GET|POST) /mysql-admin/
+- (GET|POST) /mysql/
+- (GET|POST) /mysqladmin/
+- (GET|POST) /phpAdsNew/
+- (GET|POST) /phpMyAdmin/
+- (GET|POST) /phpads/
+- (GET|POST) /phpadsnew/
+- (GET|POST) /phpgroupware/
+- (GET|POST) /phpmyadmin/
+- (GET|POST) /portal/
+- (GET|POST) /program/
+- (GET|POST) /rc/
+- (GET|POST) /rcmail/
+- (GET|POST) /round/
+- (GET|POST) /roundcube/
+- (GET|POST) /scripts/
+- (GET|POST) /sdk/
+- (GET|POST) /solr/
+- (GET|POST) /squirrelmail/
+- (GET|POST) /tag/
+- (GET|POST) /tracker/
+- (GET|POST) /twiki/
+- (GET|POST) /user/
+- (GET|POST) /vhcs/
+- (GET|POST) /webmail/
+- (GET|POST) /wiki/
+- (GET|POST) /wikis/
+- (GET|POST) /wordpress/
 
 fail2ban_rcptscan_addresses: "{{ vault_fail2ban_rcptscan_addresses }}"
 
