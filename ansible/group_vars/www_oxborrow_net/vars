@@ -14,6 +14,7 @@ firewall_tcp_ports:
 
 fail2ban_enable_nginx: true
 fail2ban_enable_postfix: true
+fail2ban_enable_rcptscan: true
 fail2ban_enable_sshd: true
 
 fail2ban_rcptscan_addresses: "{{ vault_fail2ban_rcptscan_addresses }}"
