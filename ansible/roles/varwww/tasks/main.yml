@@ -23,3 +23,8 @@
     dest: /srv/www.oxborrow.net
     bare: true
   notify: Extract git bare to docroot
+
+- name: Remove index.nginx-debian.html
+  ansible.builtin.file:
+    path: /var/www/html/index.nginx-debian.html
+    state: absent
