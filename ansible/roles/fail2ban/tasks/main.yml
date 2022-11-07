@@ -5,4 +5,4 @@
     state: present
 
 - name: Manage fail2ban configuraiton
-  import_tasks: configuration.yml
+  ansible.builtin.import_tasks: configuration.yml

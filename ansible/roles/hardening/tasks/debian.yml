@@ -1,30 +1,30 @@
 ---
 - name: 1.1 Filesystem Configuration
-  import_tasks: filesystems.yml
+  ansible.builtin.import_tasks: filesystems.yml
 
 - name: 1.3 Sudo
-  import_tasks: sudo.yml
+  ansible.builtin.import_tasks: sudo.yml
 
 - name: 1.5 Secure Boot Settings
-  import_tasks: boot.yml
+  ansible.builtin.import_tasks: boot.yml
 
 - name: 1.6 Additional Process Hardening
-  import_tasks: process.yml
+  ansible.builtin.import_tasks: process.yml
 
 - name: 1.9 Software Updates Installed
-  import_tasks: software_updates.yml
+  ansible.builtin.import_tasks: software_updates.yml
 
 - name: 3.2 Network Parameters (Host Only)
-  import_tasks: network_parameters_host.yml
+  ansible.builtin.import_tasks: network_parameters_host.yml
 
 - name: 3.3 Network Parameters (Host and Router)
-  import_tasks: network_parameters_hostrouter.yml
+  ansible.builtin.import_tasks: network_parameters_hostrouter.yml
 
 - name: 3.4 Uncommon Network Protocols
-  import_tasks: network_protocols.yml
+  ansible.builtin.import_tasks: network_protocols.yml
 
 - name: 3.5 Firewall Configuration
-  import_tasks: iptables.yml
+  ansible.builtin.import_tasks: iptables.yml
 
 - name: 4.1 Configure System Accounting (auditd)
-  import_tasks: auditd.yml
+  ansible.builtin.import_tasks: auditd.yml

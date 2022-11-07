@@ -1,6 +1,6 @@
 ---
 - name: Manage postfix package
-  import_tasks: package.yml
+  ansible.builtin.import_tasks: package.yml
 
 - name: Manage postfix configuraiton
-  import_tasks: configuration.yml
+  ansible.builtin.import_tasks: configuration.yml

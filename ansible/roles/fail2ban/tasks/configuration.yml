@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: /etc/fail2ban/jail.d/defaults-debian.conf
     state: absent
-  notify: reload fail2ban
+  notify: Reload fail2ban
 
 - name: Ensure configuration file jail.d/sshd.conf is present
   ansible.builtin.template:
@@ -12,7 +12,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload fail2ban
+  notify: Reload fail2ban
 
 - name: Ensure configuration file jail.d/nginx.conf is present
   ansible.builtin.template:
@@ -21,7 +21,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload fail2ban
+  notify: Reload fail2ban
 
 - name: Ensure configuration file jail.d/postfix.conf is present
   ansible.builtin.template:
@@ -30,7 +30,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload fail2ban
+  notify: Reload fail2ban
 
 - name: Ensure configuration file filter.d/http-scan.conf is present
   ansible.builtin.template:
@@ -39,7 +39,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload fail2ban
+  notify: Reload fail2ban
 
 - name: Ensure configuration file jail.d/http-scan.conf is present
   ansible.builtin.template:
@@ -48,7 +48,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload fail2ban
+  notify: Reload fail2ban
 
 - name: Ensure configuration file filter.d/rcpt-scan.conf is present
   ansible.builtin.template:
@@ -57,7 +57,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload fail2ban
+  notify: Reload fail2ban
 
 - name: Ensure configuration file jail.d/rcpt-scan.conf is present
   ansible.builtin.template:
@@ -66,4 +66,4 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload fail2ban
+  notify: Reload fail2ban

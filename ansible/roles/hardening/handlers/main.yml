@@ -1,5 +1,5 @@
 ---
-- name: flush routing cache
+- name: Flush routing cache
   ansible.builtin.command: "sysctl -w net.ipv4.route.flush=1"
 
 # there is some issue running netfilter-persistent save (or rather modprobe
@@ -7,10 +7,10 @@
 # we can still rely on netfilter-persistent to load them at boot
 # fail2ban entries will be found in iptables, filter them out
 # fail2ban will take care of adding them back
-- name: save iptables rules
+- name: Save iptables rules
   ansible.builtin.shell: >
     iptables-save |
     grep -v f2b > /etc/iptables/rules.v4
 
-- name: update grub
+- name: Update grub
   ansible.builtin.command: "update-grub"

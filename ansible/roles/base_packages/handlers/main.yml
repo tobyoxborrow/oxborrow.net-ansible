@@ -1,5 +1,5 @@
 ---
-- name: apt-get autoremove
+- name: Remove unused packages
   ansible.builtin.apt:
       autoremove: true
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"

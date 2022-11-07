@@ -15,7 +15,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload postfix
+  notify: Reload postfix
 
 - name: Ensure configuration file generic is present
   ansible.builtin.template:
@@ -25,8 +25,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap generic
-    - reload postfix
+    - Postmap generic
+    - Reload postfix
 
 - name: Ensure configuration file vmailbox is present
   ansible.builtin.template:
@@ -36,8 +36,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap vmailbox
-    - reload postfix
+    - Postmap vmailbox
+    - Reload postfix
 
 - name: Ensure configuration file virtual is present
   ansible.builtin.template:
@@ -47,8 +47,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap virtual
-    - reload postfix
+    - Postmap virtual
+    - Reload postfix
 
 - name: Ensure configuration file access is present
   ansible.builtin.template:
@@ -58,8 +58,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap access
-    - reload postfix
+    - Postmap access
+    - Reload postfix
 
 - name: Ensure configuration file client_whitelist is present
   ansible.builtin.template:
@@ -69,8 +69,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap client_whitelist
-    - reload postfix
+    - Postmap client_whitelist
+    - Reload postfix
 
 - name: Ensure configuration file denied_recipients is present
   ansible.builtin.template:
@@ -80,8 +80,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap denied_recipients
-    - reload postfix
+    - Postmap denied_recipients
+    - Reload postfix
 
 - name: Ensure configuration file sender_logins is present
   ansible.builtin.template:
@@ -91,8 +91,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap sender_logins
-    - reload postfix
+    - Postmap sender_logins
+    - Reload postfix
 
 - name: Ensure configuration file recipient_bcc_maps is present
   ansible.builtin.template:
@@ -102,8 +102,8 @@
     group: root
     mode: 0644
   notify:
-    - postmap recipient_bcc_maps
-    - reload postfix
+    - Postmap recipient_bcc_maps
+    - Reload postfix
 
 - name: Synchronize remaining postfix configuration files
   ansible.builtin.copy:
@@ -113,5 +113,5 @@
     group: root
     mode: 0644
   notify:
-    - postmap static files
-    - reload postfix
+    - Postmap static files
+    - Reload postfix

@@ -21,7 +21,7 @@
     mode: 0700
 
 - name: Ensure authorized_keys file is present
-  ansible.builtin.authorized_key:
+  ansible.posix.authorized_key:
     user: toby
     key: https://github.com/tobyoxborrow.keys
     exclusive: true

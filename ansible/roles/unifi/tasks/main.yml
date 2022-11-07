@@ -1,6 +1,6 @@
 ---
 - name: Manage unifi package
-  import_tasks: package.yml
+  ansible.builtin.import_tasks: package.yml
 
 - name: Manage unifi service
-  import_tasks: service.yml
+  ansible.builtin.import_tasks: service.yml

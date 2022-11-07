@@ -8,7 +8,7 @@
     mode: 0644
 
 - name: 1.1.2 Ensure /tmp is configured
-  ansible.builtin.mount:
+  ansible.posix.mount:
     src: tmpfs
     path: /tmp
     state: mounted

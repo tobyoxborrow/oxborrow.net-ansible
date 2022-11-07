@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: update grub
+  notify: Update grub
 
 - name: 4.1.2.1 Ensure audit log storage size is configured
   ansible.builtin.lineinfile:

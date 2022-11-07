@@ -7,7 +7,7 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
   - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v6.3.0
+    rev: v6.8.6
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
@@ -37,7 +37,7 @@ repos:
           - "3"
           - --use-parentheses
   - repo: https://github.com/psf/black
-    rev: 22.6.0
+    rev: 22.10.0
     hooks:
       - id: black
         language_version: python3.9

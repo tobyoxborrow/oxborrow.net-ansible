@@ -1,6 +1,6 @@
 ---
 - name: Manage nginx package
-  import_tasks: package.yml
+  ansible.builtin.import_tasks: package.yml
 
 - name: Manage nginx sites
-  import_tasks: sites.yml
+  ansible.builtin.import_tasks: sites.yml

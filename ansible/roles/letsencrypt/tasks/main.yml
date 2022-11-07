@@ -1,11 +1,11 @@
 ---
 - name: Manage letsencrypt package
-  import_tasks: package.yml
+  ansible.builtin.import_tasks: package.yml
 
 - name: Manage letsencrypt cronjobs
-  import_tasks: cronjobs.yml
+  ansible.builtin.import_tasks: cronjobs.yml
   when: not development and not vagrant
 
 - name: Manage letsencrypt certs
-  import_tasks: certs.yml
+  ansible.builtin.import_tasks: certs.yml
   when: not development and not vagrant

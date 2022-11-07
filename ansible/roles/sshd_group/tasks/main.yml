@@ -4,4 +4,4 @@
 # group and then finally a role to configure sshd_config to set AllowGroups to
 # this group
 - name: Configure SSH system groups
-  import_tasks: groups.yml
+  ansible.builtin.import_tasks: groups.yml

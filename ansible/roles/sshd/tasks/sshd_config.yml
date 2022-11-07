@@ -25,4 +25,4 @@
     mode: 0644
     backup: true
   register: sshd_config
-  notify: reload sshd - check syntax
+  notify: Reload sshd - check syntax

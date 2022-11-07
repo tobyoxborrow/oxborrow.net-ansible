@@ -1,6 +1,6 @@
 ---
 - name: 1.6.2 Ensure address space layout randomization is enabled
-  ansible.builtin.sysctl:
+  ansible.posix.sysctl:
     name: kernel.randomize_va_space
     value: 2
 
@@ -35,6 +35,6 @@
     mode: 0644
 
 - name: 1.6.4 Ensure core dumps are restricted (sysctl)
-  ansible.builtin.sysctl:
+  ansible.posix.sysctl:
     name: fs.suid_dumpable
     value: 0

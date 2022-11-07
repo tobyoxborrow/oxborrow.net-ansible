@@ -42,21 +42,21 @@
     chain: OUTPUT
     out_interface: lo
     jump: ACCEPT
-  notify: save iptables rules
+  notify: Save iptables rules
 
 - name: 3.5.4.1.2 Ensure traffic from the loopback interface is allowed
   ansible.builtin.iptables:
     chain: INPUT
     in_interface: lo
     jump: ACCEPT
-  notify: save iptables rules
+  notify: Save iptables rules
 
 - name: 3.5.2.3 Ensure traffic claiming to be from the loopback addresses but not using the loopback interface is blocked
   ansible.builtin.iptables:
     chain: INPUT
     source: 127.0.0.0/8
     jump: DROP
-  notify: save iptables rules
+  notify: Save iptables rules
 
 - name: 3.5.4.1.3 Ensure outbound and established connections are configured
   ansible.builtin.iptables:
@@ -64,7 +64,7 @@
     protocol: "{{ item }}"
     jump: ACCEPT
     ctstate: NEW,ESTABLISHED
-  notify: save iptables rules
+  notify: Save iptables rules
   with_items:
     - tcp
     - udp
@@ -76,7 +76,7 @@
     protocol: "{{ item }}"
     jump: ACCEPT
     ctstate: ESTABLISHED
-  notify: save iptables rules
+  notify: Save iptables rules
   with_items:
     - tcp
     - udp
@@ -89,7 +89,7 @@
     destination_port: "{{ item }}"
     jump: ACCEPT
     ctstate: NEW
-  notify: save iptables rules
+  notify: Save iptables rules
   with_items: "{{ firewall_tcp_ports }}"
   when: firewall_tcp_ports is defined
 
@@ -100,7 +100,7 @@
     destination_port: 22
     jump: ACCEPT
     ctstate: NEW
-  notify: save iptables rules
+  notify: Save iptables rules
   when: development and vagrant
 
 - name: 3.5.4.1.4 Ensure firewall rules exist for all open ports (udp)
@@ -110,7 +110,7 @@
     destination_port: "{{ item }}"
     jump: ACCEPT
     ctstate: NEW
-  notify: save iptables rules
+  notify: Save iptables rules
   with_items: "{{ firewall_udp_ports }}"
   when: firewall_udp_ports is defined
 
@@ -118,7 +118,7 @@
   ansible.builtin.iptables:
     chain: "{{ item }}"
     policy: DROP
-  notify: save iptables rules
+  notify: Save iptables rules
   with_items:
     - INPUT
     - FORWARD

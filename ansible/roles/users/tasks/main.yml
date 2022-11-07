@@ -1,9 +1,9 @@
 ---
 - name: Manage user toby
-  import_tasks: toby.yml
+  ansible.builtin.import_tasks: toby.yml
 
 - name: Remove unnecessary users
-  import_tasks: remove_users.yml
+  ansible.builtin.import_tasks: remove_users.yml
 
 - name: Handle vagrant users
-  import_tasks: vagrant.yml
+  ansible.builtin.import_tasks: vagrant.yml

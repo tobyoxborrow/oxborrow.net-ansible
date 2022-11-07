@@ -1,29 +1,29 @@
 ---
-- name: postmap generic
+- name: Postmap generic
   ansible.builtin.command: postmap /etc/postfix/generic
 
-- name: postmap vmailbox
+- name: Postmap vmailbox
   ansible.builtin.command: postmap /etc/postfix/vmailbox
 
-- name: postmap virtual
+- name: Postmap virtual
   ansible.builtin.command: postmap /etc/postfix/virtual
 
-- name: postmap recipient_bcc_maps
+- name: Postmap recipient_bcc_maps
   ansible.builtin.command: postmap /etc/postfix/recipient_bcc_maps
 
-- name: postmap access
+- name: Postmap access
   ansible.builtin.command: postmap /etc/postfix/access
 
-- name: postmap client_whitelist
+- name: Postmap client_whitelist
   ansible.builtin.command: postmap /etc/postfix/client_whitelist
 
-- name: postmap denied_recipients
+- name: Postmap denied_recipients
   ansible.builtin.command: postmap /etc/postfix/denied_recipients
 
-- name: postmap sender_logins
+- name: Postmap sender_logins
   ansible.builtin.command: postmap /etc/postfix/sender_logins
 
-- name: postmap static files
+- name: Postmap static files
   ansible.builtin.command: >
     postmap
     /etc/postfix/header_checks
@@ -32,12 +32,12 @@
     /etc/postfix/relay_domains
     /etc/postfix/transport
 
-- name: reload postfix
+- name: Reload postfix
   ansible.builtin.service:
     name: postfix
     state: reloaded
 
-- name: restart postfix
+- name: Restart postfix
   ansible.builtin.service:
     name: postfix
     state: restarted
