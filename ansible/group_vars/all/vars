@@ -8,6 +8,7 @@ wintermute_become_pass: "{{ vault_wintermute_become_pass }}"
 freeside_become_pass: "{{ vault_freeside_become_pass }}"
 pihole_become_pass: "{{ vault_pihole_become_pass }}"
 dvd_become_pass: "{{ vault_dvd_become_pass }}"
+minecraft_become_pass: "{{ vault_minecraft_become_pass }}"
 
 logwatch_mail_to: "{{ admin_email_address }}"
 

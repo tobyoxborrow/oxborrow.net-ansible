@@ -3,6 +3,7 @@
   hosts:
     - pihole
     - dvd
+    - minecraft
   become: true
   become_user: root
   roles:
@@ -27,3 +28,11 @@
   become_user: root
   roles:
     - unifi
+
+- name: minecraft.home.oxborrow.net
+  hosts:
+    - minecraft
+  become: true
+  become_user: root
+  # roles:
+  #   - minecraft

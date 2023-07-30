@@ -10,6 +10,9 @@ pihole.home.oxborrow.net ansible_become_pass='{{ pihole_become_pass }}'
 [dvd]
 dvd.home.oxborrow.net ansible_become_pass='{{ dvd_become_pass }}'
 
+[minecraft]
+minecraft.home.oxborrow.net ansible_become_pass='{{ minecraft_become_pass }}'
+
 [www_oxborrow_net:children]
 wintermute
 freeside
@@ -17,6 +20,7 @@ freeside
 [home_oxborrow_net:children]
 pihole
 dvd
+minecraft
 
 [all:vars]
 development=False
