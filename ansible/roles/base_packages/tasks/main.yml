@@ -4,7 +4,7 @@
     name: "{{ item }}"
     state: absent
   with_items: "{{ base_packages_to_remove + additional_base_packages_to_remove | default([], true) }}"
-  notify: apt-get autoremove
+  notify: Remove unused packages
 
 - name: Ensure certain base packages are present
   ansible.builtin.package:
