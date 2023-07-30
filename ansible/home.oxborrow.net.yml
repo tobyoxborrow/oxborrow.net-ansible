@@ -34,5 +34,5 @@
     - minecraft
   become: true
   become_user: root
-  # roles:
-  #   - minecraft
+  roles:
+    - minecraft

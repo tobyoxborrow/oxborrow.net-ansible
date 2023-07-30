@@ -1,0 +1,15 @@
+---
+- name: Ensure /etc/systemd/system/minecraft@.service is present
+  ansible.builtin.copy:
+    src: files/etc-systemd-system.minecraft.service
+    dest: /etc/systemd/system/minecraft@.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: Reload systemctl daemon
+
+- name: Ensure minecraft server service started and enabled
+  ansible.builtin.service:
+    name: "minecraft@{{ minecraft_gamemode }}.service"
+    state: started
+    enabled: true

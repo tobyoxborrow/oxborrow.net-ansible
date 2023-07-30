@@ -1,0 +1,12 @@
+---
+- name: Manage minecraft server user
+  ansible.builtin.import_tasks: user.yml
+
+- name: Manage minecraft server package
+  ansible.builtin.import_tasks: package.yml
+
+- name: Configure minecraft server package
+  ansible.builtin.import_tasks: minecraft_config.yml
+
+- name: Manage minecraft server service
+  ansible.builtin.import_tasks: service.yml

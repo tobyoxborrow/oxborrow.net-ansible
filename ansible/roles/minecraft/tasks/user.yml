@@ -1,0 +1,17 @@
+---
+- name: Ensure group minecraft exists
+  ansible.builtin.group:
+    name: minecraft
+    state: present
+    system: true
+
+- name: Ensure user minecraft exists
+  ansible.builtin.user:
+    name: minecraft
+    comment: Minecraft Server
+    group: minecraft
+    shell: /bin/bash
+    home: /opt/minecraft
+    createhome: true
+    state: present
+    system: true

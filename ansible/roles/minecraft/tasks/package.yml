@@ -1,0 +1,22 @@
+---
+- name: Ensure java package is installed
+  ansible.builtin.package:
+    name: openjdk-17-jre-headless
+    state: present
+
+- name: Ensure /opt/minecraft/creative exists
+  ansible.builtin.file:
+    path: /opt/minecraft/creative
+    mode: 0755
+    owner: minecraft
+    group: minecraft
+    state: directory
+
+- name: Ensure minecraft server.jar is present
+  ansible.builtin.get_url:
+    url: "{{ minecraft_server_jar_url }}"
+    dest: "/opt/minecraft/{{ minecraft_gamemode }}/server.jar"
+    mode: 0644
+    owner: root
+    group: root
+    force: false
