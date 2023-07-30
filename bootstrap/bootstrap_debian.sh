@@ -19,13 +19,13 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-# if [[ $EUID != "0" ]]; then
-#     echo "Please run this script as root"
-#     exit 1
-# fi
-#
-# echo "Please set a password for the user root"
-# passwd
+if [[ $EUID != "0" ]]; then
+    echo "Please run this script as root"
+    exit 1
+fi
+
+echo "Please set a password for the user root"
+passwd
 
 if ! getent passwd toby; then
     echo "Creating the user toby"
@@ -67,11 +67,11 @@ if ! type python >/dev/null 2>&1; then
     /usr/bin/update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 fi
 
-# # python-apt must be installed to use check mode
-# if ! dpkg -s python-apt > /dev/null 2>&1; then
-#     apt install --yes python-apt
-# fi
-# # python's git module requires the git command-line
-# if ! dpkg -s git > /dev/null 2>&1; then
-#     apt install --yes git
-# fi
+# python-apt must be installed to use check mode
+if ! dpkg -s python-apt > /dev/null 2>&1; then
+    apt install --yes python3-apt
+fi
+# python's git module requires the git command-line
+if ! dpkg -s git > /dev/null 2>&1; then
+    apt install --yes git
+fi
