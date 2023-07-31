@@ -1,6 +1,13 @@
 ---
+minecraft_user: minecraft
+minecraft_group: minecraft
+minecraft_home: /opt/minecraft
 minecraft_gamemode: creative
 minecraft_server_jar_url: https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar
 minecraft_motd: i like cats
 minecraft_difficulty: peaceful
 minecraft_spawn_monsters: "true"
+minecraft_query_port: 25565
+minecraft_enable_rcon: "true"
+minecraft_rcon_port: 25575
+minecraft_rcon_password: "{{ vault_minecraft_rcon_password }}"

@@ -1,9 +1,0 @@
----
-- name: Ensure server.properties is present
-  ansible.builtin.template:
-    dest: "/opt/minecraft/{{ minecraft_gamemode }}/server.properties"
-    src: templates/server.properties.j2
-    owner: minecraft
-    group: minecraft
-    mode: 0644
-    backup: true

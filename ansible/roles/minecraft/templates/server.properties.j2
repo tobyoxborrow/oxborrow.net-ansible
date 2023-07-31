@@ -1,6 +1,7 @@
-# Minecraft server properties
+#Minecraft server properties
+# {{ ansible_managed }}
 enable-jmx-monitoring=false
-rcon.port=25575
+rcon.port={{ minecraft_rcon_port }}
 level-seed=
 gamemode={{ minecraft_gamemode }}
 enable-command-block=false
@@ -9,7 +10,7 @@ generator-settings={}
 enforce-secure-profile=true
 level-name=world
 motd={{ minecraft_motd }}
-query.port=25565
+query.port={{ minecraft_query_port }}
 pvp=true
 generate-structures=true
 max-chained-neighbor-updates=1000000
@@ -29,7 +30,7 @@ server-ip=
 resource-pack-prompt=
 allow-nether=true
 server-port=25565
-enable-rcon=false
+enable-rcon={{ minecraft_enable_rcon }}
 sync-chunk-writes=true
 op-permission-level=2
 prevent-proxy-connections=false
@@ -37,7 +38,7 @@ hide-online-players=false
 resource-pack=
 entity-broadcast-range-percentage=100
 simulation-distance=10
-rcon.password=
+rcon.password={{ minecraft_rcon_password }}
 player-idle-timeout=0
 force-gamemode=false
 rate-limit=0

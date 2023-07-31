@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+set -o errexit
+set -o pipefail
+set -o nounset
+
+MINECRAFT_USER={{ minecraft_user }}
+MINECRAFT_GAMEMODE="${1:-creative}"
+MINECRAFT_MIN_MEN=1G
+MINECRAFT_MAX_MEN=3G
+
+if [[ $(whoami) != $MINECRAFT_USER ]];then
+    echo "Please run this script as the user: ${MINECRAFT_USER}"
+    exit 1
+fi
+
+cd "{{ minecraft_home }}/${MINECRAFT_GAMEMODE}"
+
+/usr/bin/java \
+    -server \
+    -Xms${MINECRAFT_MIN_MEN} \
+    -Xmx${MINECRAFT_MAX_MEN} \
+    -XX:+UseG1GC \
+    -XX:ParallelGCThreads=2 \
+    -XX:MinHeapFreeRatio=5 \
+    -XX:MaxHeapFreeRatio=10 \
+    -jar server.jar \
+    --nogui

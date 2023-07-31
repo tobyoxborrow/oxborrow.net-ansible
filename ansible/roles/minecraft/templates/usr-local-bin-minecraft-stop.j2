@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+set -o errexit
+set -o pipefail
+set -o nounset
+
+MINECRAFT_GAMEMODE="${1:-creative}"
+RCON_CONF_PATH="{{ minecraft_home }}/${MINECRAFT_GAMEMODE}/rcon.conf"
+
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" stop

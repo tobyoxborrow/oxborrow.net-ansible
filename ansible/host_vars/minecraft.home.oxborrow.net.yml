@@ -3,7 +3,7 @@ hostname: minecraft
 
 firewall_tcp_ports:
   - "{{ sshd_config_port }}"
-  - 8080
+  - 25565 # minecraft query port
 
 hardening_disable_filesystems:
   - cramfs
@@ -16,9 +16,9 @@ hardening_disable_filesystems:
   # - vfat  # raspberry pi uses vfat for boot partition
 
 base_packages_to_remove:
-  # - avahi-daemon  # dependancy of OSMC
-  # - nano  # dependancy of OSMC
-  # - nfs-common  # dependancy of OSMC
+  - avahi-daemon
+  - nano
+  - nfs-common
   - cups  # CIS Ensure CUPS is not enabled
   - eatmydata
   - emacsen-common
@@ -39,11 +39,8 @@ base_packages_to_remove:
   - xinetd  # CIS Ensure xinetd is not installed
   - xserver-xorg*  # CIS Ensure X Window System is not installed
 
-# OSMC depends on ntp package and already configures it
-chrony_enable_role: false
-
 users_to_remove:
-  - avahi  # dependancy of OSMC
+  - avahi
   - irc
   - list
   - lp
