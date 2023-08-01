@@ -17,6 +17,14 @@
     group: "{{ minecraft_group }}"
     state: directory
 
+- name: Ensure minecraft backups directory exists
+  ansible.builtin.file:
+    path: "{{ minecraft_home }}/backups"
+    mode: 0755
+    owner: root
+    group: root
+    state: directory
+
 - name: Ensure minecraft server.jar is present
   ansible.builtin.get_url:
     url: "{{ minecraft_server_jar_url }}"

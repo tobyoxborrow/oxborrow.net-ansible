@@ -1,19 +1,37 @@
 ---
-- name: Ensure minecraft-start script is present
+- name: Ensure minecraft-server script is present
   ansible.builtin.template:
-    src: templates/usr-local-bin-minecraft-start.j2
-    dest: /usr/local/bin/minecraft-start
+    src: templates/usr-local-bin-minecraft-server.j2
+    dest: /usr/local/bin/minecraft-server
     owner: root
     group: root
     mode: 0755
 
-- name: Ensure minecraft-stop script is present
+- name: Ensure minecraft-server-stop script is present
   ansible.builtin.template:
-    src: templates/usr-local-bin-minecraft-stop.j2
-    dest: /usr/local/bin/minecraft-stop
+    src: templates/usr-local-bin-minecraft-server-stop.j2
+    dest: /usr/local/bin/minecraft-server-stop
     owner: root
     group: root
     mode: 0755
+
+- name: Ensure minecraft-server-backup script is present
+  ansible.builtin.template:
+    src: templates/usr-local-bin-minecraft-server-backup.j2
+    dest: /usr/local/bin/minecraft-server-backup
+    owner: root
+    group: root
+    mode: 0755
+
+# Debian runs the daily cron job at 06:25 (see /etc/crontab)
+- name: Ensure minecraft-server-backup cronjob job is present
+  ansible.builtin.cron:
+    name: "minecraft server backup"
+    job: "/usr/local/bin/minecraft-server-backup"
+    special_time: daily
+    cron_file: minecraft-server-backup
+    user: root
+    state: present
 
 - name: Ensure /etc/systemd/system/minecraft@.service is present
   ansible.builtin.template:

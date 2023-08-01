@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+set -o errexit
+set -o pipefail
+set -o nounset
+
+MINECRAFT_GAMEMODE="${1:-{{ minecraft_gamemode }}}"
+RCON_CONF_PATH="{{ minecraft_home }}/${MINECRAFT_GAMEMODE}/rcon.conf"
+
+if [[ $EUID != 0 ]];then
+    echo "Please run this script as root"
+    exit 1
+fi
+
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" say "Server will backup now..."
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" save-off
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" save-all
+
+TIMESTAMP=$(date +"%Y%m%dT%H%M")
+BACKUP_FILE_NAME="minecraft-backup-${MINECRAFT_GAMEMODE}-${TIMESTAMP}.tar.bz2"
+BACKUP_FILE_PATH="{{ minecraft_home }}/backups/${BACKUP_FILE_NAME}"
+tar -cf "${BACKUP_FILE_PATH}" -C "{{ minecraft_home }}" "$MINECRAFT_GAMEMODE"
+
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" save-on
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" say "Backup complete."
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" say "Backup file: ${BACKUP_FILE_PATH}"
+
+find "{{ minecraft_home }}/backups/" -type f -name minecraft-backups*.tar.bz2 -mtime 30 -delete

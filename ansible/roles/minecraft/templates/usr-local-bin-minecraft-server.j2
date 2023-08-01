@@ -5,7 +5,7 @@ set -o pipefail
 set -o nounset
 
 MINECRAFT_USER={{ minecraft_user }}
-MINECRAFT_GAMEMODE="${1:-creative}"
+MINECRAFT_GAMEMODE="${1:-{{ minecraft_gamemode }}}"
 MINECRAFT_MIN_MEN=1G
 MINECRAFT_MAX_MEN=3G
 
