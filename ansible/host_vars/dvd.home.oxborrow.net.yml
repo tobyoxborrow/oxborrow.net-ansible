@@ -5,6 +5,10 @@ firewall_tcp_ports:
   - "{{ sshd_config_port }}"
   - 8080
 
+remove_base_packages: true
+remove_cis_packages: true
+remove_desktop_packages: true
+
 hardening_disable_filesystems:
   - cramfs
   - freevxfs

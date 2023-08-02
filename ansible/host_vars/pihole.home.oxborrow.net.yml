@@ -9,6 +9,10 @@ firewall_tcp_ports:
   - 8080
   - 8443
 
+remove_base_packages: true
+remove_cis_packages: true
+remove_desktop_packages: true
+
 hardening_disable_filesystems:
   - cramfs
   - freevxfs

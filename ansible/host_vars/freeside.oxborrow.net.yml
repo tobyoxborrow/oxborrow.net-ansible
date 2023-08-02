@@ -3,6 +3,10 @@ hostname: freeside
 
 public_inet_address: 188.34.205.7
 
+remove_base_packages: true
+remove_cis_packages: true
+remove_desktop_packages: true
+
 hardening_disable_filesystems:
   - cramfs
   - freevxfs

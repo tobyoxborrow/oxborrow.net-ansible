@@ -2,3 +2,7 @@
 hostname: wintermute
 
 public_inet_address: 209.141.50.158
+
+remove_base_packages: true
+remove_cis_packages: true
+remove_desktop_packages: true

@@ -3,7 +3,31 @@
   ansible.builtin.package:
     name: "{{ item }}"
     state: absent
-  with_items: "{{ base_packages_to_remove + additional_base_packages_to_remove | default([], true) }}"
+  with_items: "{{ base_packages_to_remove | default([], true) }}"
+  when: remove_base_packages
+  notify: Remove unused packages
+
+- name: Ensure additional base packages are absent
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ additional_base_packages_to_remove | default([], true) }}"
+  notify: Remove unused packages
+
+- name: Ensure certain CIS suggested packages are absent
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ cis_packages_to_remove | default([], true) }}"
+  when: remove_cis_packages
+  notify: Remove unused packages
+
+- name: Ensure certain desktop packages are absent
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ desktop_packages_to_remove | default([], true) }}"
+  when: remove_desktop_packages
   notify: Remove unused packages
 
 - name: Ensure certain base packages are present

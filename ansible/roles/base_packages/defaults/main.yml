@@ -1,13 +1,26 @@
 ---
+# Set these to true in your hostvars/groupvars to remove these package sets
+# remove certain base packages that I rarely or never use
+remove_base_packages: false
+# remove certain packages recommended by CIS benchmarks
+remove_cis_packages: false
+# remove certain packages related to desktop computers
+remove_desktop_packages: false
+
 base_packages_to_remove:
-  - avahi-daemon  # CIS Ensure Avahi Server is not enabled
-  - cups  # CIS Ensure CUPS is not enabled
   - eatmydata
   - emacsen-common
-  - iamerican
+  - iamerican  # dictionary wordlist
   - laptop-detect
-  - ldap-utils  # CIS Ensure LDAP client is not enabled
   - nano
+  - triggerhappy  # global keybindings
+  - wamerican  # dictionary wordlist
+
+cis_packages_to_remove:
+  - avahi-daemon  # CIS Ensure Avahi Server is not enabled
+  - cups  # CIS Ensure CUPS is not enabled
+  - cups-common # printing
+  - ldap-utils  # CIS Ensure LDAP client is not enabled
   - nfs-common  # CIS Ensure NFS and RPC are not enabled
   - nis  # CIS Ensure NIS Server is not enabled
   - openbsd-inetd  # CIS Ensure openbsd-inetd is not installed
@@ -18,10 +31,35 @@ base_packages_to_remove:
   - talk  # CIS Ensure talk client is not enabled
   - telnet  # CIS Ensure telnet client is not enabled
   - vsftpd  # CIS Ensure FTP Server is not enabled
-  - wamerican
-  - xauth
   - xinetd  # CIS Ensure xinetd is not installed
+
+desktop_packages_to_remove:
+  - alsa-topology-conf  # audio
+  - alsa-ucm-conf  # audio
+  - blueman  # bluetooth
+  - bluetooth  # bluetooth
+  - bluez  # bluetooth
+  - bluez-utils  # bluetooth
+  - desktop-base  # gui
+  - desktop-file-utils  # gui
+  - gnome-menus  # gui
+  - gstreamer1.0-alsa  # audio
+  - hicolor-icon-theme  # gui
+  - libpulse0  # audio
+  - libpulsedsp  # audio
+  - menu-xdg  # gui, window manager scripts
+  - modemmanager  # modems
+  - ppp  # modems
+  - pulseaudio  # audio
+  - pulseaudio-utils  # audio
+  - x11-utils  # gui
+  - x11-xkb-utils  # gui
+  - x11-xserver-utils  # gui
+  - xauth
+  - xdg-user-dirs  # gui, manage well-known user dirs like Desktop and Music
+  - xdg-utils  # gui, desktop integration utils
   - xserver-xorg*  # CIS Ensure X Window System is not installed
+  - xterm  # gui
 
 base_packages_to_install:
   - acl
