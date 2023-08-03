@@ -1,7 +1,14 @@
 ---
+- name: Stat /boot/grub/grub.cfg
+  ansible.builtin.stat:
+    path: /boot/grub/grub.cfg
+  register: stat_boot_grub_grub_cfg
+  changed_when: false
+
 - name: 1.5.1 Ensure permissions on bootloader config are configured
   ansible.builtin.file:
     path: /boot/grub/grub.cfg
     owner: root
     group: root
     mode: 0600
+  when: stat_boot_grub_grub_cfg.stat.exists
