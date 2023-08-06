@@ -16,10 +16,9 @@
     - sshd
     - pam
     - logrotate
-#    - hardening
+    - hardening
     - fail2ban
-#    - logwatch
-#    - letsencrypt
+    # - logwatch
 
 - name: pihole.home.oxborrow.net
   hosts:
