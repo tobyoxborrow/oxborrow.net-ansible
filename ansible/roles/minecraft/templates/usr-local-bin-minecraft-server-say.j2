@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+set -o errexit
+set -o pipefail
+set -o nounset
+
+MESSAGE="${1:-Hello}"
+
+MINECRAFT_GAMEMODE="{{ minecraft_gamemode }}"
+RCON_CONF_PATH="{{ minecraft_home }}/${MINECRAFT_GAMEMODE}/rcon.conf"
+
+if [[ $EUID != 0 ]];then
+    echo "Please run this script as root"
+    exit 1
+fi
+
+/usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" say "$MESSAGE"

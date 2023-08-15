@@ -5,7 +5,7 @@
     dest: /usr/local/bin/minecraft-server
     owner: root
     group: root
-    mode: 0755
+    mode: 0744
 
 - name: Ensure minecraft-server-stop script is present
   ansible.builtin.template:
@@ -13,7 +13,7 @@
     dest: /usr/local/bin/minecraft-server-stop
     owner: root
     group: root
-    mode: 0755
+    mode: 0744
 
 - name: Ensure minecraft-server-backup script is present
   ansible.builtin.template:
@@ -21,10 +21,10 @@
     dest: /usr/local/bin/minecraft-server-backup
     owner: root
     group: root
-    mode: 0755
+    mode: 0744
 
 # Debian runs the daily cron job at 06:25 (see /etc/crontab)
-- name: Ensure minecraft-server-backup cronjob job is present
+- name: Ensure minecraft-server-backup cronjob is present
   ansible.builtin.cron:
     name: "minecraft server backup"
     job: "/usr/local/bin/minecraft-server-backup"
@@ -42,3 +42,22 @@
     mode: 0644
   no_log: true
   notify: Reload systemctl daemon
+
+- name: Ensure the message script is present
+  ansible.builtin.template:
+    src: templates/usr-local-bin-minecraft-server-say.j2
+    dest: /usr/local/bin/minecraft-server-say
+    owner: root
+    group: root
+    mode: 0744
+
+- name: Ensure any message cronjobs are present
+  ansible.builtin.cron:
+    name: "minecraft server message {{ item.name }}"
+    job: "/usr/local/bin/minecraft-server-say \"{{ item.message }}\""
+    hour: "{{ item.hour }}"
+    minute: "{{ item.minute }}"
+    cron_file: "minecraft-server-message-{{ item.file_name }}"
+    user: root
+    state: present
+  with_items: "{{ minecraft_cron_messages | default([], true) }}"

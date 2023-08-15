@@ -5,6 +5,29 @@ firewall_tcp_ports:
   - "{{ sshd_config_port }}"
   - 25565 # minecraft query port
 
+minecraft_cron_messages:
+  - name: "2000"
+    file_name: "2000"
+    hour: "20"
+    minute: "00"
+    message: "⏳ 30 minutes left 😿"
+  - name: "2020"
+    file_name: "2020"
+    hour: "20"
+    minute: "20"
+    message: "⏳ 10 minutes left"
+  - name: "2025"
+    file_name: "2025"
+    hour: "20"
+    minute: "25"
+    message: "⌛ 5 minutes left 🙀"
+  - name: "2030"
+    file_name: "2030"
+    hour: "20"
+    minute: "30"
+    message: "🔔 Time's up! 🔔"
+
+
 remove_base_packages: true
 remove_cis_packages: true
 remove_desktop_packages: true
