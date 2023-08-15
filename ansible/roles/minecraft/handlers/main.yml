@@ -1,6 +1,6 @@
 ---
 - name: Reload systemctl daemon
-  ansible.builtin.systemd_service:
+  systemd:
     daemon_reload: true
   notify: Enable minecraft server service
 
