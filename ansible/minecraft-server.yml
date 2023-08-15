@@ -1,0 +1,8 @@
+---
+- name: minecraft.home.oxborrow.net
+  hosts:
+    - minecraft
+  become: true
+  become_user: root
+  roles:
+    - minecraft
