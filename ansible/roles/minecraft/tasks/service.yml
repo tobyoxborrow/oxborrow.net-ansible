@@ -4,16 +4,16 @@
     src: templates/usr-local-bin-minecraft-server.j2
     dest: /usr/local/bin/minecraft-server
     owner: root
-    group: root
-    mode: 0744
+    group: minecraft
+    mode: 0754
 
 - name: Ensure minecraft-server-stop script is present
   ansible.builtin.template:
     src: templates/usr-local-bin-minecraft-server-stop.j2
     dest: /usr/local/bin/minecraft-server-stop
     owner: root
-    group: root
-    mode: 0744
+    group: minecraft
+    mode: 0754
 
 - name: Ensure minecraft-server-backup script is present
   ansible.builtin.template:
