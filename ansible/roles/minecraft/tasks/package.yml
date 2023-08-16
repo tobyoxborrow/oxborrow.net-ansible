@@ -17,9 +17,23 @@
     group: "{{ minecraft_group }}"
     state: directory
 
+- name: Ensure log directory exists
+  ansible.builtin.file:
+    path: "/var/log/minecraft/{{ minecraft_gamemode }}"
+    mode: 0775
+    owner: root
+    group: "{{ minecraft_group }}"
+    state: directory
+
+- name: Ensure symlink to log directory exists
+  ansible.builtin.file:
+    src: "/var/log/minecraft/{{ minecraft_gamemode }}"
+    dest: "{{ minecraft_home }}/{{ minecraft_gamemode }}/logs"
+    state: link
+
 - name: Ensure minecraft backups directory exists
   ansible.builtin.file:
-    path: "{{ minecraft_home }}/backups"
+    path: "/var/backups/minecraft/"
     mode: 0755
     owner: root
     group: root
