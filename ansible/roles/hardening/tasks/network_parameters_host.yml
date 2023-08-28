@@ -2,7 +2,7 @@
 - name: 3.2.1 Ensure packet redirect sending is disabled
   ansible.posix.sysctl:
     name: "{{ item }}"
-    value: 0
+    value: "0"
   notify: Flush routing cache
   with_items:
     - net.ipv4.conf.all.send_redirects
@@ -11,7 +11,7 @@
 - name: 3.2.2 Ensure IP forwarding is disabled
   ansible.posix.sysctl:
     name: "{{ item }}"
-    value: 0
+    value: "0"
   notify: Flush routing cache
   with_items:
     - net.ipv4.ip_forward

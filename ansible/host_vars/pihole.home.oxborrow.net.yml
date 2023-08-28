@@ -3,11 +3,11 @@ hostname: pihole
 
 firewall_tcp_ports:
   - "{{ sshd_config_port }}"
-  - 80
-  - 53
-  - 443
-  - 8080
-  - 8443
+  - "80"
+  - "53"
+  - "443"
+  - "8080"
+  - "8443"
 
 remove_base_packages: true
 remove_cis_packages: true

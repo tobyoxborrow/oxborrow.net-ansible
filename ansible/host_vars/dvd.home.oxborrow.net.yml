@@ -3,7 +3,7 @@ hostname: dvd
 
 firewall_tcp_ports:
   - "{{ sshd_config_port }}"
-  - 8080
+  - "8080"
 
 remove_base_packages: true
 remove_cis_packages: true

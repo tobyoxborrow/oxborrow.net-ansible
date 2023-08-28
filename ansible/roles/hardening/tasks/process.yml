@@ -2,7 +2,7 @@
 - name: 1.6.2 Ensure address space layout randomization is enabled
   ansible.posix.sysctl:
     name: kernel.randomize_va_space
-    value: 2
+    value: "2"
 
 - name: 1.6.3 Stat prelink
   ansible.builtin.command: "dpkg -s prelink"
@@ -37,4 +37,4 @@
 - name: 1.6.4 Ensure core dumps are restricted (sysctl)
   ansible.posix.sysctl:
     name: fs.suid_dumpable
-    value: 0
+    value: "0"

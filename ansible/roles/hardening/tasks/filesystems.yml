@@ -14,7 +14,7 @@
     state: mounted
     fstype: tmpfs
     boot: true
-    dump: 0
+    dump: "0"
     opts: defaults,rw,nosuid,nodev,noexec,relatime
     backup: true
 

@@ -3,7 +3,7 @@ hostname: minecraft
 
 firewall_tcp_ports:
   - "{{ sshd_config_port }}"
-  - 25565 # minecraft query port
+  - "25565" # minecraft query port
 
 minecraft_cron_messages:
   - name: "2000"
