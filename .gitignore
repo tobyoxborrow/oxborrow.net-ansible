@@ -1,6 +1,10 @@
 .vagrant
 *.log
 
+# ignore group and host vars, they are no longer part of this repo
+ansible/group_vars
+ansible/host_vars
+
 # Ansible
 # https://github.com/github/gitignore/blob/main/Global/Ansible.gitignore
 *.retry

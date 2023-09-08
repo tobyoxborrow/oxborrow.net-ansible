@@ -38,12 +38,28 @@ Then to add keys to the agent:
 ssh-add ~/.ssh/filename
 ```
 
+## Vars
+
+The ansible group and host vars are kept in another repository.
+
+Clone the repository to a separate directory:
+```Shell
+cd /path/to/git-repos
+git clone [repo-uri]
+```
+
+Add symlinks between the two:
+```Shell
+cd /path/to/git-repos/oxborrow.net-ansible/ansible
+ln -s ../../path/to/var-repo/ansible/group_vars .
+ln -s ../../path/to/var-repo/ansible/host_vars .
+```
+
 ## Vault
 
-Certain secret sauce is kept in ansible vault encrypted files so that they can
-be safely stored in public along with the the rest of this repository. To aid
-automation the password for decrypting them is stored on your workstation in
-pass oxborrow.net/ansible/vault.
+Certain secret sauce is kept in ansible vault encrypted var files. To aid 
+automation the password for decrypting them can be stored on your workstation 
+using the pass password manager.
 
 Pass and pwgen can be installed with homebrew:
 ```Shell
@@ -51,13 +67,13 @@ brew install pass pwgen
 pass init
 ```
 
-Generate a password for the vault. Since I'll never type it and it will be
-stored in public, go nuts with the length:
+When generaterating a password for the vault, since I'll never type it, go 
+nuts with the length:
 ```Shell
 pwgen 128 1
 ```
 
-To store the vault password in pass:
+To store the vault password in pass, come up with a path, such as:
 ```Shell
 pass insert oxborrow.net/ansible/vault
 ```
