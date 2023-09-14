@@ -61,6 +61,17 @@
     - Postmap access
     - Reload postfix
 
+- name: Ensure configuration file header_checks is present
+  ansible.builtin.template:
+    src: templates/header_checks.j2
+    dest: /etc/postfix/header_checks
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Postmap header_checks
+    - Reload postfix
+
 - name: Ensure configuration file client_whitelist is present
   ansible.builtin.template:
     src: templates/client_whitelist.j2

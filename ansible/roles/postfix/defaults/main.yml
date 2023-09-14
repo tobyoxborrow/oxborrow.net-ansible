@@ -44,6 +44,9 @@ postfix_denied_recipients:
 postfix_sender_login_entries:
   - username: foo@example.com
     address: foo@example.com
+postfix_header_checks_entries:
+  - pattern: "/^subject:/"
+    value: INFO
 
 postfix_smtpd_sasl_auth_enable: "no"
 

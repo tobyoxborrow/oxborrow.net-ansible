@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for entry in postfix_header_checks_entries -%}
+{{ entry.pattern }} {{ entry.value }}
+{% endfor -%}
