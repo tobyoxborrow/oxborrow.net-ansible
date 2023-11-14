@@ -26,4 +26,4 @@ tar -cf "${BACKUP_FILE_PATH}" -C "{{ minecraft_home }}" "$MINECRAFT_GAMEMODE"
 /usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" say "Backup complete."
 /usr/bin/rconclt --config "$RCON_CONF_PATH" "$MINECRAFT_GAMEMODE" say "Backup file: ${BACKUP_FILE_PATH}"
 
-find "$BACKUP_DIR" -type f -name minecraft-backups*.tar.bz2 -mtime 30 -delete
+find "$BACKUP_DIR" -type f -name "minecraft-backup*.tar.bz2" -mtime +30 -delete
