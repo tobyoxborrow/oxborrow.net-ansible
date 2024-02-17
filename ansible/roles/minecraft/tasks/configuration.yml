@@ -16,3 +16,12 @@
     group: "{{ minecraft_group }}"
     mode: 0600
     backup: true
+
+- name: Ensure ops.json is present
+  ansible.builtin.template:
+    dest: "/opt/minecraft/{{ minecraft_gamemode }}/ops.json"
+    src: templates/ops.json.j2
+    owner: "{{ minecraft_user }}"
+    group: "{{ minecraft_group }}"
+    mode: 0600
+    backup: true

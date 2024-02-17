@@ -8,6 +8,7 @@ minecraft_group: minecraft
 minecraft_home: /opt/minecraft
 minecraft_max_players: 6
 minecraft_motd: i like cats
+minecraft_ops: "{{ vault_minecraft_ops }}"
 minecraft_query_port: 25565
 minecraft_rcon_password: "{{ vault_minecraft_rcon_password }}"
 minecraft_rcon_port: 25575
