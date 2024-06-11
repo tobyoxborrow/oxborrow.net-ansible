@@ -7,14 +7,12 @@
 #
 
 [Definition]
-
-# Option:  failregex
-# Notes.:  Ban based on the recipient address.
-# Values:  TEXT
-#
-failregex = from [^[]+\[<HOST>\].*to=<spameri@tiscali.it>
-{% if fail2ban_rcptscan_addresses is defined -%}
+{% if fail2ban_rcptscan_addresses is defined %}
 {% for entry in fail2ban_rcptscan_addresses %}
+{% if loop.first %}
+failregex = from [^[]+\[<HOST>\].*to=<{{ entry }}>
+{% else %}
             from [^[]+\[<HOST>\].*to=<{{ entry }}>
+{% endif %}
 {% endfor %}
-{%- endif -%}
+{% endif %}

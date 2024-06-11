@@ -6,14 +6,12 @@
 #
 
 [Definition]
-
-# Option:  failregex
-# Notes.:  Ban based on the URL requested.
-# Values:  TEXT
-#
-failregex = ^<HOST> [^"]+"(GET|POST) /shell
-{% if fail2ban_httpscan_entries is defined -%}
+{% if fail2ban_httpscan_entries is defined %}
 {% for entry in fail2ban_httpscan_entries %}
+{% if loop.first %}
+failregex = ^<HOST> [^"]+"{{ entry }}
+{% else %}
             ^<HOST> [^"]+"{{ entry }}
+{% endif %}
 {% endfor %}
-{%- endif -%}
+{% endif %}
