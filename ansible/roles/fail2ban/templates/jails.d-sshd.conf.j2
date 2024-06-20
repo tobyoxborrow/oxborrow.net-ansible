@@ -1,21 +1,24 @@
 # {{ ansible_managed }}
+#
+# Ban hosts that fail frequently.
+#
 
 [sshd]
 {% if fail2ban_enable_sshd %}
-enabled           = true
+enabled = true
 {% else %}
-enabled           = false
+enabled = false
 {% endif %}
 {% if development and vagrant %}
 # The production port would be: {{ sshd_config_port }}
-port              = 22
+port = 22
 {% else %}
-port              = {{ sshd_config_port }}
+port = {{ sshd_config_port }}
 {% endif %}
-# bantime           = 10m
+mode = {{ fail2ban_sshd_mode }}
 bantime.increment = true
-bantime.factor    = 1
-bantime.maxtime   = 5w
-# findtime          = 10m
-# maxretry          = 5
-mode              = {{ fail2ban_sshd_mode }}
+bantime.factor = 1
+bantime.maxtime = 5w
+# bantime = 10m
+# findtime = 10m
+# maxretry = 5

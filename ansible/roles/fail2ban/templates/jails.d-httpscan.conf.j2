@@ -1,24 +1,26 @@
 # {{ ansible_managed }}
 #
-# Fail2Ban jail configuration: http-scan
-#
-# Ban hosts that scan for vulnerable URLs in the web server.
+# Ban hosts that request vulnerable URLs in the web server.
+# Since we know the URLs are not valid, we can use a low maxretry.
 #
 
 [http-scan]
 {% if fail2ban_enable_httpscan %}
-enabled    = true
+enabled = true
 {% else %}
-enabled    = false
+enabled = false
 {% endif %}
-filter     = http-scan
+filter = http-scan
 {% if fail2ban_httpscan_logpath is defined %}
-logpath    = {{ fail2ban_httpscan_logpath }}
+logpath = {{ fail2ban_httpscan_logpath }}
 {% else %}
-logpath    = /var/log/nginx/access.log
+logpath = /var/log/nginx/access.log
 {% endif %}
-banaction  = iptables
-bantime    = 21600
-findtime   = 3600
-maxretry   = 1
-usedns     = no
+banaction = iptables
+bantime.increment = true
+bantime.factor = 1
+bantime.maxtime = 5w
+bantime = 20m
+findtime = 1h
+maxretry = 1
+usedns = no

@@ -1,4 +1,7 @@
 # {{ ansible_managed }}
+#
+# Ban hosts that fail frequently.
+#
 
 [postfix]
 {% if fail2ban_enable_postfix %}
@@ -7,8 +10,11 @@ enabled = true
 enabled = false
 {% endif %}
 logpath = /var/log/mail.log
-bantime = 3600
-findtime = 1800
+bantime.increment = true
+bantime.factor = 1
+bantime.maxtime = 6h
+bantime = 10m
+findtime = 1h
 maxretry = 3
 usedns = no
 
@@ -19,8 +25,11 @@ enabled = true
 enabled = false
 {% endif %}
 logpath = /var/log/mail.log
-bantime = 3600
-findtime = 1800
+bantime.increment = true
+bantime.factor = 1
+bantime.maxtime = 6h
+bantime = 10m
+findtime = 1h
 maxretry = 3
 
 [postfix-rbl]
@@ -30,5 +39,9 @@ enabled = true
 enabled = false
 {% endif %}
 logpath = /var/log/mail.log
-bantime = 3600
+bantime.increment = true
+bantime.factor = 1
+bantime.maxtime = 6h
+bantime = 10m
+findtime = 1h
 maxretry = 1
