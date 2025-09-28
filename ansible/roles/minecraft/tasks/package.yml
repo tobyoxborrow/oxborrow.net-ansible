@@ -1,9 +1,4 @@
 ---
-- name: Ensure java package is installed
-  ansible.builtin.package:
-    name: openjdk-17-jre-headless
-    state: present
-
 - name: Ensure rcon package is installed
   ansible.builtin.package:
     name: rcon

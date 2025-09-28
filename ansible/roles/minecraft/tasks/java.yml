@@ -1,0 +1,16 @@
+- name: Ensure openjdk directory exists
+  ansible.builtin.file:
+    path: "{{ minecraft_jdk_home }}"
+    mode: 0755
+    owner: "{{ minecraft_user }}"
+    group: "{{ minecraft_group }}"
+    state: directory
+
+- name: Ensure openjdk tarball is present
+  ansible.builtin.get_url:
+    url: "{{ minecraft_jdk_url }}"
+    dest: "{{ minecraft_jdk_home }}/openjdk.jar"
+    mode: 0644
+    owner: root
+    group: root
+    force: false

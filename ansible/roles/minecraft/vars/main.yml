@@ -12,6 +12,8 @@ minecraft_ops: "{{ vault_minecraft_ops }}"
 minecraft_query_port: 25565
 minecraft_rcon_password: "{{ vault_minecraft_rcon_password }}"
 minecraft_rcon_port: 25575
-minecraft_server_jar_url: https://piston-data.mojang.com/v1/objects/8dd1a28015f51b1803213892b50b7b4fc76e594d/server.jar
+minecraft_server_jar_url: https://piston-data.mojang.com/v1/objects/450698d1863ab5180c25d7c804ef0fe6369dd1ba/server.jar
 minecraft_spawn_monsters: "true"
 minecraft_user: minecraft
+minecraft_jdk_url: https://download.java.net/java/GA/jdk22.0.1/c7ec1332f7bb44aeba2eb341ae18aca4/8/GPL/openjdk-22.0.1_linux-aarch64_bin.tar.gz
+minecraft_jdk_home: /opt/minecraft-jdk
