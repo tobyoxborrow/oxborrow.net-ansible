@@ -1,0 +1,9 @@
+---
+- name: Ensure nginx server_tokens
+  ansible.builtin.lineinfile:
+    dest: /etc/nginx/nginx.conf
+    insertafter: "http {"
+    state: present
+    regexp: '^\s*server_tokens\s+off;'
+    line: "    server_tokens {{ nginx_server_tokens }};"
+  notify: Reload nginx

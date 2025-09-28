@@ -2,5 +2,8 @@
 - name: Manage nginx package
   ansible.builtin.import_tasks: package.yml
 
+- name: Configure nginx
+  ansible.builtin.import_tasks: configuration.yml
+
 - name: Manage nginx sites
   ansible.builtin.import_tasks: sites.yml
