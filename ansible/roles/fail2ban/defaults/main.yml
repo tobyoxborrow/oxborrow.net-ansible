@@ -7,9 +7,9 @@ fail2ban_enable_sshd: true
 
 fail2ban_httpscan_logpath: /var/log/nginx/access.log
 fail2ban_httpscan_entries:
-- /shell
+  - /shell
 
 fail2ban_rcptscan_addresses:
-- spameri@tiscali.it
+  - spameri@tiscali.it
 
 fail2ban_sshd_mode: normal
