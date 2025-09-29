@@ -23,10 +23,10 @@
 - name: Ensure authorized_keys file is present
   ansible.posix.authorized_key:
     user: toby
-    key: https://github.com/tobyoxborrow.keys
     exclusive: true
     state: present
     manage_dir: true
+    key: "{{ user_ssh_keys_toby | sort | join('\n') }}"
 
 - name: Ensure git is installed
   ansible.builtin.package:
